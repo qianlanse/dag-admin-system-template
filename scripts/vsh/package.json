@@ -1,0 +1,28 @@
+{
+    "name": "@dag/vsh",
+    "version": "1.0.0",
+    "private": true,
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "stub": "pnpm unbuild --stub"
+    },
+    "files": [
+        "dist"
+    ],
+    "bin": {
+        "vsh": "./bin/vsh.mjs"
+    },
+    "main": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
+    "exports": {
+        ".": {
+            "default": "./dist/index.mjs"
+        },
+        "./package.json": "./package.json"
+    },
+    "dependencies": {
+        "@dag/node-utils": "workspace:^",
+        "cac": "^6.7.14"
+    }
+}

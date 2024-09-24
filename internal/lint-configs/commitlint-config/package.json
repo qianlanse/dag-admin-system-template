@@ -1,0 +1,26 @@
+{
+    "name": "@dag/commitlint-config",
+    "version": "1.0.0",
+    "private": true,
+    "license": "MIT",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "./index.mjs",
+    "module": "./index.mjs",
+    "exports": {
+        ".": {
+            "import": "./index.mjs",
+            "default": "./index.mjs"
+        }
+    },
+    "dependencies": {
+        "@commitlint/cli": "^19.5.0",
+        "@commitlint/config-conventional": "^19.5.0",
+        "@dag/node-utils": "workspace:^",
+        "commitlint-plugin-function-rules": "^4.0.0",
+        "cz-git": "^1.9.4",
+        "czg": "^1.9.4"
+    }
+}

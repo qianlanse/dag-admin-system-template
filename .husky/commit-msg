@@ -1,0 +1,6 @@
+echo Start running commit-msg hook.
+
+# 检查git commit信息是否规范
+pnpm exec commitlint --edit "$1"
+
+echo Run commit-msg hook done.

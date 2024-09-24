@@ -1,0 +1,6 @@
+$abc: 123px;
+
+.abc {
+    width: 100px;
+    height: $abc;
+}

@@ -1,0 +1,21 @@
+{
+    "name": "@dag/prettier-config",
+    "version": "1.0.0",
+    "private": true,
+    "license": "MIT",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "./index.mjs",
+    "module": "./index.mjs",
+    "exports": {
+        ".": {
+            "default": "./index.mjs"
+        }
+    },
+    "dependencies": {
+        "prettier": "^3.3.3",
+        "prettier-plugin-tailwindcss": "^0.6.6"
+    }
+}
