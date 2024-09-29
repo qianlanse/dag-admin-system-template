@@ -19,6 +19,7 @@ import {
     unicorn,
     vue
 } from './configs'
+import { customConfig } from './custom-config'
 
 type FlatConfig = Linter.Config
 type FlatConfigPromise = FlatConfig | FlatConfig[] | Promise<FlatConfig> | Promise<FlatConfig[]>
@@ -42,6 +43,7 @@ async function defineConfig(config: FlatConfig[] = []) {
         regexp(),
         command(),
         turbo(),
+        ...customConfig,
         ...config
     ]
 

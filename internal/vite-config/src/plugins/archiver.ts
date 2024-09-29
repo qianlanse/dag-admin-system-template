@@ -1,0 +1,72 @@
+import type { PluginOption } from 'vite'
+
+import type { ArchiverPluginOptions } from '../typing'
+
+import fs from 'node:fs'
+import fsp from 'node:fs/promises'
+import { join } from 'node:path'
+
+// https://www.npmjs.com/package/archiver
+import archiver from 'archiver'
+
+function zipFolder(folderPath: string, outputPath: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+        const output = fs.createWriteStream(outputPath)
+        const archive = archiver('zip', {
+            // 设置压缩级别为9以实现最高压缩率
+            zlib: { level: 9 }
+        })
+
+        output.on('close', () => {
+            resolve()
+        })
+
+        archive.on('error', (err) => {
+            reject(err)
+        })
+
+        archive.pipe(output)
+
+        archive.directory(folderPath, false)
+
+        archive.finalize()
+    })
+}
+
+/**
+ * 设置压缩打包配置插件
+ * @param options ArchiverPluginOptions
+ * @returns PluginOption
+ */
+export function viteArchiverPlugin(options: ArchiverPluginOptions = {}): PluginOption {
+    return {
+        apply: 'build',
+        closeBundle: {
+            handler() {
+                const { name = 'dist', outputDir = '.' } = options
+
+                setTimeout(async () => {
+                    const folderToZip = 'dist'
+
+                    const zipOutputDir = join(process.cwd(), outputDir)
+                    const zipOutputPath = join(zipOutputDir, `${name}.zip`)
+
+                    try {
+                        await fsp.mkdir(zipOutputDir, { recursive: true })
+                    } catch {
+                        // -
+                    }
+
+                    try {
+                        await zipFolder(folderToZip, zipOutputPath)
+                    } catch {
+                        // -
+                    }
+                }, 0)
+            },
+            order: 'post'
+        },
+        enforce: 'post',
+        name: 'vite:archiver'
+    }
+}

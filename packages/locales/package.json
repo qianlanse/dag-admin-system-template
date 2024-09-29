@@ -1,0 +1,21 @@
+{
+    "name": "@dag/locales",
+    "version": "1.0.0",
+    "license": "MIT",
+    "type": "module",
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "default": "./src/index.ts"
+        }
+    },
+    "dependencies": {
+        "@dag-core/composables": "workspace:^",
+        "@intlify/core-base": "catalog:",
+        "vue": "catalog:",
+        "vue-i18n": "catalog:"
+    }
+}

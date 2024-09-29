@@ -13,7 +13,11 @@
         "format": "vsh lint --format",
         "lint": "vsh lint",
         "reinstall": "pnpm clean --del-lock && pnpm install",
-        "check:cspell": "cspell lint **/*.ts **/README.md .changeset/*.md --no-progress"
+        "check:cspell": "cspell lint **/*.ts **/README.md .changeset/*.md --no-progress",
+        "check:type": "turbo run typecheck",
+        "dev": "turbo-run dev",
+        "dev:ele": "pnpm -F @dag/web-ele run dev",
+        "dev:naive": "pnpm -F @dag/web-naive run dev"
     },
     "devDependencies": {
         "@dag/commitlint-config": "workspace:*",
@@ -21,16 +25,22 @@
         "@dag/prettier-config": "workspace:*",
         "@dag/stylelint-config": "workspace:*",
         "@dag/tsconfig": "workspace:*",
+        "@dag/turbo-run": "workspace:*",
+        "@dag/vite-config": "workspace:*",
         "@dag/vsh": "workspace:*",
-        "@types/node": "^22.5.5",
-        "cspell": "^8.14.4",
-        "husky": "^9.1.6",
-        "lint-staged": "^15.2.10",
-        "turbo": "^2.1.1",
+        "@types/node": "catalog:",
+        "@vitejs/plugin-vue": "catalog:",
+        "@vitejs/plugin-vue-jsx": "catalog:",
+        "autoprefixer": "catalog:",
+        "cross-env": "catalog:",
+        "cspell": "catalog:",
+        "husky": "catalog:",
+        "lint-staged": "catalog:",
+        "turbo": "catalog:",
         "typescript": "catalog:",
-        "unbuild": "^2.0.0",
-        "vite": "^5.4.3",
-        "vue": "^3.5.3"
+        "unbuild": "catalog:",
+        "vite": "catalog:",
+        "vue": "catalog:"
     },
     "engines": {
         "node": ">=20.10.0",

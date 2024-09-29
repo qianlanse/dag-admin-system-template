@@ -18,5 +18,26 @@
             "types": "./src/index.ts",
             "default": "./dist/index.mjs"
         }
+    },
+    "dependencies": {
+        "@intlify/unplugin-vue-i18n": "catalog:",
+        "archiver": "catalog:",
+        "nitropack": "catalog:",
+        "vite-plugin-lib-inject-css": "catalog:",
+        "vite-plugin-pwa": "catalog:",
+        "vite-plugin-vue-devtools": "catalog:"
+    },
+    "devDependencies": {
+        "@dag/node-utils": "workspace:*",
+        "@types/archiver": "catalog:",
+        "@vitejs/plugin-vue": "catalog:",
+        "@vitejs/plugin-vue-jsx": "catalog:",
+        "dotenv": "catalog:",
+        "less": "catalog:",
+        "rollup-plugin-visualizer": "catalog:",
+        "sass": "catalog:",
+        "vite": "catalog:",
+        "vite-plugin-dts": "catalog:",
+        "vite-plugin-html": "catalog:"
     }
 }

@@ -12,6 +12,7 @@
         "web.json"
     ],
     "dependencies": {
-        "vite": "^5.4.3"
+        "@dag/types": "workspace:*",
+        "vite": "catalog:"
     }
 }

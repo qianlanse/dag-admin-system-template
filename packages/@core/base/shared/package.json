@@ -1,0 +1,33 @@
+{
+    "name": "@dag-core/shared",
+    "version": "1.0.0",
+    "license": "MIT",
+    "scripts": {
+        "build": "pnpm unbuild"
+    },
+    "files": [
+        "dist"
+    ],
+    "sideEffects": false,
+    "exports": {
+        "./utils": {
+            "types": "./src/utils/index.ts",
+            "development": "./src/utils/index.ts",
+            "default": "./dist/utils/index.mjs"
+        }
+    },
+    "publishConfig": {
+        "exports": {
+            "./utils": {
+                "types": "./dist/utils/index.d.ts",
+                "default": "./dist/utils/index.mjs"
+            }
+        }
+    },
+    "dependencies": {
+        "lodash.clonedeep": "catalog:"
+    },
+    "devDependencies": {
+        "@types/lodash.clonedeep": "catalog:"
+    }
+}

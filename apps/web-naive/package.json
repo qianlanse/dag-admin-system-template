@@ -1,0 +1,22 @@
+{
+    "name": "@dag/web-naive",
+    "version": "1.0.0",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "dev": "pnpm vite --mode development"
+    },
+    "imports": {
+        "#/*": "./src/*"
+    },
+    "dependencies": {
+        "@dag/locales": "workspace:*",
+        "@dag/stores": "workspace:*",
+        "@dag/utils": "workspace:*",
+        "naive-ui": "catalog:",
+        "pinia": "catalog:",
+        "vue": "catalog:",
+        "vue-i18n": "catalog:",
+        "vue-router": "catalog:"
+    }
+}

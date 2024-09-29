@@ -1,1 +1,1 @@
-export const vite = 'Hello Vite'
+export * from './config'

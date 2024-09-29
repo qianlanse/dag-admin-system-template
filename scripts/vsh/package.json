@@ -22,7 +22,7 @@
         "./package.json": "./package.json"
     },
     "dependencies": {
-        "@dag/node-utils": "workspace:^",
-        "cac": "^6.7.14"
+        "@dag/node-utils": "workspace:*",
+        "cac": "catalog:"
     }
 }

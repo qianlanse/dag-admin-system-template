@@ -1,0 +1,17 @@
+{
+    "name": "@dag/utils",
+    "version": "1.0.0",
+    "license": "MIT",
+    "type": "module",
+    "main": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "default": "./src/index.ts"
+        }
+    },
+    "dependencies": {
+        "@dag-core/typings": "workspace:*"
+    }
+}

@@ -4,8 +4,17 @@
     "description": "",
     "license": "MIT",
     "type": "module",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "default": "./src/index.ts"
+        },
+        "./global": {
+            "types": "./global.d.ts"
+        }
     },
-    "main": "index.js"
+    "dependencies": {
+        "vue": "catalog:",
+        "vue-router": "catalog:"
+    }
 }
