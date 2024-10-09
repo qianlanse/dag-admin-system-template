@@ -41,6 +41,8 @@ export async function unicorn(): Promise<Linter.Config[]> {
                 'unicorn/prefer-dom-node-text-content': 'off',
                 // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/HEAD/docs/rules/prefer-export-from.md
                 'unicorn/prefer-export-from': ['error', { ignoreUsedVariables: true }],
+                // 相比 window、self 和 global，优先使用 globalThis。
+                'unicorn/prefer-global-this': 'off',
                 // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/HEAD/docs/rules/prefer-top-level-await.md
                 'unicorn/prefer-top-level-await': 'off',
                 // 防止缩写

@@ -1,6 +1,6 @@
 {
-    "name": "small-vite-next-template",
-    "version": "1.1.0",
+    "name": "dag-admin-system-template",
+    "version": "1.2.0",
     "private": true,
     "license": "MIT",
     "type": "module",
@@ -17,9 +17,11 @@
         "check:type": "turbo run typecheck",
         "dev": "turbo-run dev",
         "dev:ele": "pnpm -F @dag/web-ele run dev",
-        "dev:naive": "pnpm -F @dag/web-naive run dev"
+        "dev:naive": "pnpm -F @dag/web-naive run dev",
+        "version": "pnpm exec changeset version && pnpm install --no-frozen-lockfile"
     },
     "devDependencies": {
+        "@changesets/cli": "^2.27.9",
         "@dag/commitlint-config": "workspace:*",
         "@dag/eslint-config": "workspace:*",
         "@dag/prettier-config": "workspace:*",
@@ -46,7 +48,7 @@
         "node": ">=20.10.0",
         "pnpm": ">=9.5.0"
     },
-    "packageManager": "pnpm@9.11.0",
+    "packageManager": "pnpm@9.12.1",
     "pnpm": {
         "peerDependencyRules": {
             "allowedVersions": {
