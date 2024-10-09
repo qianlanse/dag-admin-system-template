@@ -18,10 +18,12 @@
         "dev": "turbo-run dev",
         "dev:ele": "pnpm -F @dag/web-ele run dev",
         "dev:naive": "pnpm -F @dag/web-naive run dev",
+        "changeset": "pnpm exec changeset",
         "version": "pnpm exec changeset version && pnpm install --no-frozen-lockfile"
     },
     "devDependencies": {
-        "@changesets/cli": "^2.27.9",
+        "@changesets/changelog-github": "catalog:",
+        "@changesets/cli": "catalog:",
         "@dag/commitlint-config": "workspace:*",
         "@dag/eslint-config": "workspace:*",
         "@dag/prettier-config": "workspace:*",
