@@ -1,6 +1,9 @@
 {
     "$schema": "https://unpkg.com/@changesets/config@3.0.3/schema.json",
-    "changelog": "@changesets/cli/changelog",
+    "changelog": [
+        "@changesets/changelog-github",
+        { "repo": "qianlanse/dag-admin-system-template" }
+    ],
     "commit": false,
     "fixed": [["@dag-core/*", "@dag/*"]],
     "snapshot": {
