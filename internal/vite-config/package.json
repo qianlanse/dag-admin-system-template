@@ -34,6 +34,7 @@
         "@vitejs/plugin-vue-jsx": "catalog:",
         "dotenv": "catalog:",
         "less": "catalog:",
+        "rollup": "^4.24.0",
         "rollup-plugin-visualizer": "catalog:",
         "sass": "catalog:",
         "vite": "catalog:",

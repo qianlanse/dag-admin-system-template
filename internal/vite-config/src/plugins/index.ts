@@ -23,8 +23,10 @@ import { VitePWA } from 'vite-plugin-pwa'
 import viteVueDevTools from 'vite-plugin-vue-devtools'
 
 import { viteArchiverPlugin } from './archiver'
+import { viteExtraAppConfigPlugin } from './extra-app-config'
 import { viteInjectAppLoadingPlugin } from './inject-app-loading'
 import { viteMetadataPlugin } from './inject-metadata'
+import { viteLicensePlugin } from './license'
 import { vitePrintPlugin } from './print'
 
 /**
@@ -90,13 +92,13 @@ async function loadApplicationPlugins(options: ApplicationPluginOptions): Promis
         archiverPluginOptions,
         // compress,
         // compressTypes,
-        // extraAppConfig,
+        extraAppConfig,
         html,
         i18n,
         // importmap,
         // importmapOptions,
         injectAppLoading,
-        // license,
+        license,
         // nitroMock,
         // nitroMockOptions,
         print,
@@ -132,6 +134,10 @@ async function loadApplicationPlugins(options: ApplicationPluginOptions): Promis
             }
         },
         {
+            condition: license,
+            plugins: async () => [await viteLicensePlugin()]
+        },
+        {
             condition: pwa,
             plugins: () =>
                 VitePWA({
@@ -155,6 +161,12 @@ async function loadApplicationPlugins(options: ApplicationPluginOptions): Promis
         {
             condition: !!html,
             plugins: () => [viteHtmlPlugin({ minify: true })]
+        },
+        {
+            condition: isBuild && extraAppConfig,
+            plugins: async () => [
+                await viteExtraAppConfigPlugin({ isBuild: true, root: process.cwd() })
+            ]
         },
         {
             condition: archiver,

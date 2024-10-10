@@ -29,7 +29,7 @@ function getConfigFiles() {
 /**
  * 加载配置信息
  */
-async function loadEnv<T = Record<string, string>>(
+export async function loadEnv<T = Record<string, string>>(
     match = 'VITE_GLOB_',
     confFiles = getConfigFiles()
 ) {

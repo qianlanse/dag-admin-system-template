@@ -1,0 +1,79 @@
+import type { PluginOption } from 'vite'
+
+import { colors, generatorContentHash, readPackageJSON } from '@dag/node-utils'
+
+import { loadEnv } from '../utils/env'
+
+interface PluginOptions {
+    isBuild: boolean
+    root: string
+}
+
+const GLOBAL_CONFIG_FILE_NAME = '_app.config.js'
+const DAG_ADMIN_PRO_APP_CONF = '_DAG_ADMIN_PRO_APP_CONF_'
+
+async function getConfigSource() {
+    const config = await loadEnv()
+    const windowVariable = `window.${DAG_ADMIN_PRO_APP_CONF}`
+    let source = `${windowVariable}=${JSON.stringify(config)}`
+    source += `
+        Object.freeze(${windowVariable});
+        Object.defineProperty(window, "${DAG_ADMIN_PRO_APP_CONF}", {
+            configurable: false,
+            writeable: false
+        })
+    `.replaceAll(/\s/g, '')
+
+    return source
+}
+
+/**
+ * 用于将配置文件抽离出来并注入到项目中
+ * @params
+ * @returns promise
+ */
+export async function viteExtraAppConfigPlugin({
+    isBuild,
+    root
+}: PluginOptions): Promise<PluginOption | undefined> {
+    let publicPath: string
+    let source: string
+
+    if (!isBuild) {
+        return
+    }
+
+    const { version = '' } = await readPackageJSON(root)
+
+    return {
+        async configResolved(config) {
+            const { base } = config
+            publicPath = base.endsWith('/') ? base : `${base}/`
+            source = await getConfigSource()
+        },
+        async generateBundle() {
+            try {
+                this.emitFile({
+                    fileName: GLOBAL_CONFIG_FILE_NAME,
+                    source,
+                    type: 'asset'
+                })
+                console.log(colors.cyan(`✨configuration file is build successfully!`))
+            } catch (error) {
+                console.log(
+                    colors.red(`configuration file configuration file failed to package:\n${error}`)
+                )
+            }
+        },
+        name: 'vite:extra-app-config',
+        transformIndexHtml(html) {
+            const hash = `v=${version}-${generatorContentHash(source, 8)}`
+            const appConfigSrc = `${publicPath}${GLOBAL_CONFIG_FILE_NAME}?${hash}`
+
+            return {
+                html,
+                tags: [{ attrs: { src: appConfigSrc }, tag: 'script' }]
+            }
+        }
+    }
+}

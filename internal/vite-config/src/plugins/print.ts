@@ -4,6 +4,11 @@ import type { PrintPluginOptions } from '../typing'
 
 import { colors } from '@dag/node-utils'
 
+/**
+ * 控制台自定义打印
+ * @param options PrintPluginOptions
+ * @returns PluginOption
+ */
 export function vitePrintPlugin(options: PrintPluginOptions = {}): PluginOption {
     const { infoMap = {} } = options
 

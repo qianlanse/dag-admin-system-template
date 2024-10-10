@@ -37,7 +37,7 @@ function createCssOptions(injectGlobalScss = true) {
 
 /**
  * 应用配置信息
- * @param userConfigPromise
+ * @param userConfigPromise DefineApplicationOptions
  * @returns UserConfigExport
  */
 export function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
@@ -55,12 +55,20 @@ export function defineApplicationConfig(userConfigPromise?: DefineApplicationOpt
         const plugins = await loadApplicationPlugins({
             archiver: true,
             archiverPluginOptions: {},
+            // compress: false,
+            // compressTypes: ['brotli', 'gzip'],
             devtools: true,
             env,
+            extraAppConfig: true,
             html: true,
             i18n: true,
             injectAppLoading: true,
             injectMetadata: true,
+            isBuild,
+            license: true,
+            mode,
+            // nitroMock: !isBuild,
+            // nitroMockOptions: {},
             print: !isBuild,
             printInfoMap: {
                 'Dag Admin Docs': 'https://doc.dagteam.cn'
