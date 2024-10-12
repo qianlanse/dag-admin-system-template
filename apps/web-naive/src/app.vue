@@ -16,9 +16,10 @@
 </script>
 
 <template>
-    <div class="text-primary-400 container h-screen" @click="setUserRoles">
+    <div class="text-primary-400 container" @click="setUserRoles">
         <span>Hello Vite Naive {{ count }} {{ roles.join() }} {{ $t('page.core.login') }}</span>
     </div>
+    <RouterView />
 </template>
 
 <style lang="scss" scoped>

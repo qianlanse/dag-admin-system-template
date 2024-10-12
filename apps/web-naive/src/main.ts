@@ -1,6 +1,8 @@
 import { initPreferences } from '@dag/preferences'
 import { unmountGlobalLoading } from '@dag/utils'
 
+import { overridesPreferences } from './preferences'
+
 /**
  * 应用初始化完成之后再进行页面加载渲染
  */
@@ -11,8 +13,10 @@ async function initApplication() {
     const appVersion = import.meta.env.VITE_APP_VERSION
     const namespace = `${import.meta.env.VITE_APP_NAMESPACE}-${appVersion}-${env}`
 
+    // 偏好设置初始化
     await initPreferences({
-        namespace
+        namespace,
+        overrides: overridesPreferences
     })
 
     // 启动应用并挂载

@@ -44,10 +44,10 @@
         }
     },
     "dependencies": {
-        "@ctrl/tinycolor": "^4.1.0",
-        "defu": "^6.1.4",
+        "@ctrl/tinycolor": "catalog:",
+        "defu": "catalog:",
         "lodash.clonedeep": "catalog:",
-        "theme-colors": "^0.1.0"
+        "theme-colors": "catalog:"
     },
     "devDependencies": {
         "@types/lodash.clonedeep": "catalog:"

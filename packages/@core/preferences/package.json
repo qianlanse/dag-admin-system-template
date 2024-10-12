@@ -24,7 +24,7 @@
     "dependencies": {
         "@dag-core/shared": "workspace:*",
         "@dag-core/typings": "workspace:*",
-        "@vueuse/core": "^11.1.0",
-        "vue": "^3.5.12"
+        "@vueuse/core": "catalog:",
+        "vue": "catalog:"
     }
 }
