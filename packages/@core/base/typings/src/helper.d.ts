@@ -13,4 +13,13 @@ type NNonNullable<T> = T extends null | undefined ? never : T
  */
 type Recordable<T> = Record<string, T>
 
-export type { NNonNullable, Nullable, Recordable }
+/**
+ * 深层递归所有属性为可选
+ */
+type DeepPartial<T> = T extends object
+    ? {
+          [P in keyof T]?: DeepPartial<T[P]>
+      }
+    : T
+
+export type { DeepPartial, NNonNullable, Nullable, Recordable }

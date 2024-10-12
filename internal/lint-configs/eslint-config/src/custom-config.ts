@@ -135,7 +135,15 @@ const customConfig: Linter.Config[] = [
         }
     },
     {
-        files: ['internal/**/**'],
+        files: ['**/**/playwright.config.ts'],
+        rules: {
+            'n/prefer-global/buffer': 'off',
+            'n/prefer-global/process': 'off',
+            'no-console': 'off'
+        }
+    },
+    {
+        files: ['internal/**/**', 'scripts/**/**'],
         rules: {
             'no-console': 'off'
         }

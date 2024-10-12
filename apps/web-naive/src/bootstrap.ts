@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 
 import { initStores } from '@dag/stores'
+import '@dag/styles'
 
 import App from './app.vue'
 import { setupI18n } from './locales'

@@ -1,0 +1,19 @@
+{
+    "name": "@dag/preferences",
+    "version": "1.3.0",
+    "license": "MIT",
+    "type": "module",
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "default": "./src/index.ts"
+        }
+    },
+    "dependencies": {
+        "@dag-core/preferences": "workspace:*",
+        "@dag-core/typings": "workspace:*"
+    }
+}

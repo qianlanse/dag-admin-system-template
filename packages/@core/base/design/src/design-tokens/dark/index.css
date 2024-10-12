@@ -1,0 +1,85 @@
+.dark,
+.dark[data-theme='custom'],
+.dark[data-theme='default'] {
+    --background: 222.34deg 10.43% 12.27%;
+
+    /* 主体区域背景色 */
+    --background-deep: 220deg 13.06% 9%;
+    --foreground: 0 0% 95%;
+    --card: 222.34deg 10.43% 12.27%;
+    --card-foreground: 210 40% 98%;
+
+    /* 弹出窗口的背景颜色，如 <DropdownMenu />, <HoverCard />, <Popover /> */
+    --popover: 222.82deg 8.43% 12.27%;
+    --popover-foreground: 210 40% 98%;
+
+    /* 静态背景，如 <TabsList />, <Skeleton />, <Switch /> */
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    /* 主题颜色 */
+
+    /* --primary: 245 82% 67%; */
+    --primary-foreground: 0 0% 98%;
+
+    /* 用于破坏性操作，如 <Button variant="destructive"> */
+    --destructive: 359.21 68.47% 56.47%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* 用于成功的操作 如 <message type="info"> */
+    --info: 180 1.54% 12.75%;
+    --info-foreground: 220 4% 58%;
+
+    /* 用于成功的操作 如 <message type="success"> */
+    --success: 144 57% 58%;
+    --success-foreground: 0 0% 98%;
+
+    /* 用于警告的操作 如 <message type="warning"> */
+    --warning: 42 84% 61%;
+    --warning-foreground: 0 0% 98%;
+
+    /* 颜色次要 */
+    --secondary: 240 5% 17%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* 用户<DropdownMenuItem>, <SelectItem>等上面的悬停效果 */
+    --accent: 216 5% 19%;
+    --accent-lighter: 216 5% 11%;
+    --accent-hover: 216 5% 24%;
+    --accent-foreground: 0 0% 98%;
+
+    /* 深色 */
+    --heavy: 216 5% 24%;
+    --heavy-foreground: var(--accent-foreground);
+
+    /* 默认边框颜色 */
+    --border: 240 3.7% 22%;
+
+    /* 输入的边框颜色，如 <Input />, <Select />, <Textarea /> */
+    --input: 0deg 0% 100% / 10%;
+    --input-placeholder: 218deg 11% 65%;
+    --input-background: 0deg 0% 100% / 5%;
+
+    /* 用于聚焦 */
+    --ring: 222.2 84% 4.9%;
+
+    /* 基础圆角大小 */
+    --radius: 0.5rem;
+
+    /* 遮罩颜色 */
+    --overlay: 0deg 0% 0% / 40%;
+    --overlay-content: 0deg 0% 0% / 40%;
+
+    /* 基本文字大小 */
+    --font-size-base: 16px;
+
+    /* 侧栏菜单 */
+    --sidebar: 222.34deg 10.43% 12.27%;
+    --sidebar-deep: 220deg 13.06% 9%;
+    --menu: var(--sidebar);
+
+    /* 头部 */
+    --header: 222.34deg 10.43% 12.27%;
+
+    color-scheme: dark;
+}

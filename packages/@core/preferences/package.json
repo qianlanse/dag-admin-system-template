@@ -1,0 +1,30 @@
+{
+    "name": "@dag-core/preferences",
+    "version": "1.3.0",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "#build": "pnpm unbuild"
+    },
+    "files": [
+        "dist",
+        "src"
+    ],
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "development": "./src/index.ts",
+            "default": "./src/index.ts",
+            "#default": "./dist/index.mjs"
+        }
+    },
+    "dependencies": {
+        "@dag-core/shared": "workspace:*",
+        "@dag-core/typings": "workspace:*",
+        "@vueuse/core": "^11.1.0",
+        "vue": "^3.5.12"
+    }
+}

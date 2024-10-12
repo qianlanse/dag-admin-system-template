@@ -1,0 +1,86 @@
+:root {
+    --font-family: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, 'Helvetica Neue', arial,
+        'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+    --background: 0 0% 100%;
+
+    /* 主体区域背景色 */
+    --background-deep: 216 20.11% 95.47%;
+    --foreground: 210 6% 21%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    /* 弹出窗口的背景颜色，如 <DropdownMenu />, <HoverCard />, <Popover /> */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    /* 静态背景，如 <TabsList />, <Skeleton />, <Switch /> */
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    /* 主题颜色 */
+    --primary: 212 100% 45%;
+    --primary-foreground: 0 0% 98%;
+
+    /* 用于破坏性操作，如 <Button variant="destructive"> */
+    --destructive: 359.33 100% 65.1%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* 用于成功的操作 如 <message type="info"> */
+    --info: 240 5% 96%;
+    --info-foreground: 220 4% 58%;
+
+    /* 用于成功的操作 如 <message type="success"> */
+    --success: 144 57% 58%;
+    --success-foreground: 0 0% 98%;
+
+    /* 用于警告的操作 如 <message type="warning"> */
+    --warning: 42 84% 61%;
+    --warning-foreground: 0 0% 98%;
+
+    /* 颜色次要 */
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 10%;
+
+    /* 用户<DropdownMenuItem>, <SelectItem>等上面的悬停效果 */
+    --accent: 240 5% 96%;
+    --accent-lighter: 240 0% 98%;
+    --accent-hover: 200deg 10% 90%;
+    --accent-foreground: 240 6% 10%;
+
+    /* 深色 */
+    --heavy: 192deg 9.43% 89.61%;
+    --heavy-foreground: var(--accent-foreground);
+
+    /* 默认边框颜色 */
+    --border: 240 5.9% 90%;
+
+    /* 输入的边框颜色，如 <Input />, <Select />, <Textarea /> */
+    --input: 240deg 5.88% 90%;
+    --input-placeholder: 217 10.6% 65%;
+    --input-background: 0 0% 100%;
+
+    /* 用于聚焦 */
+    --ring: 222.2 84% 4.9%;
+
+    /* 基础圆角大小 */
+    --radius: 0.5rem;
+
+    /* 遮罩颜色 */
+    --overlay: 0 0% 0% / 45%;
+    --overlay-content: 0deg 0% 95% / 45%;
+
+    /* 基本文字大小 */
+    --font-size-base: 16px;
+
+    /* 侧栏菜单 */
+    --sidebar: 0 0% 100%;
+    --sidebar-deep: 0 0% 100%;
+    --menu: var(--sidebar);
+
+    /* 头部 */
+    --header: 0 0% 100%;
+
+    accent-color: var(--primary);
+    color-scheme: light;
+}

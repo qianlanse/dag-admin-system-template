@@ -1,3 +1,4 @@
+import { initPreferences } from '@dag/preferences'
 import { unmountGlobalLoading } from '@dag/utils'
 
 /**
@@ -10,8 +11,13 @@ async function initApplication() {
     const appVersion = import.meta.env.VITE_APP_VERSION
     const namespace = `${import.meta.env.VITE_APP_NAMESPACE}-${appVersion}-${env}`
 
-    const { bootstrap } = await import('./bootstrap')
+    await initPreferences({
+        namespace
+    })
 
+    // 启动应用并挂载
+    // 应用主要逻辑和视图
+    const { bootstrap } = await import('./bootstrap')
     await bootstrap(namespace)
 
     // 移除并销毁loading

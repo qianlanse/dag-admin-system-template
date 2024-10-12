@@ -16,13 +16,13 @@
 </script>
 
 <template>
-    <div class="container" @click="setUserRoles">
+    <div class="text-primary-400 container h-screen" @click="setUserRoles">
         <span>Hello Vite Naive {{ count }} {{ roles.join() }} {{ $t('page.core.login') }}</span>
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
     .container {
-        background-color: white;
+        @apply flex-center;
     }
 </style>

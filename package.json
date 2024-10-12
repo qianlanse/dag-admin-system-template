@@ -1,10 +1,11 @@
 {
     "name": "dag-admin-system-template",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "private": true,
     "license": "MIT",
     "type": "module",
     "scripts": {
+        "build:styles": "pnpm -F @dag-core/design run build",
         "preinstall": "npx only-allow pnpm",
         "postinstall": "turbo run stub",
         "commit": "czg",
@@ -28,6 +29,7 @@
         "@dag/eslint-config": "workspace:*",
         "@dag/prettier-config": "workspace:*",
         "@dag/stylelint-config": "workspace:*",
+        "@dag/tailwind-config": "workspace:*",
         "@dag/tsconfig": "workspace:*",
         "@dag/turbo-run": "workspace:*",
         "@dag/vite-config": "workspace:*",

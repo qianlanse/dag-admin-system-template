@@ -1,7 +1,8 @@
 {
     "name": "@dag-core/shared",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "license": "MIT",
+    "type": "module",
     "scripts": {
         "build": "pnpm unbuild"
     },
@@ -14,6 +15,16 @@
             "types": "./src/utils/index.ts",
             "development": "./src/utils/index.ts",
             "default": "./dist/utils/index.mjs"
+        },
+        "./color": {
+            "types": "./src/color/index.ts",
+            "development": "./src/color/index.ts",
+            "default": "./dist/color/index.mjs"
+        },
+        "./cache": {
+            "types": "./src/cache/index.ts",
+            "development": "./src/cache/index.ts",
+            "default": "./dist/cache/index.mjs"
         }
     },
     "publishConfig": {
@@ -21,11 +32,22 @@
             "./utils": {
                 "types": "./dist/utils/index.d.ts",
                 "default": "./dist/utils/index.mjs"
+            },
+            "./color": {
+                "types": "./dist/color/index.d.ts",
+                "default": "./dist/color/index.mjs"
+            },
+            "./cache": {
+                "types": "./dist/cache/index.d.ts",
+                "default": "./dist/cache/index.mjs"
             }
         }
     },
     "dependencies": {
-        "lodash.clonedeep": "catalog:"
+        "@ctrl/tinycolor": "^4.1.0",
+        "defu": "^6.1.4",
+        "lodash.clonedeep": "catalog:",
+        "theme-colors": "^0.1.0"
     },
     "devDependencies": {
         "@types/lodash.clonedeep": "catalog:"

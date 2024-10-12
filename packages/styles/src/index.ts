@@ -1,1 +1,1 @@
-export const abc = 123
+import '@dag-core/design'
