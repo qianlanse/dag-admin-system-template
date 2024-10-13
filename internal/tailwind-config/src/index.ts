@@ -1,6 +1,5 @@
 import type { Config } from 'tailwindcss'
 
-import fs from 'node:fs'
 import path from 'node:path'
 
 import { getPackagesSync } from '@dag/node-utils'
@@ -16,9 +15,7 @@ const { packages } = getPackagesSync()
 const tailwindPackages: string[] = []
 
 packages.forEach((pkg) => {
-    if (fs.existsSync(path.join(pkg.dir, 'tailwind.config.mjs'))) {
-        tailwindPackages.push(pkg.dir)
-    }
+    tailwindPackages.push(pkg.dir)
 })
 
 /**

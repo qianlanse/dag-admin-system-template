@@ -1,29 +1,11 @@
 <script setup lang="ts">
-    import { computed, ref } from 'vue'
+    import { NConfigProvider } from 'naive-ui'
 
-    import { $t } from '@dag/locales'
-    import { useUserStore } from '@dag/stores'
-
-    const userStore = useUserStore()
-
-    const roles = computed(() => userStore.userRoles)
-
-    function setUserRoles() {
-        userStore.setUserRoles(['admin', 'user'])
-    }
-
-    const count = ref(0)
+    defineOptions({ name: 'App' })
 </script>
 
 <template>
-    <div class="text-primary-400 container" @click="setUserRoles">
-        <span>Hello Vite Naive {{ count }} {{ roles.join() }} {{ $t('page.core.login') }}</span>
-    </div>
-    <RouterView />
+    <NConfigProvider class="h-full">
+        <RouterView />
+    </NConfigProvider>
 </template>
-
-<style lang="scss" scoped>
-    .container {
-        @apply flex-center;
-    }
-</style>

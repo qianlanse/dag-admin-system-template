@@ -33,8 +33,12 @@ const scopeComplete = execSync('git status --porcelain || true')
  */
 const userConfig = {
     extends: ['@commitlint/config-conventional'],
+    // https://www.npmjs.com/package/commitlint-plugin-function-rules
     plugins: ['commitlint-plugin-function-rules'],
     prompt: {
+        /**
+         * @use `pnpm commit :f`
+         */
         alias: {
             b: 'build: bump dependencies',
             c: 'chore: update config',

@@ -5,6 +5,7 @@ import '@dag/styles'
 
 import App from './app.vue'
 import { setupI18n } from './locales'
+import { router } from './router'
 
 export async function bootstrap(namespace: string) {
     const app = createApp(App)
@@ -14,6 +15,9 @@ export async function bootstrap(namespace: string) {
 
     // 初始化存储库
     await initStores(app, { namespace })
+
+    // 配置路由及路由守卫
+    app.use(router)
 
     app.mount('#app')
 }

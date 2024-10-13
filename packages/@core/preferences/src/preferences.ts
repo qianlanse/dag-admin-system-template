@@ -2,7 +2,7 @@ import type { DeepPartial } from '@dag-core/typings'
 
 import type { InitialOptions, Preferences } from './types'
 
-import { markRaw, reactive } from 'vue'
+import { markRaw, reactive, readonly } from 'vue'
 
 import { StorageManager } from '@dag-core/shared/cache'
 import { merge } from '@dag-core/shared/utils'
@@ -67,6 +67,14 @@ class PreferenceManager {
      */
     private loadPreferences(): Preferences {
         return this.loadCachedPreferences() || { ...defaultPreferences }
+    }
+
+    /**
+     * 获取偏好设置state
+     * @returns readonly state
+     */
+    public getPreferences() {
+        return readonly(this.state)
     }
 
     /**

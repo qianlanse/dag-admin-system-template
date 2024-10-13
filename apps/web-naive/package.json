@@ -10,6 +10,8 @@
         "#/*": "./src/*"
     },
     "dependencies": {
+        "@dag/constants": "workspace:*",
+        "@dag/layouts": "workspace:*",
         "@dag/locales": "workspace:*",
         "@dag/preferences": "workspace:*",
         "@dag/stores": "workspace:*",
@@ -18,7 +20,6 @@
         "naive-ui": "catalog:",
         "pinia": "catalog:",
         "vue": "catalog:",
-        "vue-i18n": "catalog:",
         "vue-router": "catalog:"
     }
 }

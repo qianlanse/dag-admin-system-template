@@ -1,3 +1,8 @@
+/**
+ * 优雅的终端旋转器
+ * @see https://www.npmjs.com/package/ora
+ */
+
 import type { Ora } from 'ora'
 
 import ora from 'ora'

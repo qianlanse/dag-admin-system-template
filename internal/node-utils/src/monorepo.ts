@@ -1,9 +1,18 @@
 import { dirname } from 'node:path'
 
+/**
+ * 一个简单的实用程序，用于从 monorepo 获取软件包，无论他们使用的是 Yarn、Bolt、Lerna、pnpm 还是 Rush
+ * @see https://www.npmjs.com/package/@manypkg/get-packages
+ */
 import {
     getPackages as getPackagesFunc,
     getPackagesSync as getPackagesSyncFunc
 } from '@manypkg/get-packages'
+
+/**
+ * 通过遍历父目录来查找文件或目录
+ * @see https://www.npmjs.com/package/find-up
+ */
 import { findUpSync } from 'find-up'
 
 /**

@@ -1,0 +1,21 @@
+{
+    "name": "@dag/layouts",
+    "version": "1.4.0",
+    "license": "MIT",
+    "type": "module",
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "default": "./src/index.ts"
+        }
+    },
+    "dependencies": {
+        "@dag/icons": "workspace:*",
+        "@dag/preferences": "workspace:*",
+        "vue": "catalog:",
+        "vue-router": "catalog:"
+    }
+}

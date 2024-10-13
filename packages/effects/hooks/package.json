@@ -1,0 +1,15 @@
+{
+    "name": "@dag/hooks",
+    "version": "1.4.0",
+    "license": "MIT",
+    "type": "module",
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "default": "./src/index.ts"
+        }
+    }
+}

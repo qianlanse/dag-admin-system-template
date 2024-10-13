@@ -2,10 +2,13 @@
     "$schema": "https://turbo.build/schema.json",
     "globalDependencies": [
         "pnpm-lock.yaml",
-        "**/env.*local",
+        "**/.env.*local",
         "**/tsconfig*.json",
         "internal/node-utils/*.json",
-        "internal/node-utils/src/**/*.ts"
+        "internal/node-utils/src/**/*.ts",
+        "internal/tailwind-config/src/**/*.ts",
+        "internal/vite-config/*.json",
+        "internal/vite-config/src/**/*.ts"
     ],
     "globalEnv": ["NODE_ENV"],
     "tasks": {
@@ -20,9 +23,6 @@
         "build:analyze": {
             "dependsOn": ["^build"],
             "outputs": ["dist/**"]
-        },
-        "stub": {
-            "cache": false
         },
         "dev": {
             "dependsOn": [],
