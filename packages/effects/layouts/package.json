@@ -13,8 +13,10 @@
         }
     },
     "dependencies": {
+        "@dag-core/shadcn-ui": "workspace:*",
         "@dag/icons": "workspace:*",
         "@dag/preferences": "workspace:*",
+        "@dag/types": "workspace:*",
         "vue": "catalog:",
         "vue-router": "catalog:"
     }
