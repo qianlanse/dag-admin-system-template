@@ -7,5 +7,12 @@
             "qrcodeLogin": "Qr Code Login",
             "forgetPassword": "Forget Password"
         }
+    },
+    "authentication": {
+        "layout": {
+            "center": "Align Center",
+            "alignLeft": "Align Left",
+            "alignRight": "Align Right"
+        }
     }
 }

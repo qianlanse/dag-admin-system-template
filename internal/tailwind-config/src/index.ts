@@ -76,12 +76,34 @@ const shadcnUiColors = {
         DEFAULT: 'hsl(var(--card))',
         foreground: 'hsl(var(--card-foreground))'
     },
+    destructive: {
+        ...createColorsPalette('destructive'),
+        DEFAULT: 'hsl(var(--destructive))'
+    },
     foreground: {
         DEFAULT: 'hsl(var(--foreground))'
+    },
+    input: {
+        background: 'hsl(var(--input))',
+        DEFAULT: 'hsl(var(--input-background))'
+    },
+    muted: {
+        DEFAULT: 'hsl(var(--muted))',
+        foreground: 'hsl(var(--muted-foreground))'
+    },
+    popover: {
+        DEFAULT: 'hsl(var(--popover))',
+        foreground: 'hsl(var(--popover-foreground))'
     },
     primary: {
         ...createColorsPalette('primary'),
         DEFAULT: 'hsl(var(--primary))'
+    },
+    ring: 'hsl(var(--ring))',
+    secondary: {
+        DEFAULT: 'hsl(var(--secondary))',
+        desc: 'hsl(var(--secondary-desc))',
+        foreground: 'hsl(var(--secondary-foreground))'
     }
 }
 

@@ -3,7 +3,7 @@
 
     import { computed } from 'vue'
 
-    import { AuthenticationColorToggle } from '../widgets'
+    import { AuthenticationColorToggle, AuthenticationLayoutToggle } from '../widgets'
 
     interface Props {
         toolbarList?: ToolbarType[]
@@ -18,6 +18,7 @@
     })
 
     const showColor = computed(() => props.toolbarList.includes('color'))
+    const showLayout = computed(() => props.toolbarList.includes('layout'))
 </script>
 
 <template>
@@ -29,6 +30,7 @@
     >
         <div class="hidden md:flex">
             <AuthenticationColorToggle v-if="showColor" />
+            <AuthenticationLayoutToggle v-if="showLayout" />
         </div>
     </div>
 </template>

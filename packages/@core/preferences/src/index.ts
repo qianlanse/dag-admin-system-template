@@ -18,3 +18,4 @@ export { initPreferences, preferences, updatePreferences }
 
 export * from './constants'
 export type * from './types'
+export * from './use-preferences'

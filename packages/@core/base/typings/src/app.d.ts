@@ -26,4 +26,9 @@ type BuiltinThemeType =
     | 'zinc'
     | (Record<never, never> & string)
 
-export type { BuiltinThemeType, ThemeModeType }
+/**
+ * 页面布局
+ */
+type AuthPageLayoutType = 'panel-center' | 'panel-left' | 'panel-right'
+
+export type { AuthPageLayoutType, BuiltinThemeType, ThemeModeType }

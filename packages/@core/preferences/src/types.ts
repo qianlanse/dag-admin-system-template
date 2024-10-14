@@ -1,4 +1,9 @@
-import type { BuiltinThemeType, DeepPartial, ThemeModeType } from '@dag-core/typings'
+import type {
+    AuthPageLayoutType,
+    BuiltinThemeType,
+    DeepPartial,
+    ThemeModeType
+} from '@dag-core/typings'
 
 interface ThemePreferences {
     /**
@@ -39,8 +44,21 @@ interface ThemePreferences {
     semiDarkSidebar: boolean
 }
 
+interface AppPreferences {
+    /**
+     * 登录注册页面布局
+     */
+    authPageLayout: AuthPageLayoutType
+}
+
 interface Preferences {
-    /** 主题配置 */
+    /**
+     * 全局配置
+     */
+    app: AppPreferences
+    /**
+     * 主题配置
+     */
     theme: ThemePreferences
 }
 

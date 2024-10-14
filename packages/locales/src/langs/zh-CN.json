@@ -7,5 +7,12 @@
             "qrcodeLogin": "二维码登录",
             "forgetPassword": "忘记密码"
         }
+    },
+    "authentication": {
+        "layout": {
+            "center": "居中",
+            "alignLeft": "居左",
+            "alignRight": "居右"
+        }
     }
 }

@@ -1,6 +1,9 @@
 import type { Preferences } from './types'
 
 export const defaultPreferences: Preferences = {
+    app: {
+        authPageLayout: 'panel-left'
+    },
     theme: {
         builtinType: 'default',
         colorDestructive: 'hsl(348 100% 61%)',
