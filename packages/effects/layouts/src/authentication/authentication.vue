@@ -1,6 +1,10 @@
 <script setup lang="ts">
     import type { ToolbarType } from './types'
 
+    import { preferences, usePreferences } from '@dag/preferences'
+
+    import { Copyright } from '../basic'
+    import AuthenticationFormView from './form.vue'
     import Toolbar from './toolbar.vue'
 
     interface Props {
@@ -24,14 +28,71 @@
         toolbar: true,
         toolbarList: () => ['color', 'language', 'layout', 'theme']
     })
+
+    const { authPanelCenter, authPanelRight, isDark } = usePreferences()
 </script>
 
 <template>
-    <div class="flex min-h-full flex-1 select-none overflow-x-hidden">
+    <div :class="[isDark]" class="flex min-h-full flex-1 select-none overflow-x-hidden">
         <template v-if="toolbar">
             <slot name="toolbar">
                 <Toolbar :toolbar-list="toolbarList" />
             </slot>
         </template>
+        <!-- 应用名称和Logo -->
+        <div class="absolute left-0 top-0 z-10 flex flex-1">
+            <div class="text-foreground ml-4 mt-4 flex flex-1 items-center sm:left-6 sm:top-6">
+                <img :alt="appName" :src="logo" class="mr-2" width="42" />
+                <p class="text-xl font-medium">{{ appName }}</p>
+            </div>
+        </div>
+        <!-- 系统介绍 -->
+        <div v-if="!authPanelCenter" class="relative hidden w-0 flex-1 lg:block">
+            <div class="bg-background-deep absolute inset-0 h-full w-full dark:bg-[#070709]">
+                <div class="login-background absolute left-0 top-0 size-full"></div>
+                <div class="flex-col-center -enter-x mr-20 h-full">
+                    <img :alt="appName" :src="logo" class="animate-float h-64 w-2/5" />
+                    <h2 class="text-1xl text-foreground mt-6 font-sans lg:text-2xl">
+                        {{ pageTitle }}
+                    </h2>
+                    <p class="dark:text-muted-foreground mt-2">{{ pageDescription }}</p>
+                </div>
+            </div>
+        </div>
+        <div v-if="authPanelCenter" class="flex-center relative w-full">
+            <div class="login-background absolute left-0 top-0 size-full"></div>
+        </div>
+        <!-- 右侧认证 -->
+        <AuthenticationFormView v-if="authPanelRight" class="min-h-full w-[34%] flex-1">
+            <template v-if="copyright" #copyright>
+                <slot name="copyright">
+                    <Copyright v-if="preferences.copyright.enable" v-bind="preferences.copyright" />
+                </slot>
+            </template>
+        </AuthenticationFormView>
     </div>
 </template>
+
+<style scoped>
+    .login-background {
+        background: linear-gradient(
+            200deg,
+            #07070915 30%,
+            hsl(var(--primary) / 30%) 48%,
+            #07070915 64%
+        );
+        filter: blur(100px);
+    }
+
+    .dark {
+        .login-background {
+            background: linear-gradient(
+                200deg,
+                #07070915 30%,
+                hsl(var(--primary) / 20%) 48%,
+                #07070915 64%
+            );
+            filter: blur(100px);
+        }
+    }
+</style>

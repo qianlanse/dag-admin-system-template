@@ -9,6 +9,8 @@
         }
     },
     "authentication": {
+        "pageTitle": "Plug-and-play Admin system",
+        "pageDesc": "Efficient, versatile frontend template",
         "layout": {
             "center": "Align Center",
             "alignLeft": "Align Left",

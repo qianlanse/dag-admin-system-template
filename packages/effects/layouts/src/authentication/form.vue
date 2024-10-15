@@ -1,0 +1,29 @@
+<script setup lang="ts">
+    defineOptions({
+        name: 'AuthenticationFormView'
+    })
+</script>
+
+<template>
+    <div
+        class="bg-background dark:bg-background-deep flex-col-center relative px-6 py-10 lg:flex-initial lg:px-8"
+    >
+        <slot></slot>
+        <!-- 具有Transition和KeepAlive的路由器视图 -->
+        <RouterView v-slot="{ Component, route }">
+            <Transition appear mode="out-in" name="slide-right">
+                <KeepAlive :include="['Login']">
+                    <component
+                        :is="Component"
+                        :key="route.fullPath"
+                        class="enter-x mt-6 w-full sm:mx-auto md:max-w-md"
+                    />
+                </KeepAlive>
+            </Transition>
+        </RouterView>
+        <!-- 底部版权 -->
+        <div class="text-muted-foreground absolute bottom-3 flex text-center text-xs">
+            <slot name="copyright"></slot>
+        </div>
+    </div>
+</template>

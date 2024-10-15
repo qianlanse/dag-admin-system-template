@@ -4,7 +4,7 @@ import { DEFAULT_HOME_PATH } from '@dag/constants'
 
 import { AuthPageLayout } from '#/layouts'
 import { $t } from '#/locales'
-import Login from '#/views/_core/authentication/Login.vue'
+import Login from '#/views/_core/authentication/login.vue'
 
 const coreRoutes: RouteRecordRaw[] = [
     {
