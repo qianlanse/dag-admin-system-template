@@ -2,7 +2,8 @@ import type { Preferences } from './types'
 
 export const defaultPreferences: Preferences = {
     app: {
-        authPageLayout: 'panel-left'
+        authPageLayout: 'panel-left',
+        locale: 'zh-CN'
     },
     theme: {
         builtinType: 'default',

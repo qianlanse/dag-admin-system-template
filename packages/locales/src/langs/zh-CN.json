@@ -14,5 +14,12 @@
             "alignLeft": "居左",
             "alignRight": "居右"
         }
+    },
+    "preferences": {
+        "followSystem": "跟随系统",
+        "theme": {
+            "light": "浅色",
+            "dark": "深色"
+        }
     }
 }

@@ -13,7 +13,7 @@ import { defaultPreferences } from './config'
 import { updateCSSVariables } from './update-css-variables'
 
 const STORAGE_KEY = 'preferences'
-// const STORAGE_KEY_LOCALE = `${STORAGE_KEY}-locale`
+const STORAGE_KEY_LOCALE = `${STORAGE_KEY}-locale`
 const STORAGE_KEY_THEME = `${STORAGE_KEY}-theme`
 
 class PreferenceManager {
@@ -40,6 +40,7 @@ class PreferenceManager {
      */
     private _savePreferences(preference: Preferences) {
         this.cache?.setItem(STORAGE_KEY, preference)
+        this.cache?.setItem(STORAGE_KEY_LOCALE, preference.app.locale)
         this.cache?.setItem(STORAGE_KEY_THEME, preference.theme.mode)
     }
 
@@ -92,7 +93,11 @@ class PreferenceManager {
         this.initialPreferences = merge({}, overrides, defaultPreferences)
 
         // 加载并合并当前储存的偏好设置
-        const mergedPreference = merge({}, {}, this.initialPreferences)
+        const mergedPreference = merge(
+            {},
+            this.loadCachedPreferences() || {},
+            this.initialPreferences
+        )
 
         // 更新偏好设置
         this.updatePreferences(mergedPreference)

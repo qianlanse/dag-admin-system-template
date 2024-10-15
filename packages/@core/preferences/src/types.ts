@@ -5,6 +5,7 @@ import type {
     ThemeModeType
 } from '@dag-core/typings'
 
+type SupportedLanguagesType = 'en-US' | 'zh-CN'
 interface ThemePreferences {
     /**
      * 内置主题名
@@ -49,6 +50,10 @@ interface AppPreferences {
      * 登录注册页面布局
      */
     authPageLayout: AuthPageLayoutType
+    /**
+     * 支持的语言
+     */
+    locale: SupportedLanguagesType
 }
 
 interface Preferences {
@@ -67,4 +72,4 @@ interface InitialOptions {
     overrides?: DeepPartial<Preferences>
 }
 
-export type { InitialOptions, Preferences, ThemePreferences }
+export type { InitialOptions, Preferences, SupportedLanguagesType, ThemePreferences }

@@ -3,6 +3,7 @@ import type { LocaleSetupOptions, SupportedLanguagesType } from '@dag/locales'
 import type { App } from 'vue'
 
 import { $t, setupI18n as coreI18n, loadLocalesMap } from '@dag/locales'
+import { preferences } from '@dag/preferences'
 
 const modules = import.meta.glob('./langs/*.json')
 const localesMap = loadLocalesMap(modules)
@@ -23,7 +24,7 @@ async function loadMessages(lang: SupportedLanguagesType) {
  */
 async function setupI18n(app: App, options: LocaleSetupOptions = {}) {
     await coreI18n(app, {
-        defaultLocale: 'zh-CN',
+        defaultLocale: preferences.app.locale,
         loadMessages,
         missingWarn: import.meta.env.DEV,
         ...options

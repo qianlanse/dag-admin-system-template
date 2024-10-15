@@ -14,5 +14,12 @@
             "alignLeft": "Align Left",
             "alignRight": "Align Right"
         }
+    },
+    "preferences": {
+        "followSystem": "Follow system",
+        "theme": {
+            "light": "Light",
+            "dark": "Dark"
+        }
     }
 }
