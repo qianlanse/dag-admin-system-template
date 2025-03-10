@@ -54,10 +54,10 @@
     },
     "dependencies": {
         "@ctrl/tinycolor": "catalog:",
-        "clsx": "^2.1.1",
+        "clsx": "catalog:",
         "defu": "catalog:",
         "lodash.clonedeep": "catalog:",
-        "tailwind-merge": "^2.5.3",
+        "tailwind-merge": "catalog:",
         "theme-colors": "catalog:"
     },
     "devDependencies": {

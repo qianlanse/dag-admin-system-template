@@ -8,16 +8,16 @@ import { getPackagesSync } from '@dag/node-utils'
 
 const { packages } = getPackagesSync()
 
-const allowedScopes = new Set([
+const allowedScopes = [
+    ...packages.map((pkg) => pkg.packageJson.name),
     'ci',
     'deploy',
     'dev',
     'lint',
     'other',
     'project',
-    'style',
-    ...packages.map((pkg) => pkg.packageJson.name)
-])
+    'style'
+]
 
 const scopeComplete = execSync('git status --porcelain || true')
     .toString()
@@ -93,6 +93,7 @@ const userConfig = {
             2,
             'always',
             (parsed) => {
+                console.log('parsed:', parsed)
                 if (!parsed.scope || allowedScopes.has(parsed.scope)) {
                     return [true]
                 }

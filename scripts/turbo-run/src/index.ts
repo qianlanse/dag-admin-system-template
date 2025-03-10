@@ -18,8 +18,9 @@ try {
             run({ command })
         })
 
+    // 无效命令
     turboRun.on('command:*', () => {
-        consola.error(colors.red('Invalid command.'))
+        consola.error(colors.red('Invalid command!'))
         process.exit(1)
     })
 

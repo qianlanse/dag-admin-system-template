@@ -2,8 +2,8 @@ import { colors, consola } from '@dag/node-utils'
 
 import cac from 'cac'
 
-import { defineCleanCommand } from './clean'
 import { defineLintCommand } from './lint'
+import { definePubLintCommand } from './publint'
 
 try {
     const vsh = cac('vsh')
@@ -11,9 +11,10 @@ try {
     // vsh lint
     defineLintCommand(vsh)
 
-    // vsh clean
-    defineCleanCommand(vsh)
+    // vsh publint
+    definePubLintCommand(vsh)
 
+    // Invalid command
     vsh.on('command:*', () => {
         consola.error(colors.red('Invalid command.'))
         process.exit(1)

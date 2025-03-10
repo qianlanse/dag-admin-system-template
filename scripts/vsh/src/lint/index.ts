@@ -1,3 +1,6 @@
+/**
+ * 格式化样式，规则和检查
+ */
 import type { CAC } from 'cac'
 
 import { execaCommand } from '@dag/node-utils'
@@ -10,6 +13,8 @@ interface LintCommandOptions {
 }
 
 async function runLint({ format }: LintCommandOptions) {
+    process.env.FORCE_COLOR = '3'
+
     if (format) {
         await execaCommand(`stylelint "**/*.{vue,css,less,scss}" --cache --fix`, {
             stdio: 'inherit'
@@ -35,9 +40,11 @@ async function runLint({ format }: LintCommandOptions) {
     ])
 }
 
-export function defineLintCommand(cac: CAC) {
+function defineLintCommand(cac: CAC) {
     cac.command('lint')
         .usage('Betch execute project lint check.')
         .option('--format', 'Format lint problem')
         .action(runLint)
 }
+
+export { defineLintCommand }

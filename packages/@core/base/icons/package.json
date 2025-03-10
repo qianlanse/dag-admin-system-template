@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "@iconify/vue": "catalog:",
-        "lucide-vue-next": "^0.452.0",
+        "lucide-vue-next": "catalog:",
         "vue": "catalog:"
     }
 }

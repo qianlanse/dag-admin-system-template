@@ -10,9 +10,10 @@
         "postinstall": "pnpm -r run stub --if-present",
         "commit": "czg",
         "prepare": "is-ci || husky",
-        "clean": "vsh clean",
+        "clean": "node ./scripts/clean.mjs",
         "format": "vsh lint --format",
         "lint": "vsh lint",
+        "publint": "vsh publint",
         "reinstall": "pnpm clean --del-lock && pnpm install",
         "check:cspell": "cspell lint **/*.ts **/README.md .changeset/*.md --no-progress",
         "check:type": "turbo run typecheck",
@@ -50,14 +51,19 @@
     },
     "engines": {
         "node": ">=20.10.0",
-        "pnpm": ">=9.5.0"
+        "pnpm": ">=9.12.0"
     },
-    "packageManager": "pnpm@9.12.1",
+    "packageManager": "pnpm@9.15.6",
     "pnpm": {
         "peerDependencyRules": {
             "allowedVersions": {
                 "eslint": "*"
             }
-        }
+        },
+        "overrides": {},
+        "neverBuiltDependencies": [
+            "canvas",
+            "node-gyp"
+        ]
     }
 }

@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@dag/node-utils": "workspace:*",
-        "cac": "catalog:"
+        "cac": "catalog:",
+        "publint": "catalog:"
     }
 }

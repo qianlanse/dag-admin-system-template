@@ -23,7 +23,7 @@ export async function run(options: RunOptions) {
 
     let selectPkg: string | symbol
     if (selectPkgs.length > 1) {
-        selectPkg = await select<any, string>({
+        selectPkg = await select({
             message: `Select the app you need to run [${command}]:`,
             options: selectPkgs.map((item) => ({
                 label: item?.packageJson.name,
@@ -32,7 +32,7 @@ export async function run(options: RunOptions) {
         })
 
         if (isCancel(selectPkg) || !selectPkg) {
-            cancel(`Has cancelled.`)
+            cancel(`👋 Has cancelled.`)
             process.exit(1)
         }
     } else {
