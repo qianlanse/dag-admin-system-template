@@ -45,9 +45,15 @@ catalogs:
     '@intlify/unplugin-vue-i18n':
       specifier: ^6.0.3
       version: 6.0.3
+    '@jspm/generator':
+      specifier: ^2.5.1
+      version: 2.5.1
     '@manypkg/get-packages':
       specifier: ^2.2.2
       version: 2.2.2
+    '@pnpm/workspace.read-manifest':
+      specifier: ^1000.1.1
+      version: 1000.1.1
     '@stylistic/stylelint-plugin':
       specifier: ^3.1.2
       version: 3.1.2
@@ -63,6 +69,9 @@ catalogs:
     '@types/eslint':
       specifier: ^9.6.1
       version: 9.6.1
+    '@types/html-minifier-terser':
+      specifier: ^7.0.2
+      version: 7.0.2
     '@types/lodash.clonedeep':
       specifier: ^4.5.9
       version: 4.5.9
@@ -102,6 +111,9 @@ catalogs:
     chalk:
       specifier: ^5.4.1
       version: 5.4.1
+    cheerio:
+      specifier: ^1.0.0
+      version: 1.0.0
     circular-dependency-scanner:
       specifier: ^2.3.0
       version: 2.3.0
@@ -201,9 +213,15 @@ catalogs:
     find-up:
       specifier: ^7.0.0
       version: 7.0.0
+    get-port:
+      specifier: ^7.1.0
+      version: 7.1.0
     globals:
       specifier: ^15.15.0
       version: 15.15.0
+    html-minifier-terser:
+      specifier: ^7.2.0
+      version: 7.2.0
     husky:
       specifier: ^9.1.6
       version: 9.1.7
@@ -342,12 +360,18 @@ catalogs:
     vite:
       specifier: ^6.2.1
       version: 6.2.2
+    vite-plugin-compression:
+      specifier: ^0.5.1
+      version: 0.5.1
     vite-plugin-dts:
       specifier: ^4.5.3
       version: 4.5.3
     vite-plugin-html:
       specifier: ^3.2.2
       version: 3.2.2
+    vite-plugin-lazy-import:
+      specifier: ^1.0.7
+      version: 1.0.7
     vite-plugin-pwa:
       specifier: ^0.21.1
       version: 0.21.1
@@ -438,7 +462,7 @@ importers:
         specifier: 'catalog:'
         version: 3.5.0(sass@1.85.1)(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))
       vite:
-        specifier: ^6.2.1
+        specifier: 'catalog:'
         version: 6.2.2(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(sass@1.85.1)(terser@5.39.0)(yaml@2.7.0)
       vue:
         specifier: 'catalog:'
@@ -754,19 +778,19 @@ importers:
         specifier: 'catalog:'
         version: 6.0.3(@vue/compiler-dom@3.5.13)(eslint@9.22.0(jiti@2.4.2))(rollup@4.35.0)(typescript@5.8.2)(vue-i18n@11.1.2(vue@3.5.13(typescript@5.8.2)))(vue@3.5.13(typescript@5.8.2))
       '@jspm/generator':
-        specifier: ^2.5.1
+        specifier: 'catalog:'
         version: 2.5.1
       archiver:
         specifier: 'catalog:'
         version: 7.0.1
       cheerio:
-        specifier: ^1.0.0
+        specifier: 'catalog:'
         version: 1.0.0
       get-port:
-        specifier: ^7.1.0
+        specifier: 'catalog:'
         version: 7.1.0
       html-minifier-terser:
-        specifier: ^7.2.0
+        specifier: 'catalog:'
         version: 7.2.0
       nitropack:
         specifier: 'catalog:'
@@ -782,13 +806,13 @@ importers:
         specifier: workspace:*
         version: link:../node-utils
       '@pnpm/workspace.read-manifest':
-        specifier: ^1000.1.1
+        specifier: 'catalog:'
         version: 1000.1.1
       '@types/archiver':
         specifier: 'catalog:'
         version: 6.0.3
       '@types/html-minifier-terser':
-        specifier: ^7.0.2
+        specifier: 'catalog:'
         version: 7.0.2
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
@@ -815,7 +839,7 @@ importers:
         specifier: 'catalog:'
         version: 6.2.2(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(sass@1.85.1)(terser@5.39.0)(yaml@2.7.0)
       vite-plugin-compression:
-        specifier: ^0.5.1
+        specifier: 'catalog:'
         version: 0.5.1(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(sass@1.85.1)(terser@5.39.0)(yaml@2.7.0))
       vite-plugin-dts:
         specifier: 'catalog:'
@@ -824,7 +848,7 @@ importers:
         specifier: 'catalog:'
         version: 3.2.2(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(sass@1.85.1)(terser@5.39.0)(yaml@2.7.0))
       vite-plugin-lazy-import:
-        specifier: ^1.0.7
+        specifier: 'catalog:'
         version: 1.0.7
 
   packages/@core/base/design: {}

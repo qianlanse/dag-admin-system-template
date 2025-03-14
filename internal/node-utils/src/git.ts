@@ -4,6 +4,9 @@ import { execa } from 'execa'
 
 export * from '@changesets/git'
 
+/**
+ * 获取暂存区文件
+ */
 async function getStagedFiles(): Promise<string[]> {
     try {
         const { stdout } = await execa('git', [
@@ -22,7 +25,8 @@ async function getStagedFiles(): Promise<string[]> {
         const changedSet = new Set(changedList)
         changedSet.delete('')
         return [...changedSet]
-    } catch {
+    } catch (error) {
+        console.error('Failed to get staged files:', error)
         return []
     }
 }
