@@ -1,11 +1,11 @@
-/**
- * https://blog.csdn.net/gitblog_00830/article/details/141982098
- */
-
 import type { Linter } from 'eslint'
 
 import { interopDefault } from '../util'
 
+/**
+ * 此插件提供了超过100条规则，旨在帮助开发者编写更简洁、一致和安全的代码
+ * @see https://github.com/sindresorhus/eslint-plugin-unicorn/blob/HEAD/docs/rules/better-regex.md
+ */
 export async function unicorn(): Promise<Linter.Config[]> {
     const [unicornPlugin] = await Promise.all([
         interopDefault(import('eslint-plugin-unicorn'))

@@ -1,6 +1,6 @@
-import type { LocaleSetupOptions, SupportedLanguagesType } from '@dag/locales'
-
 import type { App } from 'vue'
+
+import type { LocaleSetupOptions, SupportedLanguagesType } from '@dag/locales'
 
 import { $t, setupI18n as coreI18n, loadLocalesMap } from '@dag/locales'
 import { preferences } from '@dag/preferences'

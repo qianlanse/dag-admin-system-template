@@ -1,8 +1,19 @@
 import type { PluginOption } from 'vite'
 
-import { dateUtil, getPackages, readPackageJSON } from '@dag/node-utils'
+import { dateUtil, findMonorepoRoot, getPackages, readPackageJSON } from '@dag/node-utils'
 
-function resolvePackageVersion(pkgsMeta: Record<string, string>, name: string, value: string) {
+import { readWorkspaceManifest } from '@pnpm/workspace.read-manifest'
+
+function resolvePackageVersion(
+    pkgsMeta: Record<string, string>,
+    name: string,
+    value: string,
+    catalog: Record<string, string>
+) {
+    if (value.includes('catalog:')) {
+        return catalog[name]
+    }
+
     if (value.includes('workspace')) {
         return pkgsMeta[name]
     }
@@ -10,8 +21,13 @@ function resolvePackageVersion(pkgsMeta: Record<string, string>, name: string, v
     return value
 }
 
+/**
+ * 解决依赖关系
+ */
 async function resolveMonorepoDependencies() {
     const { packages } = await getPackages()
+    const manifest = await readWorkspaceManifest(findMonorepoRoot())
+    const catalog = manifest?.catalog || {}
 
     const resultDevDependencies: Record<string, string | undefined> = {}
     const resultDependencies: Record<string, string | undefined> = {}
@@ -25,11 +41,11 @@ async function resolveMonorepoDependencies() {
         const { dependencies = {}, devDependencies = {} } = packageJson
 
         for (const [key, value] of Object.entries(dependencies)) {
-            resultDependencies[key] = resolvePackageVersion(pkgsMeta, key, value)
+            resultDependencies[key] = resolvePackageVersion(pkgsMeta, key, value, catalog)
         }
 
         for (const [key, value] of Object.entries(devDependencies)) {
-            resultDevDependencies[key] = resolvePackageVersion(pkgsMeta, key, value)
+            resultDevDependencies[key] = resolvePackageVersion(pkgsMeta, key, value, catalog)
         }
     }
 

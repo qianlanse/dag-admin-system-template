@@ -10,11 +10,11 @@ import { loadLibraryPlugins } from '../plugins'
 import { getCommonConfig } from './common'
 
 /**
- * 插件配置信息
+ * 插件或库配置信息
  * @param userConfigPromise
  * @returns UserConfigExport
  */
-export function defineLibraryConfig(userConfigPromise?: DefineLibraryOptions) {
+function defineLibraryConfig(userConfigPromise?: DefineLibraryOptions) {
     return defineConfig(async (config: ConfigEnv) => {
         const options = await userConfigPromise?.(config)
         const { command, mode } = config
@@ -24,7 +24,6 @@ export function defineLibraryConfig(userConfigPromise?: DefineLibraryOptions) {
 
         const plugins = await loadLibraryPlugins({
             dts: false,
-            injectLibCss: true,
             injectMetadata: true,
             isBuild,
             mode,
@@ -57,3 +56,5 @@ export function defineLibraryConfig(userConfigPromise?: DefineLibraryOptions) {
         return mergeConfig(mergedCommonConfig, vite)
     })
 }
+
+export { defineLibraryConfig }

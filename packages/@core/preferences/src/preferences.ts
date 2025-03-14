@@ -35,42 +35,6 @@ class PreferenceManager {
     }
 
     /**
-     * 保存偏好设置
-     * @param {Preferences} preference 需要保存的偏好设置
-     */
-    private _savePreferences(preference: Preferences) {
-        this.cache?.setItem(STORAGE_KEY, preference)
-        this.cache?.setItem(STORAGE_KEY_LOCALE, preference.app.locale)
-        this.cache?.setItem(STORAGE_KEY_THEME, preference.theme.mode)
-    }
-
-    /**
-     * 处理更新的键值
-     * @param {DeepPartial<Preferences>} updates 部分更新的偏好设置
-     */
-    private handleUpdates(updates: DeepPartial<Preferences>) {
-        const themeUpdates = updates.theme || {}
-        if (themeUpdates && Object.keys(themeUpdates).length > 0) {
-            updateCSSVariables(this.state)
-        }
-    }
-
-    /**
-     * 从缓存中获取偏好设置，若缓存中不存在则返回默认偏好设置
-     */
-    private loadCachedPreferences() {
-        return this.cache?.getItem<Preferences>(STORAGE_KEY)
-    }
-
-    /**
-     * 加载偏好设置
-     * @returns {Preferences} 加载偏好设置
-     */
-    private loadPreferences(): Preferences {
-        return this.loadCachedPreferences() || { ...defaultPreferences }
-    }
-
-    /**
      * 获取偏好设置state
      * @returns readonly state
      */
@@ -116,6 +80,42 @@ class PreferenceManager {
         // 根据更新的键值执行相应的操作
         this.handleUpdates(updates)
         this.savePreferences(this.state)
+    }
+
+    /**
+     * 保存偏好设置
+     * @param {Preferences} preference 需要保存的偏好设置
+     */
+    private _savePreferences(preference: Preferences) {
+        this.cache?.setItem(STORAGE_KEY, preference)
+        this.cache?.setItem(STORAGE_KEY_LOCALE, preference.app.locale)
+        this.cache?.setItem(STORAGE_KEY_THEME, preference.theme.mode)
+    }
+
+    /**
+     * 处理更新的键值
+     * @param {DeepPartial<Preferences>} updates 部分更新的偏好设置
+     */
+    private handleUpdates(updates: DeepPartial<Preferences>) {
+        const themeUpdates = updates.theme || {}
+        if (themeUpdates && Object.keys(themeUpdates).length > 0) {
+            updateCSSVariables(this.state)
+        }
+    }
+
+    /**
+     * 从缓存中获取偏好设置，若缓存中不存在则返回默认偏好设置
+     */
+    private loadCachedPreferences() {
+        return this.cache?.getItem<Preferences>(STORAGE_KEY)
+    }
+
+    /**
+     * 加载偏好设置
+     * @returns {Preferences} 加载偏好设置
+     */
+    private loadPreferences(): Preferences {
+        return this.loadCachedPreferences() || { ...defaultPreferences }
     }
 }
 

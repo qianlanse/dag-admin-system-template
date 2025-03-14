@@ -1,0 +1,120 @@
+{
+    "folders": [
+        {
+            "name": "@dag/web-ele",
+            "path": "apps/web-ele"
+        },
+        {
+            "name": "@dag/web-naive",
+            "path": "apps/web-naive"
+        },
+        {
+            "name": "@dag/commitlint-config",
+            "path": "internal/lint-configs/commitlint-config"
+        },
+        {
+            "name": "@dag/eslint-config",
+            "path": "internal/lint-configs/eslint-config"
+        },
+        {
+            "name": "@dag/prettier-config",
+            "path": "internal/lint-configs/prettier-config"
+        },
+        {
+            "name": "@dag/stylelint-config",
+            "path": "internal/lint-configs/stylelint-config"
+        },
+        {
+            "name": "@dag/node-utils",
+            "path": "internal/node-utils"
+        },
+        {
+            "name": "@dag/tailwind-config",
+            "path": "internal/tailwind-config"
+        },
+        {
+            "name": "@dag/tsconfig",
+            "path": "internal/tsconfig"
+        },
+        {
+            "name": "@dag/vite-config",
+            "path": "internal/vite-config"
+        },
+        {
+            "name": "@dag-core/design",
+            "path": "packages/@core/base/design"
+        },
+        {
+            "name": "@dag-core/icons",
+            "path": "packages/@core/base/icons"
+        },
+        {
+            "name": "@dag-core/shared",
+            "path": "packages/@core/base/shared"
+        },
+        {
+            "name": "@dag-core/typings",
+            "path": "packages/@core/base/typings"
+        },
+        {
+            "name": "@dag-core/composables",
+            "path": "packages/@core/composables"
+        },
+        {
+            "name": "@dag-core/preferences",
+            "path": "packages/@core/preferences"
+        },
+        {
+            "name": "@dag-core/shadcn-ui",
+            "path": "packages/@core/ui-kit/shadcn-ui"
+        },
+        {
+            "name": "@dag/constants",
+            "path": "packages/constants"
+        },
+        {
+            "name": "@dag/hooks",
+            "path": "packages/effects/hooks"
+        },
+        {
+            "name": "@dag/layouts",
+            "path": "packages/effects/layouts"
+        },
+        {
+            "name": "@dag/icons",
+            "path": "packages/icons"
+        },
+        {
+            "name": "@dag/locales",
+            "path": "packages/locales"
+        },
+        {
+            "name": "@dag/preferences",
+            "path": "packages/preferences"
+        },
+        {
+            "name": "@dag/stores",
+            "path": "packages/stores"
+        },
+        {
+            "name": "@dag/styles",
+            "path": "packages/styles"
+        },
+        {
+            "name": "@dag/types",
+            "path": "packages/types"
+        },
+        {
+            "name": "@dag/utils",
+            "path": "packages/utils"
+        },
+        {
+            "name": "@dag/turbo-run",
+            "path": "scripts/turbo-run"
+        },
+        {
+            "name": "@dag/vsh",
+            "path": "scripts/vsh"
+        }
+    ]
+}

@@ -1,3 +1,6 @@
+import type { App } from 'vue'
+import type { Locale } from 'vue-i18n'
+
 import type {
     ImportLocaleFn,
     LoadMessageFn,
@@ -5,8 +8,8 @@ import type {
     SupportedLanguagesType
 } from './typing'
 
-import { type App, unref } from 'vue'
-import { createI18n, type Locale } from 'vue-i18n'
+import { unref } from 'vue'
+import { createI18n } from 'vue-i18n'
 
 import { useSimpleLocale } from '@dag-core/composables'
 

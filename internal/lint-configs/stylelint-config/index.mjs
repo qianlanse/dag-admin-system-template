@@ -70,7 +70,7 @@ export default {
                     'at-root',
                     'tailwind',
                     'apply',
-                    'veriants',
+                    'variants',
                     'responsive',
                     'screen',
                     'function',

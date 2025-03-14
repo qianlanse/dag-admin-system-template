@@ -1,5 +1,6 @@
 import type { Linter } from 'eslint'
 
+/** 忽略受限导入 */
 const restrictedImportIgnores = [
     '**/vite.config.mts',
     '**/tailwind.config.mjs',
@@ -15,10 +16,17 @@ const customConfig: Linter.Config[] = [
         }
     },
     {
-        files: ['packages/effects/**/**', 'packages/types/**/**'],
+        files: [
+            'apps/**/**',
+            'packages/effects/**/**',
+            'packages/utils/**/**',
+            'packages/types/**/**',
+            'packages/locales/**/**'
+        ],
         ignores: restrictedImportIgnores,
         rules: {
-            'perfectionist/sort-interfaces': 'off'
+            'perfectionist/sort-interfaces': 'off',
+            'perfectionist/sort-objects': 'off'
         }
     },
     {
@@ -26,6 +34,8 @@ const customConfig: Linter.Config[] = [
         files: ['apps/**/**'],
         ignores: restrictedImportIgnores,
         rules: {
+            // 导入是 ES6/ES2015 的标准，用于使其他模块的功能在你当前模块中可用
+            // https://zh-hans.eslint.org/docs/latest/rules/no-restricted-imports
             'no-restricted-imports': [
                 'error',
                 {

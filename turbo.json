@@ -8,7 +8,9 @@
         "internal/node-utils/src/**/*.ts",
         "internal/tailwind-config/src/**/*.ts",
         "internal/vite-config/*.json",
-        "internal/vite-config/src/**/*.ts"
+        "internal/vite-config/src/**/*.ts",
+        "scripts/*/src/**/*.ts",
+        "scripts/*/src/**/*.json"
     ],
     "globalEnv": ["NODE_ENV"],
     "tasks": {
@@ -24,6 +26,7 @@
             "dependsOn": ["^build"],
             "outputs": ["dist/**"]
         },
+        "test:e2e": {},
         "dev": {
             "dependsOn": [],
             "outputs": [],

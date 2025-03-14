@@ -1,16 +1,22 @@
 import type { Linter } from 'eslint'
 
-// https://www.npmjs.com/package/eslint-plugin-import-x
 import * as pluginImport from 'eslint-plugin-import-x'
 
+/**
+ * 导入(import)顺序规则
+ * @see https://www.npmjs.com/package/eslint-plugin-import-x
+ * @returns Promise<Linter.Config[]>
+ */
 export async function importPluginConfig(): Promise<Linter.Config[]> {
     return [
         {
             plugins: {
-                // @ts-expect-error - no types
+                // @ts-expect-error - This is a dynamic import
                 import: pluginImport
             },
             rules: {
+                // 强制或禁止对命名导入使用内联类型标记
+                'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
                 // 确保所有导入出现在其他语句之前
                 'import/first': 'error',
                 // 在 import 语句后强制换行

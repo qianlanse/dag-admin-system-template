@@ -8,7 +8,6 @@ import {
     getPackages as getPackagesFunc,
     getPackagesSync as getPackagesSyncFunc
 } from '@manypkg/get-packages'
-
 /**
  * 通过遍历父目录来查找文件或目录
  * @see https://www.npmjs.com/package/find-up
@@ -28,12 +27,9 @@ function findMonorepoRoot(cwd: string = process.cwd()) {
     return dirname(lockFile || '')
 }
 
-/**
- * 同步获取大仓的所有包
- */
-function getPackagesSync() {
-    const root = findMonorepoRoot()
-    return getPackagesSyncFunc(root)
+async function getPackage(pkgName: string) {
+    const { packages } = await getPackages()
+    return packages.find((pkg) => pkg.packageJson.name === pkgName)
 }
 
 /**
@@ -46,9 +42,12 @@ async function getPackages() {
     return await getPackagesFunc(root)
 }
 
-async function getPackage(pkgName: string) {
-    const { packages } = await getPackages()
-    return packages.find((pkg) => pkg.packageJson.name === pkgName)
+/**
+ * 同步获取大仓的所有包
+ */
+function getPackagesSync() {
+    const root = findMonorepoRoot()
+    return getPackagesSyncFunc(root)
 }
 
 export { findMonorepoRoot, getPackage, getPackages, getPackagesSync }

@@ -5,6 +5,7 @@
     import { Languages } from '@dag/icons'
     import { loadLocaleMessages } from '@dag/locales'
     import { preferences, updatePreferences } from '@dag/preferences'
+
     import { DagDropdownRadioMenu, DagIconButton } from '@dag-core/shadcn-ui'
 
     defineOptions({

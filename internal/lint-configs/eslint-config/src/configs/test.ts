@@ -1,11 +1,12 @@
-/**
- * https://www.npmjs.com/package/eslint-plugin-vitest
- */
-
 import type { Linter } from 'eslint'
 
 import { interopDefault } from '../util'
 
+/**
+ * 针对测试规则验证
+ * @see https://www.npmjs.com/package/eslint-plugin-vitest
+ * @see https://www.npmjs.com/package/eslint-plugin-no-only-tests
+ */
 export async function test(): Promise<Linter.Config[]> {
     const [pluginTest, pluginNoOnlyTests] = await Promise.all([
         interopDefault(import('eslint-plugin-vitest')),

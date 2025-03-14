@@ -31,13 +31,13 @@ async function getLoadingRawByHtmlTemplate(loadingTemplate: string) {
  * @param loadingTemplate
  * @returns Promise<PluginOption | undefined>
  */
-export async function viteInjectAppLoadingPlugin(
+async function viteInjectAppLoadingPlugin(
     isBuild: boolean,
     env: Record<string, any> = {},
     loadingTemplate = 'loading.html'
 ): Promise<PluginOption | undefined> {
     const loadingHtml = await getLoadingRawByHtmlTemplate(loadingTemplate)
-    const { version } = await readPackageJSON()
+    const { version } = await readPackageJSON(process.cwd())
     const envRaw = isBuild ? 'prod' : 'dev'
     const cacheName = `'${env.VITE_APP_NAMESPACE}-${version}-${envRaw}-preferences-theme'`
 
@@ -67,3 +67,5 @@ export async function viteInjectAppLoadingPlugin(
         }
     }
 }
+
+export { viteInjectAppLoadingPlugin }

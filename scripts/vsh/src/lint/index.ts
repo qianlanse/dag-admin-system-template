@@ -7,7 +7,7 @@ import { execaCommand } from '@dag/node-utils'
 
 interface LintCommandOptions {
     /**
-     * Format lint problem
+     * 格式化问题
      */
     format?: boolean
 }
@@ -40,6 +40,10 @@ async function runLint({ format }: LintCommandOptions) {
     ])
 }
 
+/**
+ * 对项目进行lint检查，检查项目中的代码是否符合规范
+ * @param cac
+ */
 function defineLintCommand(cac: CAC) {
     cac.command('lint')
         .usage('Betch execute project lint check.')

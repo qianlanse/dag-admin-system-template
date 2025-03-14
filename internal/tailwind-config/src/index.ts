@@ -33,27 +33,29 @@ function createColorsPalette(name: string) {
         500: `hsl(var(--${name}-500))`,
         600: `hsl(var(--${name}-600))`,
         700: `hsl(var(--${name}-700))`,
+        // 800: `hsl(var(--${name}-800))`,
+        // 900: `hsl(var(--${name}-900))`,
+        // 950: `hsl(var(--${name}-950))`,
         // 激活状态下的颜色，适用于按钮按下时的背景色或边框色。
         active: `hsl(var(--${name}-700))`,
-        // 浅色背景，适用于输入框或表单区域的背景
+        // 浅色背景，适用于输入框或表单区域的背景。
         'background-light': `hsl(var(--${name}-200))`,
-        // 适用于略浅的背景色，通常用于次要背景或略浅的区域
+        // 适用于略浅的背景色，通常用于次要背景或略浅的区域。
         'background-lighter': `hsl(var(--${name}-100))`,
-        // 最浅的背景色，适用于非常轻微的阴影或卡片的背景
-        'background-lightest': `hsl(var(--${name}-60))`,
-        // 普通边框色，适用于按钮或卡片的边框
+        // 最浅的背景色，适用于非常轻微的阴影或卡片的背景。
+        'background-lightest': `hsl(var(--${name}-50))`,
+        // 适用于普通边框，可能用于按钮或卡片的边框。
         border: `hsl(var(--${name}-400))`,
-        // 浅色边框，适用于输入框或卡片的边框
+        // 浅色边框，适用于输入框或卡片的边框。
         'border-light': `hsl(var(--${name}-300))`,
-        // 前置色
         foreground: `hsl(var(--${name}-foreground))`,
-        // 鼠标悬浮状态，适用于按钮悬停时的背景和边框色
+        // 鼠标悬停状态下的颜色，适用于按钮悬停时的背景色或边框色。
         hover: `hsl(var(--${name}-600))`,
         // 主色文本
         text: `hsl(var(--${name}-500))`,
-        // 主色文本激活状态
+        // 主色文本激活态
         'text-active': `hsl(var(--${name}-700))`,
-        // 主色文本悬浮状态
+        // 主色文本悬浮态
         'text-hover': `hsl(var(--${name}-600))`
     }
 }
@@ -84,8 +86,8 @@ const shadcnUiColors = {
         DEFAULT: 'hsl(var(--foreground))'
     },
     input: {
-        background: 'hsl(var(--input))',
-        DEFAULT: 'hsl(var(--input-background))'
+        background: 'hsl(var(--input-background))',
+        DEFAULT: 'hsl(var(--input))'
     },
     muted: {
         DEFAULT: 'hsl(var(--muted))',
@@ -117,7 +119,7 @@ const customColors = {
     },
     heavy: {
         DEFAULT: 'hsl(var(--heavy))',
-        foreground: 'hsl(var(--heavy-foreground)'
+        foreground: 'hsl(var(--heavy-foreground))'
     },
     main: {
         DEFAULT: 'hsl(var(--main))'
@@ -144,7 +146,7 @@ const customColors = {
     },
     yellow: {
         ...createColorsPalette('yellow'),
-        DEFAULT: 'hsl(var(--warning-foreground)'
+        foreground: 'hsl(var(--warning-foreground))'
     }
 }
 
@@ -156,9 +158,8 @@ export default {
         )
     ],
     darkMode: 'selector',
-    plugins: [animate, typographyPlugin, addDynamicIconSelectors(), enterAnimationPlugin()],
+    plugins: [animate, typographyPlugin, addDynamicIconSelectors(), enterAnimationPlugin],
     prefix: '',
-    safelist: ['dark'],
     theme: {
         container: {
             center: true,
@@ -179,11 +180,11 @@ export default {
                 '2000': '2000ms',
                 '3000': '3000ms'
             },
-            borderColor: {
+            borderRadius: {
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)',
-                xl: 'calc(var(--radius) + 2px)'
+                xl: 'calc(var(--radius) + 4px)'
             },
             boxShadow: {
                 float: `0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%), 0 9px 28px 8px rgb(0 0 0 / 5%)`
@@ -223,5 +224,6 @@ export default {
                 '1000': '1000'
             }
         }
-    }
+    },
+    safelist: ['dark']
 } as Config

@@ -7,7 +7,6 @@ import { dateUtil, readPackageJSON } from '@dag/node-utils'
 
 /**
  * 用于注入版权信息
- * @returns Promise<PluginOption | undefined>
  */
 export async function viteLicensePlugin(root = process.cwd()): Promise<PluginOption | undefined> {
     const { description = '', homepage = '', version = '' } = await readPackageJSON(root)
@@ -19,16 +18,17 @@ export async function viteLicensePlugin(root = process.cwd()): Promise<PluginOpt
             handler: (_options: NormalizedOutputOptions, bundle: OutputBundle) => {
                 const date = dateUtil().format('YYYY-MM-DD')
                 const copyrightText = `/*!
-    * Dag Admin
-    * Version: ${version}
-    * Author: dag
-    * Copyright (C) 2024 Dag
-    * License: MIT License
-    * Description: ${description}
-    * Date Created: ${date}
-    * Homepage: ${homepage}
-    * Contact: dag@dagteam.cn
-*/`.trim()
+                    * Dag Admin
+                    * Version: ${version}
+                    * Author: dag
+                    * Copyright (C) 2025 Dag
+                    * License: MIT License
+                    * Description: ${description}
+                    * Date Created: ${date}
+                    * Homepage: ${homepage}
+                    * Contact: dag@dagteam.cn
+                */`.trim()
+
                 for (const [_, fileContent] of Object.entries(bundle)) {
                     if (fileContent.type === 'chunk' && fileContent.isEntry) {
                         const chunkContent = fileContent as OutputChunk

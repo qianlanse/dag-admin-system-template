@@ -27,12 +27,14 @@ async function getConfigSource() {
     return source
 }
 
+function ensureTrailingSlash(path: string) {
+    return path.endsWith('/') ? path : `${path}/`
+}
+
 /**
  * 用于将配置文件抽离出来并注入到项目中
- * @params
- * @returns promise
  */
-export async function viteExtraAppConfigPlugin({
+async function viteExtraAppConfigPlugin({
     isBuild,
     root
 }: PluginOptions): Promise<PluginOption | undefined> {
@@ -47,8 +49,7 @@ export async function viteExtraAppConfigPlugin({
 
     return {
         async configResolved(config) {
-            const { base } = config
-            publicPath = base.endsWith('/') ? base : `${base}/`
+            publicPath = ensureTrailingSlash(config.base)
             source = await getConfigSource()
         },
         async generateBundle() {
@@ -77,3 +78,5 @@ export async function viteExtraAppConfigPlugin({
         }
     }
 }
+
+export { viteExtraAppConfigPlugin }

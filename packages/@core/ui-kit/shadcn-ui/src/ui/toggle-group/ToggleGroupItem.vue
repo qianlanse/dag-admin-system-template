@@ -1,11 +1,12 @@
 <script setup lang="ts">
     import type { VariantProps } from 'class-variance-authority'
+    import type { ToggleGroupItemProps } from 'radix-vue'
 
     import { computed, inject } from 'vue'
 
     import { cn } from '@dag-core/shared/utils'
 
-    import { ToggleGroupItem, type ToggleGroupItemProps, useForwardProps } from 'radix-vue'
+    import { ToggleGroupItem, useForwardProps } from 'radix-vue'
 
     import { toggleVariants } from '../toggle'
 

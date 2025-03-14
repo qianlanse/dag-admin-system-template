@@ -7,4 +7,6 @@ dayjs.extend(timezone)
 
 dayjs.tz.setDefault('Asia/Shanghai')
 
-export const dateUtil = dayjs
+const dateUtil = dayjs
+
+export { dateUtil }

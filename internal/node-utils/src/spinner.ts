@@ -1,8 +1,3 @@
-/**
- * 优雅的终端旋转器
- * @see https://www.npmjs.com/package/ora
- */
-
 import type { Ora } from 'ora'
 
 import ora from 'ora'
@@ -13,6 +8,10 @@ interface SpinnerOptions {
     title: string
 }
 
+/**
+ * 优雅的终端旋转器
+ * @see https://www.npmjs.com/package/ora
+ */
 export async function spinner<T>(
     { failedText, successText, title }: SpinnerOptions,
     callback: () => Promise<T>

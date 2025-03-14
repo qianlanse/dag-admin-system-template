@@ -1,18 +1,22 @@
 import type { Linter } from 'eslint'
 
-import { interopDefault } from '../util'
+// import { interopDefault } from '../util'
 
+/**
+ * turbo规则配置
+ * @see https://www.npmjs.com/package/eslint-config-turbo
+ */
 export async function turbo(): Promise<Linter.Config[]> {
-    const [turboPlugin] = await Promise.all([
-        // @ts-expect-error - no types
-        interopDefault(import('eslint-config-turbo'))
-    ] as const)
+    // const [pluginTurbo] = await Promise.all([
+    //     interopDefault(import('eslint-config-turbo'))
+    // ] as const)
 
-    return [
-        {
-            plugins: {
-                turbo: turboPlugin
-            }
-        }
-    ]
+    // return [
+    //     {
+    //         plugins: {
+    //             turbo: pluginTurbo
+    //         }
+    //     }
+    // ]
+    return []
 }

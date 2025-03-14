@@ -1,5 +1,7 @@
+import type { BasicUserInfo } from '@dag-core/typings'
+
 /** 用户信息 */
-interface UserInfo {
+interface UserInfo extends BasicUserInfo {
     /**
      * 用户描述
      */

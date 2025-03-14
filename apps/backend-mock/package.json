@@ -1,0 +1,13 @@
+{
+    "name": "@dag/backend-mock",
+    "version": "1.0.0",
+    "private": true,
+    "license": "MIT",
+    "scripts": {
+        "build": "nitro build",
+        "start": "nitro dev"
+    },
+    "devDependencies": {
+        "nitropack": "latest"
+    }
+}

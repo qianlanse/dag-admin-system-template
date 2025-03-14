@@ -1,8 +1,10 @@
+import type { Locale } from './messages'
+
 import { computed, ref } from 'vue'
 
 import { createSharedComposable } from '@vueuse/core'
 
-import { getMessages, type Locale } from './messages'
+import { getMessages } from './messages'
 
 /**
  * 使可组合函数可与多个 Vue 实例一起使用

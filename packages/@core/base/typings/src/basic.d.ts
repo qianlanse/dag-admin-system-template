@@ -7,4 +7,17 @@ type SelectOption = BasicOption
 
 type TabOption = BasicOption
 
-export type { BasicOption, SelectOption, TabOption }
+interface BasicUserInfo {
+    /** 头像 */
+    avatar: string
+    /** 昵称 */
+    realName: string
+    /** 角色 */
+    roles?: string[]
+    /** ID */
+    userId: string
+    /** 用户名 */
+    username: string
+}
+
+export type { BasicOption, BasicUserInfo, SelectOption, TabOption }

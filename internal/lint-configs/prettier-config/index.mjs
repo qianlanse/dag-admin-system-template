@@ -17,7 +17,7 @@ export default {
     ],
     // 插件支持
     plugins: ['prettier-plugin-tailwindcss'],
-    // 指定打印机将换行的行长度
+    // 指定每行输入将换行的行长度
     printWidth: 100,
     proseWrap: 'never',
     // 在语句末尾打印分号

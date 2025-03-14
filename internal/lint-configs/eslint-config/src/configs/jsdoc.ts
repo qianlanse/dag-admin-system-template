@@ -2,6 +2,10 @@ import type { Linter } from 'eslint'
 
 import { interopDefault } from '../util'
 
+/**
+ * 是一款用于检查和优化JSDoc注释质量(代码注释)的ESLint插件
+ * @see https://www.npmjs.com/package/eslint-plugin-jsdoc
+ */
 export async function jsdoc(): Promise<Linter.Config[]> {
     const [pluginJsdoc] = await Promise.all([
         interopDefault(import('eslint-plugin-jsdoc'))

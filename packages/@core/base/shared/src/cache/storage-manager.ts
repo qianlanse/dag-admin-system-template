@@ -14,14 +14,6 @@ export class StorageManager {
     }
 
     /**
-     * 获取完整的储存库
-     * @param key {string}
-     */
-    private getFullKey(key: string): string {
-        return `${this.prefix}-${key}`
-    }
-
-    /**
      * 移除所有带前缀的储存项
      */
     public clear() {
@@ -103,5 +95,13 @@ export class StorageManager {
         } catch (error) {
             console.error(`设置储存错误：${fullKey}:`, error)
         }
+    }
+
+    /**
+     * 获取完整的储存库
+     * @param key {string}
+     */
+    private getFullKey(key: string): string {
+        return `${this.prefix}-${key}`
     }
 }

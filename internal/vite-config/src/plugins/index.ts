@@ -7,30 +7,28 @@ import type {
     LibraryPluginOptions
 } from '../typing'
 
-// https://www.npmjs.com/package/@intlify/unplugin-vue-i18n
 import viteVueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import viteVue from '@vitejs/plugin-vue'
 import viteVueJsx from '@vitejs/plugin-vue-jsx'
-// https://www.npmjs.com/package/rollup-plugin-visualizer
 import { visualizer as viteVisualizerPlugin } from 'rollup-plugin-visualizer'
-// https://www.npmjs.com/package/vite-plugin-dts
+import viteCompressPlugin from 'vite-plugin-compression'
 import viteDtsPlugin from 'vite-plugin-dts'
-// https://github.com/vbenjs/vite-plugin-html
 import { createHtmlPlugin as viteHtmlPlugin } from 'vite-plugin-html'
-// https://juejin.cn/post/7214374960192782373
-import { libInjectCss as viteLibInjectCss } from 'vite-plugin-lib-inject-css'
 import { VitePWA } from 'vite-plugin-pwa'
 import viteVueDevTools from 'vite-plugin-vue-devtools'
 
 import { viteArchiverPlugin } from './archiver'
 import { viteExtraAppConfigPlugin } from './extra-app-config'
+import { viteImportMapPlugin } from './importmap'
 import { viteInjectAppLoadingPlugin } from './inject-app-loading'
 import { viteMetadataPlugin } from './inject-metadata'
 import { viteLicensePlugin } from './license'
+import { viteNitroMockPlugin } from './nitro-mock'
 import { vitePrintPlugin } from './print'
+import { viteVxeTableImportsPlugin } from './vxe-table'
 
 /**
- * 获取通用的Vite插件
+ * 获取公用的Vite插件
  * @param options
  */
 async function loadCommonPlugins(options: CommonPluginOptions): Promise<ConditionPlugin[]> {
@@ -39,7 +37,14 @@ async function loadCommonPlugins(options: CommonPluginOptions): Promise<Conditio
     return [
         {
             condition: true,
-            plugins: () => [viteVue(), viteVueJsx()]
+            plugins: () => [
+                viteVue({
+                    script: {
+                        defineModel: true
+                    }
+                }),
+                viteVueJsx()
+            ]
         },
         {
             condition: !isBuild && devtools,
@@ -90,21 +95,22 @@ async function loadApplicationPlugins(options: ApplicationPluginOptions): Promis
     const {
         archiver,
         archiverPluginOptions,
-        // compress,
-        // compressTypes,
+        compress,
+        compressTypes,
         extraAppConfig,
         html,
         i18n,
-        // importmap,
-        // importmapOptions,
+        importmap,
+        importmapOptions,
         injectAppLoading,
         license,
-        // nitroMock,
-        // nitroMockOptions,
+        nitroMock,
+        nitroMockOptions,
         print,
         printInfoMap,
         pwa,
         pwaOptions,
+        vxeTableLazyImport,
         ...commonOptions
     } = options
 
@@ -134,6 +140,18 @@ async function loadApplicationPlugins(options: ApplicationPluginOptions): Promis
             }
         },
         {
+            condition: vxeTableLazyImport,
+            plugins: async () => {
+                return [await viteVxeTableImportsPlugin()]
+            }
+        },
+        {
+            condition: nitroMock,
+            plugins: async () => {
+                return [await viteNitroMockPlugin(nitroMockOptions)]
+            }
+        },
+        {
             condition: license,
             plugins: async () => [await viteLicensePlugin()]
         },
@@ -155,12 +173,38 @@ async function loadApplicationPlugins(options: ApplicationPluginOptions): Promis
                 })
         },
         {
+            condition: isBuild && !!compress,
+            plugins: () => {
+                const compressPlugins: PluginOption[] = []
+                if (compressTypes?.includes('brotli')) {
+                    compressPlugins.push(
+                        viteCompressPlugin({
+                            deleteOriginFile: false,
+                            ext: '.br'
+                        })
+                    )
+                }
+                if (compressTypes?.includes('gzip')) {
+                    compressPlugins.push(
+                        viteCompressPlugin({ deleteOriginFile: false, ext: '.gz' })
+                    )
+                }
+                return compressPlugins
+            }
+        },
+        {
             condition: injectAppLoading,
             plugins: async () => [await viteInjectAppLoadingPlugin(!!isBuild, env)]
         },
         {
             condition: !!html,
             plugins: () => [viteHtmlPlugin({ minify: true })]
+        },
+        {
+            condition: isBuild && importmap,
+            plugins: () => {
+                return [viteImportMapPlugin(importmapOptions)]
+            }
         },
         {
             condition: isBuild && extraAppConfig,
@@ -182,7 +226,7 @@ async function loadApplicationPlugins(options: ApplicationPluginOptions): Promis
  */
 async function loadLibraryPlugins(options: LibraryPluginOptions): Promise<PluginOption[]> {
     const isBuild = options.isBuild
-    const { dts, injectLibCss, ...commonOptions } = options
+    const { dts, ...commonOptions } = options
     const commonPlugins = await loadCommonPlugins(commonOptions)
 
     return await loadConditionPlugins([
@@ -190,10 +234,6 @@ async function loadLibraryPlugins(options: LibraryPluginOptions): Promise<Plugin
         {
             condition: isBuild && !!dts,
             plugins: () => [viteDtsPlugin({ logLevel: 'error' })]
-        },
-        {
-            condition: injectLibCss,
-            plugins: () => [viteLibInjectCss()]
         }
     ])
 }

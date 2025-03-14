@@ -7,7 +7,7 @@ import App from './app.vue'
 import { setupI18n } from './locales'
 import { router } from './router'
 
-export async function bootstrap(namespace: string) {
+async function bootstrap(namespace: string) {
     const app = createApp(App)
 
     // 国际化i18n配置
@@ -21,3 +21,5 @@ export async function bootstrap(namespace: string) {
 
     app.mount('#app')
 }
+
+export { bootstrap }

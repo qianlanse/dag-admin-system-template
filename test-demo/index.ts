@@ -1,1 +1,3 @@
-export const hello = '123'
+export function hello() {
+    return ''
+}

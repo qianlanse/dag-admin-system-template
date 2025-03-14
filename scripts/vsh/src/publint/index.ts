@@ -121,11 +121,11 @@ async function runPublint(files: string[], { check }: PublintCommandOptions) {
 }
 
 function printResult(
-    results: Array<{
+    results: Array<null | {
         pkgJson: Record<string, number | string>
         pkgPath: string
         publintResult: Result
-    } | null>,
+    }>,
     check?: boolean
 ) {
     let errorCount = 0
@@ -177,6 +177,10 @@ function printResult(
     }
 }
 
+/**
+ * 对 Monorepo 项目进行包规范检查，检查项目中的包是否符合规范
+ * @param cac
+ */
 function definePubLintCommand(cac: CAC) {
     cac.command('publint [...files]')
         .usage(

@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import type { AuthPageLayoutType } from '@dag/types'
+
     import type { DagDropdownMenuItem } from '@dag-core/shadcn-ui'
 
     import { computed } from 'vue'
@@ -7,6 +8,7 @@
     import { InspectionPanel, PanelLeft, PanelRight } from '@dag/icons'
     import { $t } from '@dag/locales'
     import { preferences, updatePreferences, usePreferences } from '@dag/preferences'
+
     import { DagDropdownRadioMenu, DagIconButton } from '@dag-core/shadcn-ui'
 
     defineOptions({

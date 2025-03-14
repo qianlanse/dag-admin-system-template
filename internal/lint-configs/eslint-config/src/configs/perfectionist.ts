@@ -1,22 +1,28 @@
-/**
- * ESLint 插件，用于对各种数据进行排序，例如对象、导入、类型、枚举、JSX props 等
- */
-
 import type { Linter } from 'eslint'
 
-import perfectionistPlugin from 'eslint-plugin-perfectionist'
+import { interopDefault } from '../util'
 
+/**
+ * ESLint 插件，用于对各种数据进行排序，例如对象、导入、类型、枚举、JSX props 等
+ * @see https://perfectionist.dev/guide/getting-started
+ */
 export async function perfectionist(): Promise<Linter.Config[]> {
+    const perfectionistPlugin = await interopDefault(
+        // @ts-expect-error - no types
+        import('eslint-plugin-perfectionist')
+    )
     return [
         perfectionistPlugin.configs['recommended-natural'],
         {
             rules: {
-                // 强制导出排序
+                // 强制执行导出排序
                 // https://perfectionist.dev/rules/sort-exports
                 'perfectionist/sort-exports': [
                     'error',
                     {
+                        // 按升序对项目进行排序（A到Z，1到9）
                         order: 'asc',
+                        // 按自然顺序对项目进行排序（例如，“item2”<“item10”）
                         type: 'natural'
                     }
                 ],
@@ -27,21 +33,28 @@ export async function perfectionist(): Promise<Linter.Config[]> {
                     {
                         customGroups: {
                             type: {
-                                dag: 'dag',
-                                vue: 'vue'
+                                'dag-core-type': ['^@dag-core/.+'],
+                                'dag-type': ['^@dag/.+'],
+                                'vue-type': ['^vue$', '^vue-.+', '^@vue/.+']
                             },
                             value: {
-                                dag: ['@dag*', '@dag/**/**', '@dag-core/**/**'],
-                                vue: ['vue', 'vue-*', '@vue*']
+                                dag: ['^@dag/.+'],
+                                'dag-core': ['^@dag-core/.+'],
+                                vue: ['^vue$', '^vue-.+', '^@vue/.+']
                             }
                         },
+                        environment: 'node',
                         groups: [
                             ['external-type', 'builtin-type', 'type'],
+                            'vue-type',
+                            'dag-type',
+                            'dag-core-type',
                             ['parent-type', 'sibling-type', 'index-type'],
                             ['internal-type'],
                             'builtin',
                             'vue',
                             'dag',
+                            'dag-core',
                             'external',
                             'internal',
                             ['parent', 'sibling', 'index'],
@@ -51,12 +64,15 @@ export async function perfectionist(): Promise<Linter.Config[]> {
                             'object',
                             'unknown'
                         ],
-                        internalPattern: ['#*', '#*/**'],
+                        internalPattern: ['^#/.+'],
                         newlinesBetween: 'always',
                         order: 'asc',
                         type: 'natural'
                     }
                 ],
+                // 强制对模块成员进行排序
+                // https://perfectionist.dev/rules/sort-modules
+                'perfectionist/sort-modules': 'off',
                 // 强制导出命名排序
                 // https://perfectionist.dev/rules/sort-named-exports
                 'perfectionist/sort-named-exports': [
@@ -77,43 +93,7 @@ export async function perfectionist(): Promise<Linter.Config[]> {
                             children: 'children'
                         },
                         groups: ['unknown', 'items', 'list', 'children'],
-                        ignorePattern: ['children'],
                         order: 'asc',
-                        partitionByComment: 'Part:**',
-                        type: 'natural'
-                    }
-                ],
-                'perfectionist/sort-vue-attributes': [
-                    'error',
-                    {
-                        customGroups: {
-                            /* eslint-disable perfectionist/sort-objects */
-                            DEFINITION: '*(is|:is|v-is)',
-                            LIST_RENDERING: 'v-for',
-                            CONDITIONALS: 'v-*(else-if|if|else|show|cloak)',
-                            RENDER_MODIFIERS: 'v-*(pre|once)',
-                            GLOBAL: '*(:id|id)',
-                            UNIQUE: '*(ref|key|:ref|:key)',
-                            SLOT: '*(v-slot|slot)',
-                            TWO_WAY_BINDING: '*(v-model|v-model:*)',
-                            // OTHER_DIRECTIVES e.g. 'v-custom-directive'
-                            EVENTS: '*(v-on|@*)',
-                            CONTENT: 'v-*(html|text)'
-                            /* eslint-enable perfectionist/sort-objects */
-                        },
-                        groups: [
-                            'DEFINITION',
-                            'LIST_RENDERING',
-                            'CONDITIONALS',
-                            'RENDER_MODIFIERS',
-                            'GLOBAL',
-                            'UNIQUE',
-                            'SLOT',
-                            'TWO_WAY_BINDING',
-                            'unknown',
-                            'EVENTS',
-                            'CONTENT'
-                        ],
                         type: 'natural'
                     }
                 ]

@@ -1,15 +1,11 @@
 <script setup lang="ts">
+    import type { DropdownMenuContentEmits, DropdownMenuContentProps } from 'radix-vue'
+
     import { computed } from 'vue'
 
     import { cn } from '@dag-core/shared/utils'
 
-    import {
-        DropdownMenuContent,
-        type DropdownMenuContentEmits,
-        type DropdownMenuContentProps,
-        DropdownMenuPortal,
-        useForwardPropsEmits
-    } from 'radix-vue'
+    import { DropdownMenuContent, DropdownMenuPortal, useForwardPropsEmits } from 'radix-vue'
 
     interface Props extends DropdownMenuContentProps {
         class?: any

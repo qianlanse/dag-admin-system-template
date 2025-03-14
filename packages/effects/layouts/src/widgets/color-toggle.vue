@@ -3,6 +3,7 @@
 
     import { Palette } from '@dag/icons'
     import { COLOR_PRESETS, preferences, updatePreferences } from '@dag/preferences'
+
     import { DagIconButton } from '@dag-core/shadcn-ui'
 
     defineOptions({

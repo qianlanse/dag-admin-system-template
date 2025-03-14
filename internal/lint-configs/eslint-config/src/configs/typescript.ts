@@ -2,6 +2,10 @@ import type { Linter } from 'eslint'
 
 import { interopDefault } from '../util'
 
+/**
+ * 针对typescript的规则配置
+ * @see https://typescript-eslint.io/rules/
+ */
 export async function typescript(): Promise<Linter.Config[]> {
     const [pluginTs, parserTs] = await Promise.all([
         interopDefault(import('@typescript-eslint/eslint-plugin')),

@@ -1,12 +1,12 @@
-/**
- * ESLint 指令注释的附加 ESLint 规则
- * https://mysticatea.github.io/eslint-plugin-eslint-comments/
- */
-
 import type { Linter } from 'eslint'
 
 import { interopDefault } from '../util'
 
+/**
+ * 针对注释的规则
+ * @see https://mysticatea.github.io/eslint-plugin-eslint-comments/
+ * @returns Promise<Linter.Config[]>
+ */
 export async function comments(): Promise<Linter.Config[]> {
     const [pluginComments] = await Promise.all([
         // @ts-expect-error - no types

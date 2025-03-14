@@ -46,7 +46,7 @@
         "turbo": "catalog:",
         "typescript": "catalog:",
         "unbuild": "catalog:",
-        "vite": "catalog:",
+        "vite": "^6.2.1",
         "vue": "catalog:"
     },
     "engines": {

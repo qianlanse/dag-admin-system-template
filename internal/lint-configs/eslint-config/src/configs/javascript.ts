@@ -1,12 +1,17 @@
 import type { Linter } from 'eslint'
 
+// 将 JavaScript 特定的功能从 ESLint 中分离出来
+import js from '@eslint/js'
 // https://www.npmjs.com/package/eslint-plugin-unused-imports
 // 查找并删除未使用的 es6 模块导入
 import pluginUnusedImports from 'eslint-plugin-unused-imports'
+// 不同 JavaScript 环境的全局标识符
 import globals from 'globals'
-// @ts-expect-error - no types
-import js from '@eslint/js'
 
+/**
+ * 针对javascript的规则配置
+ * @see https://eslint.org/docs/latest/rules
+ */
 export async function javascript(): Promise<Linter.Config[]> {
     return [
         {
@@ -207,7 +212,8 @@ export async function javascript(): Promise<Linter.Config[]> {
                 'no-template-curly-in-string': 'error',
                 'no-this-before-super': 'error',
                 'no-throw-literal': 'error',
-                'no-undef': 'error',
+                // 此规则可以帮助您找到由于变量和参数名称拼写错误或意外隐式全局变量（例如，忘记for循环初始化程序中的var关键字）而导致的潜在 ReferenceError。
+                'no-undef': 'off',
                 'no-undef-init': 'error',
                 'no-unexpected-multiline': 'error',
                 'no-unmodified-loop-condition': 'error',
@@ -235,7 +241,7 @@ export async function javascript(): Promise<Linter.Config[]> {
                 ],
                 'no-use-before-define': [
                     'error',
-                    { classes: false, functions: false, variables: true }
+                    { classes: false, functions: false, variables: false }
                 ],
                 'no-useless-backreference': 'error',
                 'no-useless-call': 'error',

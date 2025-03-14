@@ -4,6 +4,7 @@
     import { MoonStar, Sun, SunMoon } from '@dag/icons'
     import { $t } from '@dag/locales'
     import { preferences, updatePreferences, usePreferences } from '@dag/preferences'
+
     import { DagTooltip, ToggleGroup, ToggleGroupItem } from '@dag-core/shadcn-ui'
 
     import ThemeButton from './theme-button.vue'

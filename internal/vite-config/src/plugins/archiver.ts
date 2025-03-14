@@ -18,6 +18,7 @@ function zipFolder(folderPath: string, outputPath: string): Promise<void> {
         })
 
         output.on('close', () => {
+            console.log(`ZIP file created: ${outputPath} (${archive.pointer()} total bytes)`)
             resolve()
         })
 
@@ -27,8 +28,10 @@ function zipFolder(folderPath: string, outputPath: string): Promise<void> {
 
         archive.pipe(output)
 
+        // 使用 directory 方法以流的方式压缩文件夹，减少内存消耗
         archive.directory(folderPath, false)
 
+        // 流式处理完成
         archive.finalize()
     })
 }
@@ -59,6 +62,7 @@ export function viteArchiverPlugin(options: ArchiverPluginOptions = {}): PluginO
 
                     try {
                         await zipFolder(folderToZip, zipOutputPath)
+                        console.log(`Folder has been zipped to: ${zipOutputPath}`)
                     } catch {
                         // -
                     }
