@@ -43,6 +43,7 @@
         "cspell": "catalog:",
         "husky": "catalog:",
         "lint-staged": "catalog:",
+        "tailwindcss": "catalog:",
         "turbo": "catalog:",
         "typescript": "catalog:",
         "unbuild": "catalog:",

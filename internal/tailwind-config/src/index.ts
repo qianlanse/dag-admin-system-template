@@ -2,15 +2,14 @@ import type { Config } from 'tailwindcss'
 
 import path from 'node:path'
 
-import { getPackagesSync } from '@dag/node-utils'
-
 import { addDynamicIconSelectors } from '@iconify/tailwind'
+import { getPackagesSync } from '@manypkg/get-packages'
 import typographyPlugin from '@tailwindcss/typography'
 import animate from 'tailwindcss-animate'
 
 import { enterAnimationPlugin } from './plugins/entry'
 
-const { packages } = getPackagesSync()
+const { packages } = getPackagesSync(process.cwd())
 
 const tailwindPackages: string[] = []
 

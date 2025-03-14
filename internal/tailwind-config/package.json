@@ -40,6 +40,7 @@
     "dependencies": {
         "@iconify/json": "catalog:",
         "@iconify/tailwind": "catalog:",
+        "@manypkg/get-packages": "catalog:",
         "@tailwindcss/nesting": "catalog:",
         "@tailwindcss/typography": "catalog:",
         "autoprefixer": "catalog:",
@@ -52,7 +53,6 @@
         "tailwindcss-animate": "catalog:"
     },
     "devDependencies": {
-        "@dag/node-utils": "workspace:*",
         "@types/postcss-import": "catalog:",
         "postcss-load-config": "catalog:"
     }
