@@ -30,6 +30,7 @@ const scopeComplete = execSync('git status --porcelain || true')
 
 /**
  * @type {import('cz-git').UserConfig}
+ * @see https://zhuanlan.zhihu.com/p/12461058025
  */
 const userConfig = {
     extends: ['@commitlint/config-conventional'],
