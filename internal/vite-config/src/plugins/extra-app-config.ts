@@ -15,13 +15,13 @@ const DAG_ADMIN_PRO_APP_CONF = '_DAG_ADMIN_PRO_APP_CONF_'
 async function getConfigSource() {
     const config = await loadEnv()
     const windowVariable = `window.${DAG_ADMIN_PRO_APP_CONF}`
-    let source = `${windowVariable}=${JSON.stringify(config)}`
+    let source = `${windowVariable}=${JSON.stringify(config)};`
     source += `
         Object.freeze(${windowVariable});
         Object.defineProperty(window, "${DAG_ADMIN_PRO_APP_CONF}", {
             configurable: false,
             writeable: false
-        })
+        });
     `.replaceAll(/\s/g, '')
 
     return source

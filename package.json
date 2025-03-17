@@ -6,6 +6,7 @@
     "type": "module",
     "scripts": {
         "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
+        "build:naive": "pnpm run build --filter=@dag/web-naive",
         "preinstall": "npx only-allow pnpm",
         "postinstall": "pnpm -r run stub --if-present",
         "commit": "czg",

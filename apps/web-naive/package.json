@@ -4,7 +4,11 @@
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "dev": "pnpm vite --mode development"
+        "dev": "pnpm vite --mode development",
+        "build": "pnpm vite build --mode production",
+        "build:analyze": "pnpm vite build --mode analyze",
+        "preview": "vite preview",
+        "typecheck": "vue-tsc --noEmit --skipLibCheck"
     },
     "imports": {
         "#/*": "./src/*"
