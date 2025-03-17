@@ -6,6 +6,10 @@ interface RunOptions {
     command?: string
 }
 
+/**
+ * 轻松构建漂亮的命令行应用程序
+ * @see https://www.npmjs.com/package/@clack/prompts
+ */
 export async function run(options: RunOptions) {
     const { command } = options
 
