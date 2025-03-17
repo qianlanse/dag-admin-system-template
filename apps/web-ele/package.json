@@ -13,6 +13,7 @@
         "vue-router": "catalog:"
     },
     "devDependencies": {
+        "@dag/types": "workspace:*",
         "unplugin-element-plus": "catalog:"
     }
 }
