@@ -95,7 +95,7 @@ const userConfig = {
             'always',
             (parsed) => {
                 console.log('parsed:', parsed)
-                if (!parsed.scope || allowedScopes.has(parsed.scope)) {
+                if (!parsed.scope || allowedScopes.includes(parsed.scope)) {
                     return [true]
                 }
 

@@ -2,11 +2,11 @@ import type { App } from 'vue'
 
 import type { LocaleSetupOptions, SupportedLanguagesType } from '@dag/locales'
 
-import { $t, setupI18n as coreI18n, loadLocalesMap } from '@dag/locales'
+import { $t, setupI18n as coreI18n, loadLocalesMapFromDir } from '@dag/locales'
 import { preferences } from '@dag/preferences'
 
-const modules = import.meta.glob('./langs/*.json')
-const localesMap = loadLocalesMap(modules)
+const modules = import.meta.glob('./langs/**/*.json')
+const localesMap = loadLocalesMapFromDir(/\.\/langs\/([^/]+)\/(.*)\.json$/, modules)
 
 /**
  * 加载应用特有的语言包
@@ -26,7 +26,7 @@ async function setupI18n(app: App, options: LocaleSetupOptions = {}) {
     await coreI18n(app, {
         defaultLocale: preferences.app.locale,
         loadMessages,
-        missingWarn: import.meta.env.DEV,
+        missingWarn: !import.meta.env.PROD,
         ...options
     })
 }
