@@ -2,6 +2,9 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 
 import { routes } from './routes'
 
+/**
+ * 创建vue-router实例
+ */
 const router = createRouter({
     history:
         import.meta.env.VITE_ROUTER_HISTORY === 'hash'

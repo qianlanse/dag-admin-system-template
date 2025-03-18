@@ -6,7 +6,7 @@
 
 <template>
     <div
-        class="bg-background dark:bg-background-deep flex-col-center relative px-6 py-10 lg:flex-initial lg:px-8"
+        class="flex-col-center dark:bg-background-deep bg-background relative px-6 py-10 lg:flex-initial lg:px-8"
     >
         <slot></slot>
         <!-- 具有Transition和KeepAlive的路由器视图 -->

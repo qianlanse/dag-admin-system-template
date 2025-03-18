@@ -8,7 +8,16 @@ import { setupI18n } from './locales'
 import { router } from './router'
 
 async function bootstrap(namespace: string) {
+    // 初始化组件适配器
+    // initComponentAdapter()
+
     const app = createApp(App)
+
+    // 注册v-loading指令
+    // registerLoadingDirective(app, {
+    //     loading: 'loading',
+    //     spinning: 'spinning'
+    // })
 
     // 国际化i18n配置
     await setupI18n(app)
