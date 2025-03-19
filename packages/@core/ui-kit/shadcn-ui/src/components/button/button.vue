@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import type { DagButtonProps } from './types'
+    import type { DagButtonProps } from './button'
 
     import { computed } from 'vue'
 

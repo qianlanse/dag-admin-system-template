@@ -1,3 +1,5 @@
 export * from './button'
+export * from './checkbox'
 export * from './dropdown-menu'
+export * from './render-content'
 export * from './tooltip'

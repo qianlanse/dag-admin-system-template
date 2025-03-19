@@ -35,6 +35,8 @@
     "dependencies": {
         "@dag-core/icons": "workspace:*",
         "@dag-core/shared": "workspace:*",
+        "@dag-core/typings": "workspace:*",
+        "@vueuse/core": "catalog:",
         "class-variance-authority": "catalog:",
         "lucide-vue-next": "catalog:",
         "radix-vue": "catalog:",

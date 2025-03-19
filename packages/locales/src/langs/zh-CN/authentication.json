@@ -1,6 +1,15 @@
 {
+    "welcomeBack": "欢迎回来",
+    "loginSubtitle": "请输入您的帐户信息以开始管理您的项目",
+    "rememberMe": "记住账号",
     "pageTitle": "开箱即用的大型中后台管理系统",
     "pageDesc": "工程化、高性能、跨组件库的前端模版",
+    "forgetPassword": "忘记密码?",
+    "mobileLogin": "手机号登录",
+    "qrcodeLogin": "扫码登录",
+    "accountTip": "还没有账号?",
+    "createAccount": "创建账号",
+    "thirdPartyLogin": "其他登录方式",
     "layout": {
         "center": "居中",
         "alignLeft": "居左",

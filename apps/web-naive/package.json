@@ -14,6 +14,7 @@
         "#/*": "./src/*"
     },
     "dependencies": {
+        "@dag/common-ui": "workspace:*",
         "@dag/constants": "workspace:*",
         "@dag/layouts": "workspace:*",
         "@dag/locales": "workspace:*",

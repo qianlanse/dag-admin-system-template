@@ -1,0 +1,20 @@
+{
+    "name": "@dag/common-ui",
+    "version": "1.5.0",
+    "license": "MIT",
+    "type": "module",
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "default": "./src/index.ts"
+        }
+    },
+    "dependencies": {
+        "@dag-core/shadcn-ui": "workspace:*",
+        "@dag/icons": "workspace:*",
+        "@dag/locales": "workspace:*"
+    }
+}

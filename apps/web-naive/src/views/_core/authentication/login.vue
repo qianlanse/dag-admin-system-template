@@ -1,5 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+    import { AuthenticationLogin } from '@dag/common-ui'
+</script>
 
 <template>
-    <div>login</div>
+    <AuthenticationLogin />
 </template>

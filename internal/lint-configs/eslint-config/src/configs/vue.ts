@@ -84,7 +84,8 @@ export async function vue(): Promise<Linter.Config[]> {
                 'vue/eqeqeq': ['error', 'smart'],
                 // 要求或禁止在标签的右括号前使用换行符
                 'vue/html-closing-bracket-newline': 'error',
-                'vue/html-indent': ['error', 4],
+                'vue/html-indent': 'off',
+                // 'vue/html-indent': ['error', 4],
                 // 使用双引号
                 'vue/html-quotes': ['error', 'double'],
                 // 强制使用自闭合样式

@@ -54,6 +54,7 @@
     },
     "dependencies": {
         "@ctrl/tinycolor": "catalog:",
+        "@vue/shared": "^3.5.13",
         "clsx": "catalog:",
         "defu": "catalog:",
         "lodash.clonedeep": "catalog:",

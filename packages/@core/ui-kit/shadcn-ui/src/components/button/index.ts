@@ -1,4 +1,5 @@
+export type * from './button'
+export { default as DagButtonGroup } from './button-group.vue'
 export { default as DagButton } from './button.vue'
+export { default as DagCheckButtonGroup } from './check-button-group.vue'
 export { default as DagIconButton } from './icon-button.vue'
-
-export type * from './types'

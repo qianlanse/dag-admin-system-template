@@ -1,11 +1,12 @@
 <script setup lang="ts">
     import type { ButtonVariants } from '../../ui'
-    import type { DagButtonProps } from './types'
+    import type { DagButtonProps } from './button'
 
     import { computed, useSlots } from 'vue'
 
     import { cn } from '@dag-core/shared/utils'
 
+    import { DagTooltip } from '../tooltip'
     import DagButton from './button.vue'
 
     interface Props extends DagButtonProps {
@@ -13,6 +14,7 @@
         disabled?: boolean
         onClick?: () => void
         tooltip?: string
+        tooltipDelayDuration?: number
         tooltipSide?: 'bottom' | 'left' | 'right' | 'top'
         variant?: ButtonVariants
     }
@@ -20,6 +22,7 @@
     const props = withDefaults(defineProps<Props>(), {
         disabled: false,
         onClick: () => {},
+        tooltipDelayDuration: 200,
         tooltipSide: 'bottom',
         variant: 'icon'
     })
@@ -40,4 +43,22 @@
     >
         <slot></slot>
     </DagButton>
+
+    <DagTooltip v-else :delay-duration="tooltipDelayDuration" :side="tooltipSide">
+        <template #trigger>
+            <DagButton
+                :class="cn('rounded-full', props.class)"
+                :disabled="disabled"
+                :variant="variant"
+                size="icon"
+                @click="onClick"
+            >
+                <slot></slot>
+            </DagButton>
+        </template>
+        <slot v-if="slots.tooltip" name="tooltip"></slot>
+        <template v-else>
+            {{ tooltip }}
+        </template>
+    </DagTooltip>
 </template>
