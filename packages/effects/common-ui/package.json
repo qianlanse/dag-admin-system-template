@@ -13,8 +13,12 @@
         }
     },
     "dependencies": {
+        "@dag-core/form-ui": "workspace:*",
         "@dag-core/shadcn-ui": "workspace:*",
+        "@dag-core/shared": "workspace:*",
         "@dag/icons": "workspace:*",
-        "@dag/locales": "workspace:*"
+        "@dag/locales": "workspace:*",
+        "@dag/types": "workspace:*",
+        "@vueuse/core": "catalog:"
     }
 }

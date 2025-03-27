@@ -10,6 +10,12 @@
     "accountTip": "Don't have an account?",
     "createAccount": "Create Account",
     "thirdPartyLogin": "Or continue with",
+    "selectAccount": "Quick Select Account",
+    "username": "Username",
+    "password": "Password",
+    "usernameTip": "Please enter username",
+    "passwordTip": "Please enter password",
+    "verifyRequiredTip": "Please complete the verification first",
     "layout": {
         "center": "Align Center",
         "alignLeft": "Align Left",

@@ -1,0 +1,6 @@
+{
+    "captcha": {
+        "sliderSuccessText": "Passed",
+        "sliderDefaultText": "Slider and drag"
+    }
+}

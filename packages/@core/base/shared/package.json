@@ -30,6 +30,11 @@
             "types": "./src/constants/index.ts",
             "development": "./src/constants/index.ts",
             "default": "./dist/constants/index.mjs"
+        },
+        "./store": {
+            "types": "./src/store.ts",
+            "development": "./src/store.ts",
+            "default": "./dist/store.mjs"
         }
     },
     "publishConfig": {
@@ -49,12 +54,17 @@
             "./constants": {
                 "types": "./dist/constants/index.d.ts",
                 "default": "./dist/constants/index.mjs"
+            },
+            "./store": {
+                "types": "./dist/store.d.ts",
+                "default": "./dist/store.mjs"
             }
         }
     },
     "dependencies": {
         "@ctrl/tinycolor": "catalog:",
-        "@vue/shared": "^3.5.13",
+        "@tanstack/vue-store": "^0.7.0",
+        "@vue/shared": "catalog:",
         "clsx": "catalog:",
         "defu": "catalog:",
         "lodash.clonedeep": "catalog:",

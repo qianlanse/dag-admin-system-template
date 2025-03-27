@@ -1,0 +1,43 @@
+{
+    "name": "@dag-core/form-ui",
+    "version": "1.5.0",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "build": "pnpm build",
+        "prepublishOnly": "npm run build"
+    },
+    "files": [
+        "dist"
+    ],
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "main": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "development": "./src/index.ts",
+            "default": "./dist/index.mjs"
+        }
+    },
+    "publishConfig": {
+        "exports": {
+            ".": {
+                "default": "./dist/index.mjs"
+            }
+        }
+    },
+    "dependencies": {
+        "@dag-core/composables": "workspace:*",
+        "@dag-core/shadcn-ui": "workspace:*",
+        "@dag-core/shared": "workspace:*",
+        "@dag-core/typings": "workspace:*",
+        "@vee-validate/zod": "catalog:",
+        "@vueuse/core": "catalog:",
+        "vee-validate": "catalog:",
+        "zod": "catalog:",
+        "zod-defaults": "^0.1.3"
+    }
+}
