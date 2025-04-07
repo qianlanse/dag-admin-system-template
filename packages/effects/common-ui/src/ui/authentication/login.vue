@@ -7,6 +7,7 @@
     import type { AuthencationProps } from './types'
 
     import { computed, onMounted, reactive, ref } from 'vue'
+    import { useRouter } from 'vue-router'
 
     import { $t } from '@dag/locales'
 
@@ -36,6 +37,7 @@
         showRegister: true,
         showRememberMe: true,
         showThirdPartyLogin: true,
+        formSchema: () => [],
         submitButtonText: '',
         subTitle: '',
         title: ''
@@ -44,6 +46,7 @@
         submit: [Recordable<any>]
     }>()
 
+    const router = useRouter()
     const [Form, formApi] = useDagForm(
         reactive({
             commonConfig: {
@@ -83,8 +86,7 @@
 
     // 其它登录
     function handleGo(path: string) {
-        // eslint-disable-next-line no-console
-        console.log('其它登录：', path)
+        router.push(path)
     }
 </script>
 

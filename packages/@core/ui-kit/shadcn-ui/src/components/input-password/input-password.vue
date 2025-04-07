@@ -8,6 +8,10 @@
     import { Input } from '../../ui'
     import PasswordStrength from './password-strength.vue'
 
+    defineOptions({
+        inheritAttrs: false
+    })
+
     const props = defineProps<{
         class?: any
         passwordStrength?: boolean

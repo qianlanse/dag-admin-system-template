@@ -1,6 +1,6 @@
 {
     "name": "@dag/common-ui",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "license": "MIT",
     "type": "module",
     "sideEffects": [
@@ -19,6 +19,7 @@
         "@dag/icons": "workspace:*",
         "@dag/locales": "workspace:*",
         "@dag/types": "workspace:*",
-        "@vueuse/core": "catalog:"
+        "@vueuse/core": "catalog:",
+        "vue-router": "catalog:"
     }
 }

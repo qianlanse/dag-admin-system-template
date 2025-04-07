@@ -135,7 +135,7 @@ export class FormApi {
         const validateResult = await form.validate(opts)
 
         if (Object.keys(validateResult?.errors ?? {}).length > 0) {
-            console.error('Validate error:', validateResult?.errors)
+            console.error('validate error', validateResult?.errors)
         }
 
         return validateResult

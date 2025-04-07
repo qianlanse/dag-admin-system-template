@@ -9,7 +9,7 @@
     import { useDebounceFn } from '@vueuse/core'
 
     import FormActions from './components/form-actions.vue'
-    import { COMPONENT_MAP, DEFAULT_FORM_COMMON_CONFIG } from './config'
+    import { COMPONENT_BIND_EVENT_MAP, COMPONENT_MAP, DEFAULT_FORM_COMMON_CONFIG } from './config'
     import { Form } from './form-render'
     import { provideComponentRefMap, useFormInitial } from './use-form-context'
 
@@ -65,6 +65,7 @@
         @keydown.enter="handleKeyDownEnter"
         v-bind="forward"
         :collapsed="state.collapsed"
+        :component-bind-event-map="COMPONENT_BIND_EVENT_MAP"
         :component-map="COMPONENT_MAP"
         :form="form"
         :global-common-config="DEFAULT_FORM_COMMON_CONFIG"

@@ -24,3 +24,7 @@ export const COMPONENT_MAP: Record<BaseFormComponentType, Component> = {
     DefaultButton: h(DagButton, { size: 'sm', variant: 'outline' }),
     PrimaryButton: h(DagButton, { size: 'sm', variant: 'default' })
 }
+
+export const COMPONENT_BIND_EVENT_MAP: Partial<Record<BaseFormComponentType, string>> = {
+    DagCheckbox: 'checked'
+}

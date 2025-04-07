@@ -2,7 +2,7 @@ import type { ZodRawShape } from 'zod'
 
 import type { ComputedRef } from 'vue'
 
-import type { DagFormProps } from './types'
+import type { DagFormProps, ExtendedFormApi, FormActions } from './types'
 
 import { computed, unref, useSlots } from 'vue'
 
@@ -12,6 +12,11 @@ import { isString } from '@dag-core/shared/utils'
 import { useForm } from 'vee-validate'
 import { object } from 'zod'
 import { getDefaultsForSchema } from 'zod-defaults'
+
+type ExtendFormProps = DagFormProps & { formApi: ExtendedFormApi }
+
+export const [injectFormProps, provideFormProps] =
+    createContext<[ComputedRef<ExtendFormProps> | ExtendFormProps, FormActions]>('DagFormProps')
 
 export const [injectComponentRefMap, provideComponentRefMap] =
     createContext<Map<string, unknown>>('ComponentRefMap')

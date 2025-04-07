@@ -14,7 +14,7 @@
     import { cn, isFunction, isObject, isString } from '@dag-core/shared/utils'
 
     import { toTypedSchema } from '@vee-validate/zod'
-    import { useFormValues } from 'vee-validate'
+    import { useFieldError, useFormValues } from 'vee-validate'
     import { ZodType } from 'zod'
 
     import { injectComponentRefMap } from '../use-form-context'
@@ -28,6 +28,7 @@
     }
 
     const {
+        colon,
         commonComponentProps,
         component,
         componentProps,
@@ -52,10 +53,11 @@
         useDependencies(() => dependencies)
     const formRenderProps = injectRenderFormProps()
     const values = useFormValues()
+    const errors = useFieldError(fieldName)
     const fieldComponentRef = useTemplateRef<HTMLInputElement>('fieldComponentRef')
     const formApi = formRenderProps.form
     const compact = formRenderProps.compact
-    const isInValid = computed(() => false)
+    const isInValid = computed(() => errors.value?.length > 0)
 
     const labelStyle = computed(() => {
         return labelClass?.includes('w-') || isVertical.value
@@ -65,6 +67,7 @@
               }
     })
 
+    /** 验证自定义组件 */
     const customContentRender = computed(() => {
         if (!isFunction(renderComponentContent)) {
             return {}
@@ -72,6 +75,7 @@
         return renderComponentContent(values.value, formApi!)
     })
 
+    /** 获取自定义渲染组件keys */
     const renderContentKey = computed(() => {
         return Object.keys(customContentRender.value)
     })
@@ -86,7 +90,7 @@
 
     const shouldRequired = computed(() => {
         if (!visible.value) {
-            return
+            return false
         }
 
         if (!currentRules.value) {
@@ -221,7 +225,7 @@
     function createComponentProps(slotProps: Record<string, any>) {
         const bindEvents = fieldBindEvent(slotProps)
 
-        return {
+        const binds = {
             ...slotProps.componentField,
             ...computedProps.value,
             ...bindEvents,
@@ -236,6 +240,8 @@
                   }
                 : {})
         }
+
+        return binds
     }
 
     const componentRefMap = injectComponentRefMap()

@@ -1,6 +1,7 @@
 {
     "auth": {
-        "login": "Login"
+        "login": "Login",
+        "register": "Register"
     },
     "dashboard": {
         "title": "Dashboard"
