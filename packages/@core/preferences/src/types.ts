@@ -28,11 +28,13 @@ interface ThemePreferences {
 }
 
 interface AppPreferences {
-    // 登录注册页面布局
+    /** 登录注册页面布局 */
     authPageLayout: AuthPageLayoutType
-    // 支持的语言
+    /** 开启动态标题 */
+    dynamicTitle: boolean
+    /** 支持的语言 */
     locale: SupportedLanguagesType
-    // 应用名
+    /** 应用名 */
     name: string
 }
 

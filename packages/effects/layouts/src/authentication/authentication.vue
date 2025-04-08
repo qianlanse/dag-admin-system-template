@@ -83,7 +83,7 @@
         <div v-if="authPanelCenter" class="flex-center relative w-full">
             <div class="login-background absolute left-0 top-0 size-full"></div>
             <AuthenticationFormView
-                class="md:ba-background shadow-primary/5 shadow-float rouded-3xl w-full pb-20 md:w-2/3 lg:w-1/2 xl:w-[36%]"
+                class="md:ba-background shadow-primary/5 shadow-float w-full rounded-3xl pb-20 md:w-2/3 lg:w-1/2 xl:w-[36%]"
             >
                 <template v-if="copyright" #copyright>
                     <slot name="copyright">

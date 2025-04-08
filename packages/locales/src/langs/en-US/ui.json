@@ -2,5 +2,16 @@
     "captcha": {
         "sliderSuccessText": "Passed",
         "sliderDefaultText": "Slider and drag"
+    },
+    "fallback": {
+        "forbidden": "Forbidden",
+        "pageNotFound": "Oops! Page Not Found",
+        "internalError": "Oops! Something Went Wrong",
+        "comingSoon": "Coming Soon",
+        "offlineError": "Oops! Network Error",
+        "pageNotFoundDesc": "Sorry, we couldn't find the page you were looking for.",
+        "forbiddenDesc": "Sorry, but you don't have permission to access this page.",
+        "internalErrorDesc": "Sorry, but the server encountered an error.",
+        "offlineErrorDesc": "Sorry, can't connect to the internet. Check your connection."
     }
 }

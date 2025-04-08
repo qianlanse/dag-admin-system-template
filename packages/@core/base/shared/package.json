@@ -63,7 +63,7 @@
     },
     "dependencies": {
         "@ctrl/tinycolor": "catalog:",
-        "@tanstack/vue-store": "^0.7.0",
+        "@tanstack/vue-store": "catalog:",
         "@vue/shared": "catalog:",
         "clsx": "catalog:",
         "defu": "catalog:",

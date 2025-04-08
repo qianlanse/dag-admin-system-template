@@ -1,10 +1,13 @@
-import { createApp } from 'vue'
+import { createApp, watchEffect } from 'vue'
 
+import { preferences } from '@dag/preferences'
 import { initStores } from '@dag/stores'
 import '@dag/styles'
 
+import { useTitle } from '@vueuse/core'
+
 import App from './app.vue'
-import { setupI18n } from './locales'
+import { $t, setupI18n } from './locales'
 import { router } from './router'
 
 async function bootstrap(namespace: string) {
@@ -27,6 +30,15 @@ async function bootstrap(namespace: string) {
 
     // 配置路由及路由守卫
     app.use(router)
+
+    // 动态更新标题
+    watchEffect(() => {
+        if (preferences.app.dynamicTitle) {
+            const routeTitle = router.currentRoute.value.meta?.title
+            const pageTitle = (routeTitle ? `${$t(routeTitle)} - ` : '') + preferences.app.name
+            useTitle(pageTitle)
+        }
+    })
 
     app.mount('#app')
 }

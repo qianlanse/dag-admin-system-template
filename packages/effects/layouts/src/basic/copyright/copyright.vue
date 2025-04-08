@@ -14,7 +14,7 @@
     withDefaults(defineProps<Props>(), {
         companyName: 'Dag Admin',
         companySiteLink: '',
-        date: '2024',
+        date: '2025',
         icp: '',
         icpLink: ''
     })

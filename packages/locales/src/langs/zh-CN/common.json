@@ -1,3 +1,6 @@
 {
-    "login": "登录"
+    "login": "登录",
+    "back": "返回",
+    "backToHome": "返回首页",
+    "refresh": "刷新"
 }

@@ -1,3 +1,6 @@
 {
-    "login": "Login"
+    "login": "Login",
+    "back": "Back",
+    "backToHome": "Back To Home",
+    "refresh": "Refresh"
 }

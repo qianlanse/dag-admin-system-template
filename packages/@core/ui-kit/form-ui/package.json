@@ -38,6 +38,6 @@
         "@vueuse/core": "catalog:",
         "vee-validate": "catalog:",
         "zod": "catalog:",
-        "zod-defaults": "^0.1.3"
+        "zod-defaults": "catalog:"
     }
 }

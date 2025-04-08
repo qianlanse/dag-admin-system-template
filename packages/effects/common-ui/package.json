@@ -20,6 +20,11 @@
         "@dag/locales": "workspace:*",
         "@dag/types": "workspace:*",
         "@vueuse/core": "catalog:",
+        "@vueuse/integrations": "catalog:",
+        "qrcode": "catalog:",
         "vue-router": "catalog:"
+    },
+    "devDependencies": {
+        "@types/qrcode": "catalog:"
     }
 }

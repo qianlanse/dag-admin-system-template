@@ -116,7 +116,11 @@
                 </DagCheckbox>
             </div>
 
-            <span v-if="showForgetPassword" class="dag-link text-sm font-normal">
+            <span
+                v-if="showForgetPassword"
+                class="dag-link text-sm font-normal"
+                @click="handleGo(forgetPasswordPath)"
+            >
                 {{ $t('authentication.forgetPassword') }}
             </span>
         </div>

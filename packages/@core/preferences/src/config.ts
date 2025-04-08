@@ -3,13 +3,14 @@ import type { Preferences } from './types'
 export const defaultPreferences: Preferences = {
     app: {
         authPageLayout: 'panel-right',
+        dynamicTitle: true,
         locale: 'zh-CN',
         name: 'Dag Admin'
     },
     copyright: {
         companyName: 'Dag',
         companySiteLink: 'https://www.dagteam.cn',
-        date: '2024',
+        date: '2025',
         enable: true,
         icp: '',
         icpLink: '',

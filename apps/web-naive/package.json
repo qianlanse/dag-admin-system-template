@@ -23,6 +23,7 @@
         "@dag/styles": "workspace:*",
         "@dag/types": "workspace:*",
         "@dag/utils": "workspace:*",
+        "@vueuse/core": "catalog:",
         "naive-ui": "catalog:",
         "pinia": "catalog:",
         "vue": "catalog:",
