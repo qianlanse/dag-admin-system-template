@@ -1,6 +1,6 @@
 {
     "name": "@dag/web-naive",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "license": "MIT",
     "type": "module",
     "scripts": {
@@ -16,9 +16,11 @@
     "dependencies": {
         "@dag/common-ui": "workspace:*",
         "@dag/constants": "workspace:*",
+        "@dag/hooks": "workspace:^",
         "@dag/layouts": "workspace:*",
         "@dag/locales": "workspace:*",
         "@dag/preferences": "workspace:*",
+        "@dag/request": "workspace:*",
         "@dag/stores": "workspace:*",
         "@dag/styles": "workspace:*",
         "@dag/types": "workspace:*",

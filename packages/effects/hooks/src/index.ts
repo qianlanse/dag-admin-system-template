@@ -1,1 +1,1 @@
-export const name = '@dag/hooks'
+export * from './use-app-config'

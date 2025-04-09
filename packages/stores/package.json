@@ -1,6 +1,6 @@
 {
     "name": "@dag/stores",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "license": "ISC",
     "type": "module",
     "sideEffects": [
@@ -13,6 +13,7 @@
         }
     },
     "dependencies": {
+        "@dag-core/typings": "workspace:*",
         "pinia": "catalog:",
         "pinia-plugin-persistedstate": "catalog:",
         "vue": "catalog:",

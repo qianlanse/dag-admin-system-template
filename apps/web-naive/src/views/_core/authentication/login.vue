@@ -2,12 +2,14 @@
     import type { DagFormSchema } from '@dag/common-ui'
     import type { BasicOption } from '@dag/types'
 
-    import { computed, markRaw, ref } from 'vue'
+    import { computed, markRaw } from 'vue'
 
     import { AuthenticationLogin, SliderCaptcha, z } from '@dag/common-ui'
     import { $t } from '@dag/locales'
 
-    const loading = ref(false)
+    import { useAuthStore } from '#/store'
+
+    const authStore = useAuthStore()
 
     const MOCK_USER_OPTIONS: BasicOption[] = [
         {
@@ -20,7 +22,7 @@
         },
         {
             label: 'User',
-            value: 'jack'
+            value: 'anyu'
         }
     ]
 
@@ -82,14 +84,12 @@
             }
         ]
     })
-
-    // 提交
-    function handleSubmit(values: Record<string, any>) {
-        // eslint-disable-next-line no-console
-        console.log('submiting...', values)
-    }
 </script>
 
 <template>
-    <AuthenticationLogin :form-schema="formSchema" :loading="loading" @submit="handleSubmit" />
+    <AuthenticationLogin
+        :form-schema="formSchema"
+        :loading="authStore.loginLoading"
+        @submit="authStore.authLogin"
+    />
 </template>

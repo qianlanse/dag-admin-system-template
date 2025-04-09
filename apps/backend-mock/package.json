@@ -7,7 +7,12 @@
         "build": "nitro build",
         "start": "nitro dev"
     },
+    "dependencies": {
+        "jsonwebtoken": "^9.0.2",
+        "nitropack": "catalog:"
+    },
     "devDependencies": {
-        "nitropack": "latest"
+        "@types/jsonwebtoken": "^9.0.9",
+        "h3": "^1.15.1"
     }
 }

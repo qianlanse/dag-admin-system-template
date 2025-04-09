@@ -1,0 +1,22 @@
+{
+    "name": "@dag/request",
+    "version": "1.7.0",
+    "license": "MIT",
+    "type": "module",
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "default": "./src/index.ts"
+        }
+    },
+    "dependencies": {
+        "@dag/locales": "workspace:*",
+        "@dag/utils": "workspace:*",
+        "axios": "catalog:",
+        "qs": "catalog:"
+    },
+    "devDependencies": {
+        "@types/qs": "catalog:",
+        "axios-mock-adapter": "catalog:"
+    }
+}
