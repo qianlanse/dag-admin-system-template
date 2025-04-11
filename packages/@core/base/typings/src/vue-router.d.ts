@@ -1,4 +1,5 @@
 import type { Component } from 'vue'
+import type { Router, RouteRecordRaw } from 'vue-router'
 
 interface RouteMeta {
     /**
@@ -95,4 +96,36 @@ interface RouteMeta {
     title: string
 }
 
-export type { RouteMeta }
+/** 定义递归类型以将 RouteRecordRaw 的 component 属性更改为 string */
+type RouteRecordStringComponent<T = string> = Omit<RouteRecordRaw, 'children' | 'component'> & {
+    children?: RouteRecordStringComponent<T>[]
+    component: T
+}
+
+type ComponentRecordType = Record<string, () => Promise<Component>>
+
+/** 生成菜单和路由参数 */
+interface GenerateMenuAndRoutesOptions {
+    /** 获取菜单 */
+    fetchMenuListAsync?: () => Promise<RouteRecordStringComponent[]>
+    /** 禁止访问页面 */
+    forbiddenComponent?: RouteRecordRaw['component']
+    /** 布局集合 */
+    layoutMap?: ComponentRecordType
+    /** 页面集合 */
+    pageMap?: ComponentRecordType
+    /** 角色 */
+    roles?: string[]
+    /** 路由 */
+    router: Router
+    /** 路由集 */
+    routes: RouteRecordRaw[]
+}
+
+export type {
+    ComponentRecordType,
+    GenerateMenuAndRoutesOptions,
+    RouteMeta,
+    RouteRecordRaw,
+    RouteRecordStringComponent
+}

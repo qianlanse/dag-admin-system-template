@@ -69,5 +69,5 @@ export const useAuthStore = defineStore('auth', () => {
         return userInfo
     }
 
-    return { loginLoading, authLogin }
+    return { loginLoading, fetchUserInfo, authLogin }
 })

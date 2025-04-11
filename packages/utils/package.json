@@ -1,6 +1,6 @@
 {
     "name": "@dag/utils",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "license": "MIT",
     "type": "module",
     "main": "./dist/index.mjs",
@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@dag-core/shared": "workspace:*",
-        "@dag-core/typings": "workspace:*"
+        "@dag-core/typings": "workspace:*",
+        "vue-router": "catalog:"
     }
 }

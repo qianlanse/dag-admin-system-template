@@ -2,6 +2,7 @@ import type { Preferences } from './types'
 
 export const defaultPreferences: Preferences = {
     app: {
+        accessMode: 'frontend',
         authPageLayout: 'panel-right',
         dynamicTitle: true,
         locale: 'zh-CN',
@@ -30,5 +31,11 @@ export const defaultPreferences: Preferences = {
         radius: '0.5',
         semiDarkHeader: false,
         semiDarkSidebar: true
+    },
+    transition: {
+        enable: true,
+        loading: true,
+        name: 'fade-slide',
+        progress: true
     }
 }

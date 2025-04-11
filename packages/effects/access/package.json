@@ -1,0 +1,22 @@
+{
+    "name": "@dag/access",
+    "version": "1.8.0",
+    "license": "MIT",
+    "type": "module",
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "default": "./src/index.ts"
+        }
+    },
+    "dependencies": {
+        "@dag/preferences": "workspace:*",
+        "@dag/stores": "workspace:*",
+        "@dag/types": "workspace:*",
+        "@dag/utils": "workspace:*",
+        "vue": "catalog:"
+    }
+}

@@ -6,7 +6,7 @@ import { createPinia } from 'pinia'
 
 let pinia: Pinia
 
-// 应用名将被用于持久化的前缀
+// 应用名将被用于持久化的前缀(为了防止多个app缓存冲突,可在这里配置应用名,应用名将被用于持久化的前缀)
 export interface InitStoreOptions {
     namespace: string
 }
@@ -22,6 +22,7 @@ export async function initStores(app: App, options: InitStoreOptions) {
     const { createPersistedState } = await import('pinia-plugin-persistedstate')
 
     pinia = createPinia()
+    // 持久化储存类似Token等值
     pinia.use(
         createPersistedState({
             key: (storeKey) => `${namespace}-${storeKey}`,

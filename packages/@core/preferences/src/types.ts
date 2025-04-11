@@ -1,11 +1,14 @@
 import type {
+    AccessModeType,
     AuthPageLayoutType,
     BuiltinThemeType,
     DeepPartial,
+    PageTransitionType,
     ThemeModeType
 } from '@dag-core/typings'
 
 type SupportedLanguagesType = 'en-US' | 'zh-CN'
+
 interface ThemePreferences {
     // 内置主题名
     builtinType: BuiltinThemeType
@@ -28,6 +31,8 @@ interface ThemePreferences {
 }
 
 interface AppPreferences {
+    /** 权限模式 */
+    accessMode: AccessModeType
     /** 登录注册页面布局 */
     authPageLayout: AuthPageLayoutType
     /** 开启动态标题 */
@@ -62,23 +67,28 @@ interface CopyrightPreferences {
     settingShow?: boolean
 }
 
+interface TransitionPreferences {
+    /** 页面切换动画是否启用 */
+    enable: boolean
+    /** 是否开启页面加载loading */
+    loading: boolean
+    /** 页面切换动画 */
+    name: PageTransitionType | string
+    /** 是否开启页面加载进度动画 */
+    progress: boolean
+}
+
 interface Preferences {
-    /**
-     * 全局配置
-     */
+    /** 全局配置 */
     app: AppPreferences
-    /**
-     * 版权配置
-     */
+    /** 版权配置 */
     copyright: CopyrightPreferences
-    /**
-     * logo配置
-     */
+    /** logo配置 */
     logo: LogoPreferences
-    /**
-     * 主题配置
-     */
+    /** 主题配置 */
     theme: ThemePreferences
+    /** 动画配置 */
+    transition: TransitionPreferences
 }
 
 interface InitialOptions {

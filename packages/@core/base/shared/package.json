@@ -1,6 +1,6 @@
 {
     "name": "@dag-core/shared",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "license": "MIT",
     "type": "module",
     "scripts": {
@@ -68,10 +68,12 @@
         "clsx": "catalog:",
         "defu": "catalog:",
         "lodash.clonedeep": "catalog:",
+        "nprogress": "^0.2.0",
         "tailwind-merge": "catalog:",
         "theme-colors": "catalog:"
     },
     "devDependencies": {
-        "@types/lodash.clonedeep": "catalog:"
+        "@types/lodash.clonedeep": "catalog:",
+        "@types/nprogress": "^0.2.3"
     }
 }
