@@ -1,4 +1,9 @@
 {
     "title": "Demos",
-    "naive": "Naive UI"
+    "naive": "Naive UI",
+    "table": "Table",
+    "form": "Form",
+    "dag": {
+        "about": "About"
+    }
 }

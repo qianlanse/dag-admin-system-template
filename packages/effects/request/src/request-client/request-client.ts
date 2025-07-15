@@ -41,6 +41,12 @@ class RequestClient {
     public addResponseInterceptor: InterceptorManager['addResponseInterceptor']
 
     public download: FileDownloader['download']
+
+    // 是否正在刷新Token
+    public isRefreshing = false
+    // 刷新token队列
+    public refreshTokenQueue: ((token: string) => void)[] = []
+
     public upload: FileUploader['upload']
 
     /** 请求实例 */

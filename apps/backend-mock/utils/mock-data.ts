@@ -83,106 +83,106 @@ const dashboardMenus = [
     }
 ]
 
-// const createDemos = (role: 'admin' | 'super' | 'user') => {
-//     const roleWithMenus = {
-//         admin: {
-//             name: 'AccessAdminVisibleDemo',
-//             path: '/demos/access/admin-visible',
-//             component: '/demos/access/admin-visible',
-//             meta: {
-//                 icon: 'mdi:button-cursor',
-//                 title: 'demos.access.adminVisible'
-//             }
-//         },
-//         super: {
-//             name: 'AccessSuperVisibleDemo',
-//             path: '/demos/access/super-visible',
-//             component: '/demos/access/super-visible',
-//             meta: {
-//                 icon: 'mdi:button-cursor',
-//                 title: 'demos.access.superVisible'
-//             }
-//         },
-//         user: {
-//             name: 'AccessUserVisibleDemo',
-//             path: '/demos/access/user-visible',
-//             component: '/demos/access/user-visible',
-//             meta: {
-//                 icon: 'mdi:button-cursor',
-//                 title: 'demos.access.userVisible'
-//             }
-//         }
-//     }
+const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
+    const roleWithMenus = {
+        admin: {
+            name: 'AccessAdminVisibleDemo',
+            path: '/demos/access/admin-visible',
+            component: '/demos/access/admin-visible',
+            meta: {
+                icon: 'mdi:button-cursor',
+                title: 'demos.access.adminVisible'
+            }
+        },
+        super: {
+            name: 'AccessSuperVisibleDemo',
+            path: '/demos/access/super-visible',
+            component: '/demos/access/super-visible',
+            meta: {
+                icon: 'mdi:button-cursor',
+                title: 'demos.access.superVisible'
+            }
+        },
+        user: {
+            name: 'AccessUserVisibleDemo',
+            path: '/demos/access/user-visible',
+            component: '/demos/access/user-visible',
+            meta: {
+                icon: 'mdi:button-cursor',
+                title: 'demos.access.userVisible'
+            }
+        }
+    }
 
-//     return [
-//         {
-//             name: 'Demos',
-//             path: '/demos',
-//             redirect: '/demos/access',
-//             meta: {
-//                 icon: 'ic:baseline-view-in-ar',
-//                 keepAlive: true,
-//                 order: 1000,
-//                 title: 'demos.title'
-//             },
-//             children: [
-//                 {
-//                     name: 'AccessDemos',
-//                     path: '/demosaccess',
-//                     meta: {
-//                         icon: 'mdi:cloud-key-outline',
-//                         title: 'demos.access.backendPermissions'
-//                     },
-//                     redirect: '/demos/access/page-control',
-//                     children: [
-//                         {
-//                             name: 'AccessPageControlDemo',
-//                             path: '/demos/access/page-control',
-//                             component: '/demos/access/index',
-//                             meta: {
-//                                 icon: 'mdi:page-previous-outline',
-//                                 title: 'demos.access.pageAccess'
-//                             }
-//                         },
-//                         {
-//                             name: 'AccessButonControlDemo',
-//                             path: '/demos/access/button-control',
-//                             component: '/demos/access/button-control',
-//                             meta: {
-//                                 icon: 'mdi:button-cursor',
-//                                 title: 'demos.access.buttonControl'
-//                             }
-//                         },
-//                         {
-//                             name: 'AccessMenuVisible403Demo',
-//                             path: '/demos/access/menu-visible-403',
-//                             component: '/demos/access/menu-visible-403',
-//                             meta: {
-//                                 icon: 'mdi:button-cursor',
-//                                 title: 'demos.access.menuVisible403',
-//                                 authority: ['no-body'],
-//                                 menuVisibleWithForbidden: true
-//                             }
-//                         },
-//                         roleWithMenus[role]
-//                     ]
-//                 }
-//             ]
-//         }
-//     ]
-// }
+    return [
+        {
+            name: 'Demos',
+            path: '/demos',
+            redirect: '/demos/access',
+            meta: {
+                icon: 'ic:baseline-view-in-ar',
+                keepAlive: true,
+                order: 1000,
+                title: 'demos.title'
+            },
+            children: [
+                {
+                    name: 'AccessDemos',
+                    path: '/demosaccess',
+                    meta: {
+                        icon: 'mdi:cloud-key-outline',
+                        title: 'demos.access.backendPermissions'
+                    },
+                    redirect: '/demos/access/page-control',
+                    children: [
+                        {
+                            name: 'AccessPageControlDemo',
+                            path: '/demos/access/page-control',
+                            component: '/demos/access/index',
+                            meta: {
+                                icon: 'mdi:page-previous-outline',
+                                title: 'demos.access.pageAccess'
+                            }
+                        },
+                        {
+                            name: 'AccessButonControlDemo',
+                            path: '/demos/access/button-control',
+                            component: '/demos/access/button-control',
+                            meta: {
+                                icon: 'mdi:button-cursor',
+                                title: 'demos.access.buttonControl'
+                            }
+                        },
+                        {
+                            name: 'AccessMenuVisible403Demo',
+                            path: '/demos/access/menu-visible-403',
+                            component: '/demos/access/menu-visible-403',
+                            meta: {
+                                icon: 'mdi:button-cursor',
+                                title: 'demos.access.menuVisible403',
+                                authority: ['no-body'],
+                                menuVisibleWithForbidden: true
+                            }
+                        },
+                        roleWithMenus[role]
+                    ]
+                }
+            ]
+        }
+    ]
+}
 
 export const MOCK_MENUS = [
     {
-        menus: [...dashboardMenus],
+        menus: [...dashboardMenus, ...createDemosMenus('super')],
         username: 'dag'
     },
     {
-        menus: [...dashboardMenus],
+        menus: [...dashboardMenus, ...createDemosMenus('admin')],
         username: 'admin'
     },
     {
-        menus: [...dashboardMenus],
+        menus: [...dashboardMenus, ...createDemosMenus('user')],
         username: 'anyu'
     }
 ]

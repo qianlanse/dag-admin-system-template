@@ -1,8 +1,8 @@
 <script setup lang="ts">
+    import type { CustomRenderType } from '../types'
+
     import { FormLabel } from '@dag-core/shadcn-ui'
     import { cn } from '@dag-core/shared/utils'
-
-    import { CustomRenderType } from '../types'
 
     interface Props {
         class?: string

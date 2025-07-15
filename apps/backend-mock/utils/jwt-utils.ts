@@ -43,3 +43,17 @@ export function verifyAccessToken(
         return null
     }
 }
+
+/** 验证刷新Token获取内容 */
+export function verifyRefreshToken(token: string): null | Omit<UserInfo, 'password'> {
+    try {
+        const decoded = jwt.verify(token, REFRESH_TOKEN_SECRET) as UserPayload
+        const username = decoded.username
+        const user = MOCK_USERS.find((item) => item.username === username)
+        const { password: _pwd, ...userinfo } = user
+
+        return userinfo
+    } catch {
+        return null
+    }
+}

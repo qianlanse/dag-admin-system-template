@@ -1,6 +1,6 @@
 {
     "name": "dag-admin-system-template",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "private": true,
     "license": "MIT",
     "type": "module",
@@ -43,6 +43,7 @@
         "cross-env": "catalog:",
         "cspell": "catalog:",
         "husky": "catalog:",
+        "lefthook": "catalog:",
         "lint-staged": "catalog:",
         "tailwindcss": "catalog:",
         "turbo": "catalog:",
@@ -67,8 +68,5 @@
             "canvas",
             "node-gyp"
         ]
-    },
-    "dependencies": {
-        "@vueuse/integrations": "catalog:"
     }
 }

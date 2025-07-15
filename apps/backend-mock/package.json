@@ -8,11 +8,11 @@
         "start": "nitro dev"
     },
     "dependencies": {
-        "jsonwebtoken": "^9.0.2",
+        "jsonwebtoken": "catalog:",
         "nitropack": "catalog:"
     },
     "devDependencies": {
-        "@types/jsonwebtoken": "^9.0.9",
-        "h3": "^1.15.1"
+        "@types/jsonwebtoken": "catalog:",
+        "h3": "catalog:"
     }
 }

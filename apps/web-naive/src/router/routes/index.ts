@@ -11,12 +11,16 @@ const dynamicRouteFiles = import.meta.glob('./modules/**/*.ts', {
 const externalRouteFiles = import.meta.glob('./external/**/*.ts', {
     eager: true
 })
+const staticRouteFiles = import.meta.glob('./static/**/*.ts', {
+    eager: true
+})
 
 /** 动态路由 */
 const dynamicRoutes: RouteRecordRaw[] = mergeRouteModules(dynamicRouteFiles)
 
 /** 扩展路由 */
 const externalRoutes: RouteRecordRaw[] = mergeRouteModules(externalRouteFiles)
+const staticRoutes: RouteRecordRaw[] = mergeRouteModules(staticRouteFiles)
 
 /**
  * 路由列表，由基本路由、扩展路由和404兜底路由组成
@@ -27,6 +31,6 @@ const routes: RouteRecordRaw[] = [...coreRoutes, ...externalRoutes, fallbackNotF
 /** 基本路由列表，这些路由不需要进入权限拦截 */
 const coreRouteNames = traverseTreeValues(coreRoutes, (route) => route.name)
 
-const accessRoutes = [...dynamicRoutes]
+const accessRoutes = [...dynamicRoutes, ...staticRoutes]
 
 export { accessRoutes, coreRouteNames, routes }

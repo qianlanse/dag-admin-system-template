@@ -1,11 +1,14 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 
+import { resetStaticRoutes } from '@dag/utils'
+
 import { createRouterGuard } from './guard'
 import { routes } from './routes'
 
 /**
  * 创建vue-router实例
  */
+
 const router = createRouter({
     history:
         import.meta.env.VITE_ROUTER_HISTORY === 'hash'
@@ -21,7 +24,9 @@ const router = createRouter({
     }
 })
 
+const resetRoutes = () => resetStaticRoutes(router, routes)
+
 /** 创建路由守卫 */
 createRouterGuard(router)
 
-export { router }
+export { resetRoutes, router }

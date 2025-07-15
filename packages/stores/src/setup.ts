@@ -3,6 +3,7 @@ import type { Pinia } from 'pinia'
 import type { App } from 'vue'
 
 import { createPinia } from 'pinia'
+import SecureLS from 'secure-ls'
 
 let pinia: Pinia
 
@@ -22,11 +23,29 @@ export async function initStores(app: App, options: InitStoreOptions) {
     const { createPersistedState } = await import('pinia-plugin-persistedstate')
 
     pinia = createPinia()
+
+    const ls = new SecureLS({
+        encodingType: 'aes',
+        encryptionSecret: import.meta.env.VITE_APP_STORE_SECURE_KEY,
+        isCompression: true,
+        // @ts-ignore 没有类型定义
+        metaKey: `${namespace}-secure-meta`
+    })
+
     // 持久化储存类似Token等值
     pinia.use(
         createPersistedState({
             key: (storeKey) => `${namespace}-${storeKey}`,
-            storage: localStorage
+            storage: import.meta.env.DEV
+                ? localStorage
+                : {
+                      getItem(key) {
+                          return ls.get(key)
+                      },
+                      setItem(key, value) {
+                          ls.set(key, value)
+                      }
+                  }
         })
     )
 

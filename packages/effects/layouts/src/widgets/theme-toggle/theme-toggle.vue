@@ -37,7 +37,7 @@
         }
     ]
 
-    function handleUpdateTheme(isDark: boolean) {
+    function handleUpdateTheme(isDark: boolean | undefined) {
         updatePreferences({
             theme: {
                 mode: isDark ? 'dark' : 'light'

@@ -1,14 +1,14 @@
 import type { Router } from 'vue-router'
 
-import { DEFAULT_HOME_PATH, LOGIN_PATH } from '@dag/constants'
+import { LOGIN_PATH } from '@dag/constants'
 import { preferences } from '@dag/preferences'
 import { useAccessStore, useUserStore } from '@dag/stores'
 import { startProgress, stopProgress } from '@dag/utils'
 
+import { accessRoutes, coreRouteNames } from '#/router/routes'
 import { useAuthStore } from '#/store'
 
 import { generateAccess } from './access'
-import { accessRoutes, coreRouteNames } from './routes'
 
 /**
  * 通用守卫配置
@@ -48,6 +48,7 @@ function setupAccessGuard(router: Router) {
     router.beforeEach(async (to, form) => {
         const accessStore = useAccessStore()
         const userStore = useUserStore()
+        /** 用户登录，登出，获取用户信息等操作 */
         const authStore = useAuthStore()
 
         // 基本路由，这些路由不需要进去权限拦截
@@ -56,13 +57,13 @@ function setupAccessGuard(router: Router) {
                 return decodeURIComponent(
                     (to.query?.redirect as string) ||
                         userStore.userInfo?.homePath ||
-                        DEFAULT_HOME_PATH
+                        preferences.app.defaultHomePath
                 )
             }
             return true
         }
 
-        // 检查是否已登录
+        // 检查未登录时
         if (!accessStore.accessToken) {
             if (to.meta.ignoreAccess) {
                 return true
@@ -74,7 +75,7 @@ function setupAccessGuard(router: Router) {
                     path: LOGIN_PATH,
                     // 参数(不需要可删除)
                     query:
-                        to.fullPath === DEFAULT_HOME_PATH
+                        to.fullPath === preferences.app.defaultHomePath
                             ? {}
                             : { redirect: encodeURIComponent(to.fullPath) },
                     replace: true
@@ -105,8 +106,8 @@ function setupAccessGuard(router: Router) {
         accessStore.setIsAccessChecked(true)
 
         const redirectPath = (form.query.redirect ??
-            (to.path === DEFAULT_HOME_PATH
-                ? userInfo.homePath || DEFAULT_HOME_PATH
+            (to.path === preferences.app.defaultHomePath
+                ? userInfo.homePath || preferences.app.defaultHomePath
                 : to.fullPath)) as string
 
         return {

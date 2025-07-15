@@ -1,4 +1,9 @@
 {
     "title": "演示",
-    "naive": "Naive UI"
+    "naive": "Naive UI",
+    "table": "Table",
+    "form": "表单",
+    "dag": {
+        "about": "关于"
+    }
 }

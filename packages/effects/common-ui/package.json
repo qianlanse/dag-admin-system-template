@@ -1,6 +1,6 @@
 {
     "name": "@dag/common-ui",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "license": "MIT",
     "type": "module",
     "sideEffects": [
@@ -16,6 +16,7 @@
         "@dag-core/form-ui": "workspace:*",
         "@dag-core/shadcn-ui": "workspace:*",
         "@dag-core/shared": "workspace:*",
+        "@dag/hooks": "workspace:*",
         "@dag/icons": "workspace:*",
         "@dag/locales": "workspace:*",
         "@dag/types": "workspace:*",

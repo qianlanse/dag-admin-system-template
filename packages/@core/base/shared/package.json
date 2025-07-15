@@ -1,10 +1,11 @@
 {
     "name": "@dag-core/shared",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "build": "pnpm unbuild"
+        "build": "pnpm unbuild",
+        "stub": "pnpm unbuild --stub"
     },
     "files": [
         "dist"
@@ -35,6 +36,11 @@
             "types": "./src/store.ts",
             "development": "./src/store.ts",
             "default": "./dist/store.mjs"
+        },
+        "./global-state": {
+            "types": "./src/global-state.ts",
+            "development": "./src/global-state.ts",
+            "default": "./dist/global-state.mjs"
         }
     },
     "publishConfig": {
@@ -58,6 +64,10 @@
             "./store": {
                 "types": "./dist/store.d.ts",
                 "default": "./dist/store.mjs"
+            },
+            "./global-state": {
+                "types": "./dist/global-state.d.ts",
+                "default": "./dist/global-state.mjs"
             }
         }
     },
@@ -68,12 +78,12 @@
         "clsx": "catalog:",
         "defu": "catalog:",
         "lodash.clonedeep": "catalog:",
-        "nprogress": "^0.2.0",
+        "nprogress": "catalog:",
         "tailwind-merge": "catalog:",
         "theme-colors": "catalog:"
     },
     "devDependencies": {
         "@types/lodash.clonedeep": "catalog:",
-        "@types/nprogress": "^0.2.3"
+        "@types/nprogress": "catalog:"
     }
 }

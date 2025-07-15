@@ -13,5 +13,35 @@
         "forbiddenDesc": "抱歉，您没有权限访问此页面。",
         "internalErrorDesc": "抱歉，服务器遇到错误。",
         "offlineErrorDesc": "抱歉，无法连接到互联网，请检查您的网络连接并重试。"
+    },
+    "widgets": {
+        "document": "文档",
+        "qa": "问题 & 帮助",
+        "setting": "设置",
+        "logoutTip": "是否退出登录？",
+        "viewAll": "查看所有消息",
+        "notifications": "通知",
+        "markAllAsRead": "全部标记为已读",
+        "clearNotifications": "清空",
+        "search": {
+            "title": "搜索",
+            "searchNavigate": "搜索导航菜单",
+            "select": "选择",
+            "navigate": "导航",
+            "close": "关闭",
+            "noResults": "未找到搜索结果",
+            "noRecent": "没有搜索历史",
+            "recent": "搜索历史"
+        },
+        "lockScreen": {
+            "title": "锁定屏幕",
+            "screenButton": "锁定",
+            "password": "密码",
+            "placeholder": "请输入锁屏密码",
+            "unlock": "点击解锁",
+            "errorPasswordTip": "密码错误，请重新输入",
+            "backToLogin": "返回登录",
+            "entry": "进入系统"
+        }
     }
 }

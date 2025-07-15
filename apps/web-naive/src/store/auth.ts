@@ -3,12 +3,13 @@ import type { Recordable, UserInfo } from '@dag/types'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { DEFAULT_HOME_PATH } from '@dag/constants'
-import { useAccessStore, useUserStore } from '@dag/stores'
+import { LOGIN_PATH } from '@dag/constants'
+import { preferences } from '@dag/preferences'
+import { resetAllStores, useAccessStore, useUserStore } from '@dag/stores'
 
 import { defineStore } from 'pinia'
 
-import { getAccessCodesApi, getUserInfoApi, loginApi } from '#/api'
+import { getAccessCodesApi, getUserInfoApi, loginApi, logoutApi } from '#/api'
 
 export const useAuthStore = defineStore('auth', () => {
     const accessStore = useAccessStore()
@@ -45,7 +46,7 @@ export const useAuthStore = defineStore('auth', () => {
                 } else {
                     onSuccess
                         ? await onSuccess?.()
-                        : await router.push(userInfo.homePath || DEFAULT_HOME_PATH)
+                        : await router.push(userInfo.homePath || preferences.app.defaultHomePath)
                 }
 
                 if (userInfo?.realName) {
@@ -61,6 +62,27 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    /** 登出 */
+    async function logout(redirect: boolean = true) {
+        try {
+            await logoutApi()
+        } catch {
+            // -
+        }
+        resetAllStores()
+        accessStore.setLoginExpired(false)
+
+        // 回登录页带上当前路由地址
+        await router.replace({
+            path: LOGIN_PATH,
+            query: redirect
+                ? {
+                      redirect: encodeURIComponent(router.currentRoute.value.fullPath)
+                  }
+                : {}
+        })
+    }
+
     /** 获取用户信息 */
     async function fetchUserInfo() {
         let userInfo: null | UserInfo = null
@@ -69,5 +91,10 @@ export const useAuthStore = defineStore('auth', () => {
         return userInfo
     }
 
-    return { loginLoading, fetchUserInfo, authLogin }
+    /** 重新定义重置 */
+    function $reset() {
+        loginLoading.value = false
+    }
+
+    return { loginLoading, fetchUserInfo, authLogin, logout, $reset }
 })

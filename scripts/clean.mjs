@@ -24,7 +24,7 @@ async function cleanTargetsRecursively(currentDir, targets) {
                 await cleanTargetsRecursively(itemPath, targets)
             }
         } catch (error) {
-            console.error(`Error handling item ${item} in ${currentDir}: ${error.message}`)
+            // console.error(`Error handling item ${item} in ${currentDir}: ${error.message}`)
         }
     }
 }

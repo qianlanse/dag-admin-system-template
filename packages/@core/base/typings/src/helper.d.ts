@@ -34,4 +34,28 @@ type DeepPartial<T> = T extends object
       }
     : T
 
-export type { DeepPartial, MaybeComputedRef, MaybeReadonlyRef, NNonNullable, Nullable, Recordable }
+type MaybePromise<T> = Promise<T> | T
+
+/** 任意类型的异步函数 */
+type AnyPromiseFunction<T extends any[] = any[], R = void> = (...arg: T) => PromiseLike<R>
+
+/** 任意类型的普通函数 */
+type AnyNormalFunction<T extends any[] = any[], R = void> = (...arg: T) => R
+
+/** 任意类型的函数 */
+type AnyFunction<T extends any[] = any[], R = void> =
+    | AnyNormalFunction<T, R>
+    | AnyPromiseFunction<T, R>
+
+export type {
+    AnyFunction,
+    AnyNormalFunction,
+    AnyPromiseFunction,
+    DeepPartial,
+    MaybeComputedRef,
+    MaybePromise,
+    MaybeReadonlyRef,
+    NNonNullable,
+    Nullable,
+    Recordable
+}

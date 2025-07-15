@@ -1,6 +1,6 @@
 {
     "name": "@dag/layouts",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "license": "MIT",
     "type": "module",
     "sideEffects": [
@@ -13,12 +13,19 @@
         }
     },
     "dependencies": {
+        "@dag-core/layout-ui": "workspace:*",
+        "@dag-core/menu-ui": "workspace:*",
+        "@dag-core/popup-ui": "workspace:*",
         "@dag-core/shadcn-ui": "workspace:*",
         "@dag/constants": "workspace:*",
+        "@dag/hooks": "workspace:*",
         "@dag/icons": "workspace:*",
-        "@dag/locales": "workspace:^",
+        "@dag/locales": "workspace:*",
         "@dag/preferences": "workspace:*",
+        "@dag/stores": "workspace:*",
         "@dag/types": "workspace:*",
+        "@dag/utils": "workspace:*",
+        "@vueuse/core": "catalog:",
         "vue": "catalog:",
         "vue-router": "catalog:"
     }

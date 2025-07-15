@@ -15,8 +15,11 @@ interface RouteMeta {
      */
     affixTab?: boolean
     /**
-     * 需要特定的校色标识才可以访问
-     * @default []
+     * 固定标签页的顺序
+     */
+    affixTabOrder?: number
+    /**
+     * 需要特定的角色标识才可以访问
      */
     authority?: string[]
     /**
@@ -82,14 +85,17 @@ interface RouteMeta {
      */
     menuVisibleWithForbidden?: boolean
     /**
-     * 固定标签页的顺序
-     * @default 0
+     * 在新窗口打开
      */
-    offixTabOrder?: number
+    openInNewWindow?: boolean
     /**
      * 路由->菜单排序
      */
     order?: number
+    /**
+     * 菜单所携带的参数
+     */
+    query?: Recordable
     /**
      * 标题名称
      */

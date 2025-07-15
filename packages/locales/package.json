@@ -1,6 +1,6 @@
 {
     "name": "@dag/locales",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "license": "MIT",
     "type": "module",
     "sideEffects": [
@@ -13,7 +13,7 @@
         }
     },
     "dependencies": {
-        "@dag-core/composables": "workspace:^",
+        "@dag-core/composables": "workspace:*",
         "@intlify/core-base": "catalog:",
         "vue": "catalog:",
         "vue-i18n": "catalog:"

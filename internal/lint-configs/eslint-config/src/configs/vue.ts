@@ -7,7 +7,6 @@ import { interopDefault } from '../util'
  */
 export async function vue(): Promise<Linter.Config[]> {
     const [pluginVue, parserVue, parserTs] = await Promise.all([
-        // @ts-expect-error - no types
         interopDefault(import('eslint-plugin-vue')),
         interopDefault(import('vue-eslint-parser')),
         // @ts-expect-error - no types
@@ -117,7 +116,7 @@ export async function vue(): Promise<Linter.Config[]> {
                 // 不允许在 <template> 中丢失精度的文本数字
                 'vue/no-loss-of-precision': 'error',
                 // 禁止在组件定义中使用保留名称
-                'vue/no-reserved-component-names': 'error',
+                'vue/no-reserved-component-names': 'off',
                 // 不允许在 <template> 中指定语法
                 'vue/no-restricted-syntax': [
                     'error',

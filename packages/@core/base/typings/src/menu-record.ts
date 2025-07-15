@@ -12,8 +12,11 @@ type ExRouteRecordRaw = RouteRecordRaw & {
 
 /** 徽标原始值 */
 interface MenuRecordBadgeRaw {
+    /** 徽标 */
     badge?: string
+    /** 徽标类型 */
     badgeType?: 'dot' | 'normal'
+    /** 徽标颜色 */
     badgeVariants?: 'destructive' | 'primary' | string
 }
 
@@ -41,4 +44,4 @@ interface MenuRecordRaw extends MenuRecordBadgeRaw {
     show?: boolean
 }
 
-export type { ExRouteRecordRaw, MenuRecordRaw }
+export type { ExRouteRecordRaw, MenuRecordBadgeRaw, MenuRecordRaw }

@@ -1,6 +1,6 @@
 {
     "name": "@dag/stores",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "license": "ISC",
     "type": "module",
     "sideEffects": [
@@ -13,9 +13,11 @@
         }
     },
     "dependencies": {
+        "@dag-core/shared": "workspace:^",
         "@dag-core/typings": "workspace:*",
         "pinia": "catalog:",
         "pinia-plugin-persistedstate": "catalog:",
+        "secure-ls": "^2.0.0",
         "vue": "catalog:",
         "vue-router": "catalog:"
     }

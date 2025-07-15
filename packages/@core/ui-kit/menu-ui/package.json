@@ -1,0 +1,41 @@
+{
+    "name": "@dag-core/menu-ui",
+    "version": "1.9.0",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "build": "pnpm unbuild",
+        "prepublishOnly": "npm run build"
+    },
+    "files": [
+        "dist"
+    ],
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "main": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "development": "./src/index.ts",
+            "default": "./dist/index.mjs"
+        }
+    },
+    "publishConfig": {
+        "exports": {
+            ".": {
+                "default": "./dist/index.mjs"
+            }
+        }
+    },
+    "dependencies": {
+        "@dag-core/composables": "workspace:*",
+        "@dag-core/icons": "workspace:*",
+        "@dag-core/shadcn-ui": "workspace:*",
+        "@dag-core/shared": "workspace:*",
+        "@dag-core/typings": "workspace:*",
+        "@vueuse/core": "catalog:",
+        "vue": "catalog:"
+    }
+}

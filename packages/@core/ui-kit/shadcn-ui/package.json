@@ -1,6 +1,6 @@
 {
     "name": "@dag-core/shadcn-ui",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "#main": "./dist/index.mjs",
     "#module": "./dist/index.mjs",
     "license": "MIT",
@@ -33,6 +33,7 @@
         }
     },
     "dependencies": {
+        "@dag-core/composables": "workspace:*",
         "@dag-core/icons": "workspace:*",
         "@dag-core/shared": "workspace:*",
         "@dag-core/typings": "workspace:*",

@@ -1,5 +1,5 @@
 <script setup lang="ts"></script>
 
 <template>
-    <div>forbidden</div>
+    <div>禁止：forbidden</div>
 </template>
