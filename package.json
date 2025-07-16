@@ -10,7 +10,6 @@
         "preinstall": "npx only-allow pnpm",
         "postinstall": "pnpm -r run stub --if-present",
         "commit": "czg",
-        "prepare": "is-ci || husky",
         "clean": "node ./scripts/clean.mjs",
         "format": "vsh lint --format",
         "lint": "vsh lint",

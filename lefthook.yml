@@ -63,7 +63,7 @@ pre-commit:
             glob: 'package.json'
         lint-json:
             run: pnpm prettier --cache --write --parser json {staged_files}
-            glob: '{!(package)*.json},*.code-snippets,.!(browserslist)*rc'
+            glob: '{!(package)*.json,*.code-snippets,.!(browserslist)*rc}'
 
 post-merge:
     commands:
