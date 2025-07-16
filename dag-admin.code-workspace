@@ -1,6 +1,10 @@
 {
     "folders": [
         {
+            "name": "@dag/backend-mock",
+            "path": "apps/backend-mock"
+        },
+        {
             "name": "@dag/web-ele",
             "path": "apps/web-ele"
         },
@@ -65,6 +69,22 @@
             "path": "packages/@core/preferences"
         },
         {
+            "name": "@dag-core/form-ui",
+            "path": "packages/@core/ui-kit/form-ui"
+        },
+        {
+            "name": "@dag-core/layout-ui",
+            "path": "packages/@core/ui-kit/layout-ui"
+        },
+        {
+            "name": "@dag-core/menu-ui",
+            "path": "packages/@core/ui-kit/menu-ui"
+        },
+        {
+            "name": "@dag-core/popup-ui",
+            "path": "packages/@core/ui-kit/popup-ui"
+        },
+        {
             "name": "@dag-core/shadcn-ui",
             "path": "packages/@core/ui-kit/shadcn-ui"
         },
@@ -73,12 +93,24 @@
             "path": "packages/constants"
         },
         {
+            "name": "@dag/access",
+            "path": "packages/effects/access"
+        },
+        {
+            "name": "@dag/common-ui",
+            "path": "packages/effects/common-ui"
+        },
+        {
             "name": "@dag/hooks",
             "path": "packages/effects/hooks"
         },
         {
             "name": "@dag/layouts",
             "path": "packages/effects/layouts"
+        },
+        {
+            "name": "@dag/request",
+            "path": "packages/effects/request"
         },
         {
             "name": "@dag/icons",

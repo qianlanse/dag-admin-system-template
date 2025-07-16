@@ -1,4 +1,0 @@
-# 根据lintstagedrc.js配置格式化并提交代码
-pnpm exec lint-staged
-
-echo Run pre-commit hook done.
