@@ -17,7 +17,7 @@
         "@dag-core/typings": "workspace:*",
         "pinia": "catalog:",
         "pinia-plugin-persistedstate": "catalog:",
-        "secure-ls": "^2.0.0",
+        "secure-ls": "catalog:",
         "vue": "catalog:",
         "vue-router": "catalog:"
     }

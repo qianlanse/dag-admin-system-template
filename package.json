@@ -15,13 +15,18 @@
         "lint": "vsh lint",
         "publint": "vsh publint",
         "reinstall": "pnpm clean --del-lock && pnpm install",
+        "check": "pnpm run check:circular && pnpm run check:dep && pnpm run check:type && pnpm check:cspell",
+        "check:circular": "vsh check-circular",
         "check:cspell": "cspell lint **/*.ts **/README.md .changeset/*.md --no-progress",
         "check:type": "turbo run typecheck",
+        "check:dep": "vsh check-dep",
         "dev": "turbo-run dev",
         "dev:ele": "pnpm -F @dag/web-ele run dev",
         "dev:naive": "pnpm -F @dag/web-naive run dev",
         "changeset": "pnpm exec changeset",
-        "version": "pnpm exec changeset version && pnpm install --no-frozen-lockfile"
+        "update:deps": "npx taze -r -w",
+        "version": "pnpm exec changeset version && pnpm install --no-frozen-lockfile",
+        "catalog": "pnpx codemod pnpm/catalog"
     },
     "devDependencies": {
         "@changesets/changelog-github": "catalog:",
@@ -55,7 +60,7 @@
         "node": ">=20.10.0",
         "pnpm": ">=9.12.0"
     },
-    "packageManager": "pnpm@9.15.6",
+    "packageManager": "pnpm@9.15.9",
     "pnpm": {
         "peerDependencyRules": {
             "allowedVersions": {

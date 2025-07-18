@@ -1,5 +1,5 @@
 import { promises as fs } from 'node:fs'
-import { join } from 'node:path'
+import { join, normalize } from 'node:path'
 
 const rootDir = process.cwd()
 
@@ -13,18 +13,18 @@ async function cleanTargetsRecursively(currentDir, targets) {
 
     for (const item of items) {
         try {
-            const itemPath = join(currentDir, item)
+            const itemPath = normalize(join(currentDir, item))
+            const stat = await fs.lstat(itemPath)
+
             if (targets.includes(item)) {
                 // 匹配到目标目录或文件时直接删除
                 await fs.rm(itemPath, { force: true, recursive: true })
                 console.log(`Deleted: ${itemPath}`)
-            }
-            const stat = await fs.lstat(itemPath)
-            if (stat.isDirectory()) {
+            } else if (stat.isDirectory()) {
                 await cleanTargetsRecursively(itemPath, targets)
             }
         } catch (error) {
-            // console.error(`Error handling item ${item} in ${currentDir}: ${error.message}`)
+            console.error(`Error handling item ${item} in ${currentDir}: ${error.message}`)
         }
     }
 }
@@ -46,5 +46,6 @@ async function cleanTargetsRecursively(currentDir, targets) {
         console.log('Cleanup process completed.')
     } catch (error) {
         console.error(`Unexpected error during cleanup: ${error.message}`)
+        process.exit(1)
     }
 })()

@@ -12,7 +12,8 @@ import {
     generatorContentHash,
     getPackages,
     outputJSON,
-    readJSON
+    readJSON,
+    UNICODE
 } from '@dag/node-utils'
 
 import { publint } from 'publint'
@@ -22,7 +23,7 @@ const CACHE_FILE = join('node_modules', '.cache', 'publint', '.pkglintcache.json
 
 interface PublintCommandOptions {
     /**
-     * Only errors are checked, no program exit is performed
+     * 仅检查错误，没有执行程序退出
      */
     check?: boolean
 }
@@ -168,12 +169,12 @@ function printResult(
     if (totalCount > 0) {
         console.error(
             colors.red(
-                `✖ ${totalCount} problem (${errorCount} errors, ${warningCount} warnings, ${suggestionsCount} suggestions)`
+                `${UNICODE.FAILURE} ${totalCount} problem (${errorCount} errors, ${warningCount} warnings, ${suggestionsCount} suggestions)`
             )
         )
         !check && process.exit(1)
     } else {
-        consola.log(colors.green(`✔ No problem`))
+        consola.log(colors.green(`${UNICODE.SUCCESS} No problem`))
     }
 }
 

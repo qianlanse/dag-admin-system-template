@@ -13,7 +13,7 @@ interface LintCommandOptions {
 }
 
 async function runLint({ format }: LintCommandOptions) {
-    process.env.FORCE_COLOR = '3'
+    // process.env.FORCE_COLOR = '3'
 
     if (format) {
         await execaCommand(`stylelint "**/*.{vue,css,less,scss}" --cache --fix`, {

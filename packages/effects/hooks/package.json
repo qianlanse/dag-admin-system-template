@@ -16,7 +16,7 @@
         "@dag/stores": "workspace:^",
         "@dag/types": "workspace:*",
         "@dag/utils": "workspace:^",
-        "@vueuse/core": "^13.5.0",
+        "@vueuse/core": "catalog:",
         "vue": "catalog:",
         "vue-router": "catalog:"
     }
