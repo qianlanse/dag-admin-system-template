@@ -1,10 +1,12 @@
-import type { ValidationOptions } from 'vee-validate'
+import type { FormState, GenericObject, ResetFormOpts, ValidationOptions } from 'vee-validate'
+
+import type { ComponentPublicInstance } from 'vue'
 
 import type { Recordable } from '@dag-core/typings'
 
 import type { DagFormProps, FormActions } from './types'
 
-import { toRaw } from 'vue'
+import { isRef, toRaw } from 'vue'
 
 import { Store } from '@dag-core/shared/store'
 import {
@@ -39,14 +41,18 @@ function getDefaultState(): DagFormProps {
 export class FormApi {
     public form = {} as FormActions
     isMounted = false
-    public state: DagFormProps | null = null
 
+    public state: DagFormProps | null = null
     stateHandler: StateHandler
+
     public store: Store<DagFormProps>
 
     /** 组件实例映射 */
     private componentRefMap: Map<string, unknown> = new Map()
+    /** 最后一次点击提交时的表单值 */
     private latestSubmissionValues: null | Recordable<any> = null
+
+    private prevState: DagFormProps | null = null
 
     constructor(options: DagFormProps = {}) {
         const { ...storeState } = options
@@ -59,7 +65,9 @@ export class FormApi {
             },
             {
                 onUpdate: () => {
-                    // -
+                    this.prevState = this.state
+                    this.state = this.store.state
+                    this.updateState()
                 }
             }
         )
@@ -69,10 +77,71 @@ export class FormApi {
         bindMethods(this)
     }
 
-    // 获取表单提交值
+    /**
+     * 获取字段组件实例
+     * @param fieldName 字段名
+     * @returns 组件实例
+     */
+    getFieldComponentRef<T = ComponentPublicInstance>(fieldName: string): T | undefined {
+        let target = this.componentRefMap.has(fieldName)
+            ? (this.componentRefMap.get(fieldName) as ComponentPublicInstance)
+            : undefined
+
+        if (target && target.$.type.name === 'AsyncComponentWrapper' && target.$.subTree.ref) {
+            if (Array.isArray(target.$.subTree.ref)) {
+                if (target.$.subTree.ref.length > 0 && isRef(target.$.subTree.ref[0]?.r)) {
+                    target = target.$.subTree.ref[0]?.r.value as ComponentPublicInstance
+                }
+            } else if (isRef(target.$.subTree.ref.r)) {
+                target = target.$.subTree.ref.r.value as ComponentPublicInstance
+            }
+        }
+
+        return target as T
+    }
+
+    /** 获取当前聚焦的字段，如果没有聚焦的字段则返回undefined */
+    getFocusField() {
+        for (const fieldName of this.componentRefMap.keys()) {
+            const ref = this.getFieldComponentRef(fieldName)
+            if (ref) {
+                let el: HTMLElement | null = null
+                if (ref instanceof HTMLElement) {
+                    el = ref
+                } else if (ref.$el instanceof HTMLElement) {
+                    el = ref.$el
+                }
+                if (!el) {
+                    continue
+                }
+                if (el === document.activeElement || el.contains(document.activeElement)) {
+                    return fieldName
+                }
+            }
+        }
+
+        return undefined
+    }
+
+    /** 最后一次点击提交时的表单值 */
+    getLatestSubmissionValues() {
+        return this.latestSubmissionValues || {}
+    }
+
+    /** 获取状态值 */
+    getState() {
+        return this.state
+    }
+
+    /** 获取表单提交值 */
     async getValues<T = Recordable<any>>() {
         const form = await this.getForm()
         return (form.values ? this.handleRangeTimeValue(form.values) : {}) as T
+    }
+
+    async isFieldValid(fieldName: string) {
+        const form = await this.getForm()
+        return form.isFieldValid(fieldName)
     }
 
     /** 初始化数据 */
@@ -86,6 +155,30 @@ export class FormApi {
             this.componentRefMap = componentRefMap
             this.isMounted = true
         }
+    }
+
+    /**
+     * 根据字段名移除表单项
+     * @param fields
+     */
+    async removeSchemaByFields(fields: string[]) {
+        const fieldSet = new Set(fields)
+        const schema = this.state?.schema ?? []
+
+        const filterSchema = schema.filter((item) => !fieldSet.has(item.fieldName))
+
+        this.setState({
+            schema: filterSchema
+        })
+    }
+
+    /** 重置表单 */
+    async resetForm(
+        state?: Partial<FormState<GenericObject>> | undefined,
+        opts?: Partial<ResetFormOpts>
+    ) {
+        const form = await this.getForm()
+        return form.resetForm(state, opts)
     }
 
     /** 设置字段值 */
@@ -168,5 +261,19 @@ export class FormApi {
         const values = { ...originValues }
 
         return values
+    }
+
+    /** 重置状态值 */
+    private updateState() {
+        const currentSchema = this.state?.schema ?? []
+        const prevSchema = this.prevState?.schema ?? []
+
+        if (currentSchema.length < prevSchema.length) {
+            const currentFields = new Set(currentSchema.map((item) => item.fieldName))
+            const deletedSchema = prevSchema.filter((item) => !currentFields.has(item.fieldName))
+            for (const schema of deletedSchema) {
+                this.form?.setFieldValue?.(schema.fieldName, undefined)
+            }
+        }
     }
 }

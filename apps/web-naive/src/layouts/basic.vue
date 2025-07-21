@@ -3,12 +3,16 @@
 
     import { computed, ref } from 'vue'
 
+    import { AuthenticationLoginExpiredModal } from '@dag/common-ui'
     import { BookOpenText, CircleHelp, MdiGithub } from '@dag/icons'
-    import { BasicLayout, Notification, UserDropdown } from '@dag/layouts'
+    import { BasicLayout, LockScreen, Notification, UserDropdown } from '@dag/layouts'
     import { $t } from '@dag/locales'
     import { preferences } from '@dag/preferences'
-    import { useUserStore } from '@dag/stores'
+    import { useAccessStore, useUserStore } from '@dag/stores'
     import { openWindow } from '@dag/utils'
+
+    import { useAuthStore } from '#/store'
+    import LoginForm from '#/views/_core/authentication/login.vue'
 
     const notifications = ref<NotificationItem[]>([
         {
@@ -42,6 +46,8 @@
     ])
 
     const userStore = useUserStore()
+    const authStore = useAuthStore()
+    const accessStore = useAccessStore()
 
     const showDot = computed(() => notifications.value.some((item) => !item.isRead))
 
@@ -84,10 +90,16 @@
     function handleMakeAll() {
         notifications.value.forEach((item) => (item.isRead = true))
     }
+
+    /** 退出登录 */
+    async function handleLogout() {
+        await authStore.logout()
+    }
 </script>
 
 <template>
     <BasicLayout>
+        <!-- 用户简介&操作 -->
         <template #user-dropdown>
             <UserDropdown
                 :avatar
@@ -95,8 +107,11 @@
                 :text="userStore.userInfo?.realName"
                 description="hefangjay@qq.com"
                 tag-text="Pro"
+                @logout="handleLogout"
             />
         </template>
+
+        <!-- 通知消息 -->
         <template #notification>
             <Notification
                 :dot="showDot"
@@ -104,6 +119,18 @@
                 @clear="handleNoticeClear"
                 @make-all="handleMakeAll"
             />
+        </template>
+
+        <!-- 登录过期 -->
+        <template #extra>
+            <AuthenticationLoginExpiredModal v-model:open="accessStore.loginExpired" :avatar>
+                <LoginForm />
+            </AuthenticationLoginExpiredModal>
+        </template>
+
+        <!-- 锁屏 -->
+        <template #lock-screen>
+            <LockScreen :avatar @to-login="handleLogout" />
         </template>
     </BasicLayout>
 </template>

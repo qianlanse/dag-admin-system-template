@@ -43,3 +43,38 @@ export function getElementVisibleRect(element?: HTMLElement | null | undefined):
         width: Math.max(0, right - left)
     }
 }
+
+/** 获取滚动条宽度 */
+export function getScrollbarWidth() {
+    const scrollDiv = document.createElement('div')
+
+    scrollDiv.style.visibility = 'hidden'
+    scrollDiv.style.overflow = 'scroll'
+    scrollDiv.style.position = 'absolute'
+    scrollDiv.style.top = '-9999px'
+
+    document.body.append(scrollDiv)
+
+    const innerDiv = document.createElement('div')
+    scrollDiv.append(innerDiv)
+
+    const scrollbarWidth = scrollDiv.offsetWidth - innerDiv.offsetWidth
+
+    scrollDiv.remove()
+
+    return scrollbarWidth
+}
+
+/** 验证内容区域高度是否大于窗口高度 */
+export function needsScrollbar() {
+    const doc = document.documentElement
+    const body = document.body
+
+    const overflowY = window.getComputedStyle(body).overflowY
+
+    if (overflowY === 'scroll' || overflowY === 'auto') {
+        return doc.scrollHeight > window.innerHeight
+    }
+
+    return doc.scrollHeight > window.innerHeight
+}

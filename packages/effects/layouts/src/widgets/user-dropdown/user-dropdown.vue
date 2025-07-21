@@ -9,8 +9,10 @@
     import { LockKeyhole, LogOut } from '@dag/icons'
     import { $t } from '@dag/locales'
     import { preferences, usePreferences } from '@dag/preferences'
+    import { useAccessStore } from '@dag/stores'
     import { isWindowsOs } from '@dag/utils'
 
+    import { useDagModal } from '@dag-core/popup-ui'
     import {
         Badge,
         DagAvatar,
@@ -23,6 +25,10 @@
         DropdownMenuShortcut,
         DropdownMenuTrigger
     } from '@dag-core/shadcn-ui'
+
+    import { useMagicKeys, whenever } from '@vueuse/core'
+
+    import { LockScreenModal } from '../lock-screen'
 
     interface Props {
         /** 头像 */
@@ -62,9 +68,10 @@
         hoverDelay: 500
     })
 
-    // const emit = defineEmits<{ logout: [] }>()
+    const emit = defineEmits<{ logout: [] }>()
 
     const { globalLogoutShortcutKey, globalLockScreenShortcutKey } = usePreferences()
+    const accessStore = useAccessStore()
 
     const refTrigger = useTemplateRef('refTrigger')
     const refContent = useTemplateRef('refContent')
@@ -74,13 +81,29 @@
         () => props.hoverDelay
     )
 
+    const [LogoutModal, logoutModalApi] = useDagModal({
+        onConfirm() {
+            handleSubmitLogout()
+        }
+    })
+    const [LockModal, lockModalApi] = useDagModal({
+        connectedComponent: LockScreenModal
+    })
+
+    /** 是否打开登出快捷键 */
     const enableLogoutShortcutKey = computed(
         () => props.enableShortcutKey && globalLogoutShortcutKey.value
     )
 
+    /** 是否打开锁屏快捷键 */
     const enableLockScreenShortcutKey = computed(() => {
         return props.enableShortcutKey && globalLockScreenShortcutKey.value
     })
+
+    /** 是否打开快捷键 */
+    const enableShortcutKey = computed(
+        () => props.enableShortcutKey && preferences.shortcutKeys.enable
+    )
 
     const altView = computed(() => (isWindowsOs() ? 'Alt' : '⌥'))
 
@@ -96,14 +119,67 @@
         { immediate: true }
     )
 
+    if (enableShortcutKey.value) {
+        const keys = useMagicKeys()
+        whenever(keys['Alt+KeyQ']!, () => {
+            if (enableLogoutShortcutKey.value) {
+                handleLogout()
+            }
+        })
+
+        whenever(keys['Alt+KeyL']!, () => {
+            if (enableLockScreenShortcutKey.value) {
+                handleOpenLock()
+            }
+        })
+    }
+
     /** 锁定屏幕 */
-    function handleOpenLock() {}
+    function handleOpenLock() {
+        lockModalApi.open()
+    }
 
     /** 登出 */
-    function handleLogout() {}
+    function handleLogout() {
+        logoutModalApi.open()
+        openPopover.value = false
+    }
+
+    /** 登出 */
+    function handleSubmitLogout() {
+        emit('logout')
+        logoutModalApi.close()
+    }
+
+    /** 锁屏 */
+    function handleSubmitLock(lockScreenPassword: string) {
+        lockModalApi.close()
+        accessStore.lockScreen(lockScreenPassword)
+    }
 </script>
 
 <template>
+    <LockModal
+        v-if="preferences.widget.lockScreen"
+        :avatar="avatar"
+        :text="text"
+        @submit="handleSubmitLock"
+    />
+    <!-- 登出确认框 -->
+    <LogoutModal
+        :cancel-text="$t('common.cancel')"
+        :confirm-text="$t('common.confirm')"
+        :fullscreen-button="false"
+        :title="$t('common.prompt')"
+        centered
+        content-class="px-8 min-h-10"
+        footer-class="border-none mb-3 mr-3"
+        header-class="border-none"
+    >
+        {{ $t('ui.widgets.logoutTip') }}
+    </LogoutModal>
+
+    <!-- 用户弹窗 -->
     <DropdownMenu v-model:open="openPopover">
         <DropdownMenuTrigger ref="refTrigger" :disabled="props.trigger === 'hover'">
             <div class="hover:bg-accent ml-1 mr-2 cursor-pointer rounded-full p-1.5">

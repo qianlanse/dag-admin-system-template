@@ -1210,6 +1210,9 @@ importers:
       '@dag-core/form-ui':
         specifier: workspace:*
         version: link:../../@core/ui-kit/form-ui
+      '@dag-core/popup-ui':
+        specifier: workspace:*
+        version: link:../../@core/ui-kit/popup-ui
       '@dag-core/shadcn-ui':
         specifier: workspace:*
         version: link:../../@core/ui-kit/shadcn-ui
@@ -1268,6 +1271,12 @@ importers:
 
   packages/effects/layouts:
     dependencies:
+      '@dag-core/composables':
+        specifier: workspace:*
+        version: link:../../@core/composables
+      '@dag-core/form-ui':
+        specifier: workspace:*
+        version: link:../../@core/ui-kit/form-ui
       '@dag-core/layout-ui':
         specifier: workspace:*
         version: link:../../@core/ui-kit/layout-ui

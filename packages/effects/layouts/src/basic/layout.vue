@@ -5,6 +5,7 @@
 
     import { $t } from '@dag/locales'
     import { preferences, updatePreferences, usePreferences } from '@dag/preferences'
+    import { useAccessStore } from '@dag/stores'
     import { cloneDeep, mapTree } from '@dag/utils'
 
     import { DagAdminLayout } from '@dag-core/layout-ui'
@@ -34,6 +35,7 @@
     const { sidebarVisible, sidebarMenus, sidebarActive, handleMenuOpen, handleMenuSelect } =
         useMixedMenu()
     const slots = useSlots()
+    const accessStore = useAccessStore()
 
     const logoClass = computed(() => {
         const { collapsedShowTitle } = preferences.sidebar
@@ -193,6 +195,13 @@
                 @open="handleMenuOpen"
                 @select="handleMenuSelect"
             />
+        </template>
+
+        <template #extra>
+            <slot name="extra"></slot>
+            <Transition v-if="preferences.widget.lockScreen" name="slide-up">
+                <slot v-if="accessStore.isLockScreen" name="lock-screen"></slot>
+            </Transition>
         </template>
     </DagAdminLayout>
 </template>

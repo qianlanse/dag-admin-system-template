@@ -4,7 +4,7 @@
 
     import type { DagFormProps, DagFormSchema } from '@dag-core/form-ui'
 
-    import type { AuthencationProps } from './types'
+    import type { AuthenticationProps } from './types'
 
     import { computed, onMounted, reactive, ref } from 'vue'
     import { useRouter } from 'vue-router'
@@ -17,7 +17,7 @@
     import AuthTitle from './auth-title.vue'
     import ThirdPartyLogin from './third-party-login.vue'
 
-    interface Props extends AuthencationProps {
+    interface Props extends AuthenticationProps {
         formSchema: DagFormSchema[]
     }
 

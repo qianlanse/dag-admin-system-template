@@ -44,7 +44,7 @@ export function useDagModal<TParentModalProps extends ModalProps = ModalProps>(
         const Modal = defineComponent(
             (props: TParentModalProps, { attrs, slots }) => {
                 provide(USER_MODAL_INJECT_KEY, {
-                    extendedApi(api: ExtendedModalApi) {
+                    extendApi(api: ExtendedModalApi) {
                         Object.setPrototypeOf(extendedApi, api)
                     },
                     options,
