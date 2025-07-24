@@ -1,0 +1,26 @@
+import { updatePreferences, usePreferences } from '@dag/preferences'
+
+/**
+ * 主题区域最大化
+ */
+export function useContentMaximize() {
+    const { contentIsMaximize } = usePreferences()
+
+    function toggleMaximize() {
+        const isMaximize = contentIsMaximize.value
+
+        updatePreferences({
+            header: {
+                hidden: !isMaximize
+            },
+            sidebar: {
+                hidden: !isMaximize
+            }
+        })
+    }
+
+    return {
+        contentIsMaximize,
+        toggleMaximize
+    }
+}

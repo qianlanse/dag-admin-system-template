@@ -89,6 +89,10 @@
             "path": "packages/@core/ui-kit/shadcn-ui"
         },
         {
+            "name": "@dag-core/tabs-ui",
+            "path": "packages/@core/ui-kit/tabs-ui"
+        },
+        {
             "name": "@dag/constants",
             "path": "packages/constants"
         },

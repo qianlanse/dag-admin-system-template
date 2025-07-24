@@ -85,7 +85,7 @@ export async function perfectionist(): Promise<Linter.Config[]> {
                 // 强制对象排序
                 // https://perfectionist.dev/rules/sort-objects
                 'perfectionist/sort-objects': [
-                    'error',
+                    'off',
                     {
                         customGroups: {
                             items: 'items',
@@ -93,6 +93,7 @@ export async function perfectionist(): Promise<Linter.Config[]> {
                             children: 'children'
                         },
                         groups: ['unknown', 'items', 'list', 'children'],
+                        ignorePattern: ['children'],
                         order: 'asc',
                         type: 'natural'
                     }

@@ -47,11 +47,14 @@ type AnyFunction<T extends any[] = any[], R = void> =
     | AnyNormalFunction<T, R>
     | AnyPromiseFunction<T, R>
 
+type EmitType = (name: Name, ...args: any[]) => void
+
 export type {
     AnyFunction,
     AnyNormalFunction,
     AnyPromiseFunction,
     DeepPartial,
+    EmitType,
     MaybeComputedRef,
     MaybePromise,
     MaybeReadonlyRef,

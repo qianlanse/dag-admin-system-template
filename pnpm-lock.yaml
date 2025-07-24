@@ -1181,6 +1181,27 @@ importers:
         specifier: ^3.5.17
         version: 3.5.17(typescript@5.8.3)
 
+  packages/@core/ui-kit/tabs-ui:
+    dependencies:
+      '@dag-core/composables':
+        specifier: workspace:*
+        version: link:../../composables
+      '@dag-core/icons':
+        specifier: workspace:*
+        version: link:../../base/icons
+      '@dag-core/shadcn-ui':
+        specifier: workspace:*
+        version: link:../shadcn-ui
+      '@dag-core/typings':
+        specifier: workspace:*
+        version: link:../../base/typings
+      '@vueuse/core':
+        specifier: 'catalog:'
+        version: 13.5.0(vue@3.5.17(typescript@5.8.3))
+      vue:
+        specifier: ^3.5.17
+        version: 3.5.17(typescript@5.8.3)
+
   packages/constants:
     dependencies:
       '@dag-core/shared':
@@ -1250,6 +1271,9 @@ importers:
 
   packages/effects/hooks:
     dependencies:
+      '@dag/preferences':
+        specifier: workspace:*
+        version: link:../../preferences
       '@dag/stores':
         specifier: workspace:^
         version: link:../../stores
@@ -1289,6 +1313,9 @@ importers:
       '@dag-core/shadcn-ui':
         specifier: workspace:*
         version: link:../../@core/ui-kit/shadcn-ui
+      '@dag-core/tabs-ui':
+        specifier: workspace:*
+        version: link:../../@core/ui-kit/tabs-ui
       '@dag/constants':
         specifier: workspace:*
         version: link:../../constants
@@ -1377,6 +1404,9 @@ importers:
 
   packages/stores:
     dependencies:
+      '@dag-core/preferences':
+        specifier: workspace:*
+        version: link:../@core/preferences
       '@dag-core/shared':
         specifier: workspace:^
         version: link:../@core/base/shared

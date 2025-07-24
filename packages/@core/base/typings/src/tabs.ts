@@ -1,3 +1,8 @@
 import type { RouteLocationNormalized } from 'vue-router'
 
-export type TabDefinition = RouteLocationNormalized
+export interface TabDefinition extends RouteLocationNormalized {
+    /**
+     * 标签页key
+     */
+    key?: string
+}

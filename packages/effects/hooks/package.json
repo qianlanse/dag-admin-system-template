@@ -1,6 +1,6 @@
 {
     "name": "@dag/hooks",
-    "version": "1.10.0",
+    "version": "1.11.0",
     "license": "MIT",
     "type": "module",
     "sideEffects": [
@@ -13,6 +13,7 @@
         }
     },
     "dependencies": {
+        "@dag/preferences": "workspace:*",
         "@dag/stores": "workspace:^",
         "@dag/types": "workspace:*",
         "@dag/utils": "workspace:^",

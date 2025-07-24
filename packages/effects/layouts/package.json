@@ -1,6 +1,6 @@
 {
     "name": "@dag/layouts",
-    "version": "1.10.0",
+    "version": "1.11.0",
     "license": "MIT",
     "type": "module",
     "sideEffects": [
@@ -19,6 +19,7 @@
         "@dag-core/menu-ui": "workspace:*",
         "@dag-core/popup-ui": "workspace:*",
         "@dag-core/shadcn-ui": "workspace:*",
+        "@dag-core/tabs-ui": "workspace:*",
         "@dag/constants": "workspace:*",
         "@dag/hooks": "workspace:*",
         "@dag/icons": "workspace:*",

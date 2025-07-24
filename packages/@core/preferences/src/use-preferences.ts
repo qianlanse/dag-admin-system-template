@@ -113,11 +113,22 @@ export function usePreferences() {
         return enable && globalLockScreen
     })
 
+    /**
+     * 内容是否已经最大化
+     * 排除full-content模式
+     */
+    const contentIsMaximize = computed(() => {
+        const headerIsHidden = preferences.header.hidden
+        const sidebarIsHidden = preferences.sidebar.hidden
+        return headerIsHidden && sidebarIsHidden && !isFullContent.value
+    })
+
     return {
         authPanelCenter,
         authPanelLeft,
         authPanelRight,
         globalLockScreenShortcutKey,
+        contentIsMaximize,
         globalLogoutShortcutKey,
         globalSearchShortcutKey,
         isDark,

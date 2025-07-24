@@ -14,6 +14,7 @@
     import { Breadcrumb } from '../widgets'
     import { LayoutHeader } from './header'
     import { LayoutMenu, useMixedMenu } from './menu'
+    import { LayoutTabbar } from './tabbar'
 
     defineOptions({ name: 'BasicLayout' })
 
@@ -161,13 +162,16 @@
         <!-- 顶部区域 -->
         <template #header>
             <LayoutHeader :theme="theme" @clear-preferences-and-logout="clearPreferencesAndLogout">
-                <template #breadcrumb>
+                <template v-if="!showHeaderNav && preferences.breadcrumb.enable" #breadcrumb>
                     <Breadcrumb
                         :hide-when-only-one="preferences.breadcrumb.hideOnlyOne"
                         :show-home="preferences.breadcrumb.showHome"
                         :show-icon="preferences.breadcrumb.showIcon"
                         :type="preferences.breadcrumb.styleType"
                     />
+                </template>
+                <template v-if="showHeaderNav" #menu>
+                    <span>menu</span>
                 </template>
                 <template #user-dropdown>
                     <slot name="user-dropdown"></slot>
@@ -194,6 +198,14 @@
                 mode="vertical"
                 @open="handleMenuOpen"
                 @select="handleMenuSelect"
+            />
+        </template>
+
+        <template #tabbar>
+            <LayoutTabbar
+                v-if="preferences.tabbar.enable"
+                :show-icon="preferences.tabbar.showIcon"
+                :theme="theme"
             />
         </template>
 

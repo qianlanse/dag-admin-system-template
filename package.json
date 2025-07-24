@@ -1,6 +1,6 @@
 {
     "name": "dag-admin-system-template",
-    "version": "1.10.0",
+    "version": "1.11.0",
     "private": true,
     "license": "MIT",
     "type": "module",
@@ -25,6 +25,7 @@
         "dev:naive": "pnpm -F @dag/web-naive run dev",
         "changeset": "pnpm exec changeset",
         "update:deps": "npx taze -r -w",
+        "preview": "turbo-run preview",
         "version": "pnpm exec changeset version && pnpm install --no-frozen-lockfile",
         "catalog": "pnpx codemod pnpm/catalog"
     },
