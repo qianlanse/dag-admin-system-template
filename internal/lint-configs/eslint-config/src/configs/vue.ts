@@ -11,9 +11,16 @@ export async function vue(): Promise<Linter.Config[]> {
         interopDefault(import('vue-eslint-parser')),
         // @ts-expect-error - no types
         interopDefault(import('@typescript-eslint/parser'))
-    ])
+    ] as const)
+
+    const flatEssential = pluginVue.configs?.['flat/essential'] || []
+    const flatStronglyRecommended = pluginVue.configs?.['flat/strongly-recommended'] || []
+    const flatRecommended = pluginVue.configs?.['flat/recommended'] || []
 
     return [
+        ...flatEssential,
+        ...flatStronglyRecommended,
+        ...flatRecommended,
         {
             files: ['**/*.vue'],
             languageOptions: {
@@ -33,12 +40,6 @@ export async function vue(): Promise<Linter.Config[]> {
             processor: pluginVue.processors['.vue'],
             rules: {
                 ...pluginVue.configs.base.rules,
-                // vue3基础
-                ...pluginVue.configs['vue3-essential'].rules,
-                // vue3强烈推荐
-                ...pluginVue.configs['vue3-strongly-recommended'].rules,
-                // vue3推荐
-                ...pluginVue.configs['vue3-recommended'].rules,
 
                 // 在模板中的自定义组件上强制实施属性命名样式
                 'vue/attribute-hyphenation': [

@@ -1,6 +1,6 @@
 {
     "name": "dag-admin-system-template",
-    "version": "1.11.0",
+    "version": "1.12.0",
     "private": true,
     "license": "MIT",
     "type": "module",
@@ -47,9 +47,7 @@
         "autoprefixer": "catalog:",
         "cross-env": "catalog:",
         "cspell": "catalog:",
-        "husky": "catalog:",
         "lefthook": "catalog:",
-        "lint-staged": "catalog:",
         "tailwindcss": "catalog:",
         "turbo": "catalog:",
         "typescript": "catalog:",

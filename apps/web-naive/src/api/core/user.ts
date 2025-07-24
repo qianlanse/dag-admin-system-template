@@ -1,8 +1,8 @@
-import type { UserInfo } from '@dag/types'
+import type { UserInfo } from '@dag/types';
 
-import { requestClient } from '../request'
+import { requestClient } from '#/api/request';
 
 /** 获取用户信息 */
 export async function getUserInfoApi() {
-    return requestClient.get<UserInfo>('/user/info')
+    return requestClient.get<UserInfo>('/user/info');
 }
