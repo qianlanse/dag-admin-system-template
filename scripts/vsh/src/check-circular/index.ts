@@ -1,10 +1,10 @@
-import type { CAC } from 'cac';
+import type { CAC } from 'cac'
 
-import { extname } from 'node:path';
+import { extname } from 'node:path'
 
-import { getStagedFiles } from '@dag/node-utils';
+import { getStagedFiles } from '@dag/node-utils'
 
-import { circularDepsDetect } from 'circular-dependency-scanner';
+import { circularDepsDetect } from 'circular-dependency-scanner'
 
 // 默认配置
 const DEFAULT_CONFIG = {
@@ -19,38 +19,38 @@ const DEFAULT_CONFIG = {
         'packages/effects/request/src/',
         'packages/@core/ui-kit/menu-ui/src/',
         'packages/@core/ui-kit/form-ui/src/',
-        'packages/@core/ui-kit/popup-ui/src',
+        'packages/@core/ui-kit/popup-ui/src'
     ],
-    threshold: 0,
-} as const;
+    threshold: 0
+} as const
 
-type CircularDependencyResult = string[];
+type CircularDependencyResult = string[]
 
 interface CheckCircularConfig {
-    allowedExtensions?: string[];
-    ignoreDirs?: string[];
-    threshold?: number;
+    allowedExtensions?: string[]
+    ignoreDirs?: string[]
+    threshold?: number
 }
 interface CommandOptions {
-    config?: CheckCircularConfig;
-    staged: boolean;
-    verbose: boolean;
+    config?: CheckCircularConfig
+    staged: boolean
+    verbose: boolean
 }
 
 // 缓存机制
-const cache = new Map<string, CircularDependencyResult[]>();
+const cache = new Map<string, CircularDependencyResult[]>()
 
 function formatCircles(circles: CircularDependencyResult[]): void {
     if (circles.length === 0) {
-        console.log('✅ No circular dependencies found');
-        return;
+        console.log('✅ No circular dependencies found')
+        return
     }
 
-    console.log('⚠️ Circular dependencies found:');
+    console.log('⚠️ Circular dependencies found:')
     circles.forEach((circle, index) => {
-        console.log(`\nCircular dependency #${index + 1}:`);
-        circle.forEach((file) => console.log(`  → ${file}`));
-    });
+        console.log(`\nCircular dependency #${index + 1}:`)
+        circle.forEach((file) => console.log(`  → ${file}`))
+    })
 }
 
 /**
@@ -66,65 +66,65 @@ async function checkCircular({ config = {}, staged, verbose }: CommandOptions): 
         // 合并配置
         const finalConfig = {
             ...DEFAULT_CONFIG,
-            ...config,
-        };
+            ...config
+        }
 
         // 生成忽略模式
-        const ignorePattern = `**/{${finalConfig.ignoreDirs.join(',')}}/**`;
+        const ignorePattern = `**/{${finalConfig.ignoreDirs.join(',')}}/**`
 
         // 检查缓存
-        const cacheKey = `${staged}-${process.cwd()}-${ignorePattern}`;
+        const cacheKey = `${staged}-${process.cwd()}-${ignorePattern}`
         if (cache.has(cacheKey)) {
-            const cachedResults = cache.get(cacheKey);
+            const cachedResults = cache.get(cacheKey)
             if (cachedResults) {
-                verbose && formatCircles(cachedResults);
+                verbose && formatCircles(cachedResults)
             }
-            return;
+            return
         }
 
         // 检测循环依赖
         const results = await circularDepsDetect({
             absolute: staged,
             cwd: process.cwd(),
-            ignore: [ignorePattern],
-        });
+            ignore: [ignorePattern]
+        })
 
         if (staged) {
-            let files = await getStagedFiles();
-            const allowedExtensions = new Set(finalConfig.allowedExtensions);
+            let files = await getStagedFiles()
+            const allowedExtensions = new Set(finalConfig.allowedExtensions)
 
             // 过滤文件列表
-            files = files.filter((file) => allowedExtensions.has(extname(file)));
+            files = files.filter((file) => allowedExtensions.has(extname(file)))
 
-            const circularFiles: CircularDependencyResult[] = [];
+            const circularFiles: CircularDependencyResult[] = []
 
             for (const file of files) {
                 for (const result of results) {
-                    const resultFiles = result.flat();
+                    const resultFiles = result.flat()
                     if (resultFiles.includes(file)) {
-                        circularFiles.push(result);
+                        circularFiles.push(result)
                     }
                 }
             }
 
             // 更新缓存
-            cache.set(cacheKey, circularFiles);
-            verbose && formatCircles(circularFiles);
+            cache.set(cacheKey, circularFiles)
+            verbose && formatCircles(circularFiles)
         } else {
             // 更新缓存
-            cache.set(cacheKey, results);
-            verbose && formatCircles(results);
+            cache.set(cacheKey, results)
+            verbose && formatCircles(results)
         }
 
         // 如果发现循环依赖只输出警告信息
         if (results.length > 0) {
-            console.log('\n⚠️ Warning: Circular dependencies found, please check and fix');
+            console.log('\n⚠️ Warning: Circular dependencies found, please check and fix')
         }
     } catch (error) {
         console.error(
             `❌ Error checking circular dependencies:`,
             error instanceof Error ? error.message : error
-        );
+        )
     }
 }
 
@@ -137,18 +137,18 @@ function defineCheckCircularCommand(cac: CAC): void {
         .option('--staged', 'Only check staged files')
         .option('--verbose', 'Show detailed infomation')
         .option('--threshold <number>', 'Threshold for circular dependencies', {
-            default: 0,
+            default: 0
         })
         .option('--ignore-dirs <dirs>', 'Directories to ignore, comma separated')
         .usage('Analyze project circular dependencies')
         .action(async ({ staged, verbose, threshold, ignoreDirs }) => {
             const config: CheckCircularConfig = {
                 threshold: Number(threshold),
-                ...(ignoreDirs && { ignoreDirs: ignoreDirs.split(',') }),
-            };
+                ...(ignoreDirs && { ignoreDirs: ignoreDirs.split(',') })
+            }
 
-            await checkCircular({ config, staged, verbose: verbose ?? true });
-        });
+            await checkCircular({ config, staged, verbose: verbose ?? true })
+        })
 }
 
-export { defineCheckCircularCommand };
+export { defineCheckCircularCommand }

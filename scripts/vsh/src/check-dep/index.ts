@@ -1,12 +1,12 @@
-import type { CAC } from 'cac';
+import type { CAC } from 'cac'
 
-import { getPackages } from '@dag/node-utils';
+import { getPackages } from '@dag/node-utils'
 
 /**
  * Depcheck是一个用于分析项目中的依赖项的工具，用于查看每个依赖项如何使用，哪些依赖项是无用的，以及package.json中缺少哪些依赖项
  * @see https://www.npmjs.com/package/depcheck
  */
-import depcheck from 'depcheck';
+import depcheck from 'depcheck'
 
 // 默认配置
 const DEFAULT_CONFIG = {
@@ -19,7 +19,7 @@ const DEFAULT_CONFIG = {
         '@dag/vite-config',
         '@dag/tailwind-config',
         '@types/*',
-        '@dag-core/design',
+        '@dag-core/design'
     ],
     // 需要忽略的包
     ignorePackages: [
@@ -32,29 +32,29 @@ const DEFAULT_CONFIG = {
         '@dag/tailwind-config',
         '@dag/tsconfig',
         '@dag/vite-config',
-        '@dag/vsh',
+        '@dag/vsh'
     ],
     // 需要忽略的文件模式
-    ignorePatterns: ['dist', 'node_modules', 'public'],
-};
+    ignorePatterns: ['dist', 'node_modules', 'public']
+}
 
 interface DepcheckResult {
-    dependencies: string[];
-    devDependencies: string[];
-    missing: Record<string, string[]>;
+    dependencies: string[]
+    devDependencies: string[]
+    missing: Record<string, string[]>
 }
 
 interface DepcheckConfig {
-    ignoreMatches?: string[];
-    ignorePackages?: string[];
-    ignorePatterns?: string[];
+    ignoreMatches?: string[]
+    ignorePackages?: string[]
+    ignorePatterns?: string[]
 }
 
 interface PackageInfo {
-    dir: string;
+    dir: string
     packageJson: {
-        name: string;
-    };
+        name: string
+    }
 }
 
 /**
@@ -63,15 +63,15 @@ interface PackageInfo {
  */
 function cleanDepcheckResult(unused: DepcheckResult): void {
     // 删除file:前缀的依赖提示，该依赖是本地依赖
-    Reflect.deleteProperty(unused.missing, 'file:');
+    Reflect.deleteProperty(unused.missing, 'file:')
 
     // 清理路径依赖
     Object.keys(unused.missing).forEach((key) => {
-        unused.missing[key] = (unused.missing[key] || []).filter((item) => !item.startsWith('/'));
+        unused.missing[key] = (unused.missing[key] || []).filter((item) => !item.startsWith('/'))
         if (unused.missing[key].length === 0) {
-            Reflect.deleteProperty(unused.missing, key);
+            Reflect.deleteProperty(unused.missing, key)
         }
-    });
+    })
 }
 
 /**
@@ -83,30 +83,30 @@ function formatDepcheckResult(pkgName: string, unused: DepcheckResult): void {
     const hasIssues =
         Object.keys(unused.missing).length > 0 ||
         unused.dependencies.length > 0 ||
-        unused.devDependencies.length > 0;
+        unused.devDependencies.length > 0
 
     if (!hasIssues) {
-        return;
+        return
     }
 
-    console.log('\n📦 Package:', pkgName);
+    console.log('\n📦 Package:', pkgName)
 
     if (Object.keys(unused.missing).length > 0) {
-        console.log('❌ Missing dependencies:');
+        console.log('❌ Missing dependencies:')
         Object.entries(unused.missing).forEach(([dep, files]) => {
-            console.log(`  - ${dep}:`);
-            files.forEach((file) => console.log(`    → ${file}`));
-        });
+            console.log(`  - ${dep}:`)
+            files.forEach((file) => console.log(`    → ${file}`))
+        })
     }
 
     if (unused.dependencies.length > 0) {
-        console.group('⚠️ Unused dependencies:');
-        unused.dependencies.forEach((dep) => console.log(`  - ${dep}`));
+        console.group('⚠️ Unused dependencies:')
+        unused.dependencies.forEach((dep) => console.log(`  - ${dep}`))
     }
 
     if (unused.devDependencies.length > 0) {
-        console.log('⚠️ Unused devDependencies:');
-        unused.devDependencies.forEach((dep) => console.log(`  - ${dep}`));
+        console.log('⚠️ Unused devDependencies:')
+        unused.devDependencies.forEach((dep) => console.log(`  - ${dep}`))
     }
 }
 
@@ -118,47 +118,44 @@ async function runDepcheck(config: DepcheckConfig = {}): Promise<void> {
     try {
         const finalConfig = {
             ...DEFAULT_CONFIG,
-            ...config,
-        };
+            ...config
+        }
 
-        const { packages } = await getPackages();
+        const { packages } = await getPackages()
 
-        let hasIssues = false;
+        let hasIssues = false
 
         await Promise.all(
             packages.map(async (pkg: PackageInfo) => {
                 // 跳过需要忽略的包
                 if (finalConfig.ignorePackages.includes(pkg.packageJson.name)) {
-                    return;
+                    return
                 }
 
                 const unused = await depcheck(pkg.dir, {
                     ignoreMatches: finalConfig.ignoreMatches,
-                    ignorePatterns: finalConfig.ignorePatterns,
-                });
+                    ignorePatterns: finalConfig.ignorePatterns
+                })
 
-                cleanDepcheckResult(unused);
+                cleanDepcheckResult(unused)
 
                 const pkgHasIssues =
                     Object.keys(unused.missing).length > 0 ||
                     unused.dependencies.length > 0 ||
-                    unused.devDependencies.length > 0;
+                    unused.devDependencies.length > 0
 
                 if (pkgHasIssues) {
-                    hasIssues = true;
-                    formatDepcheckResult(pkg.packageJson.name, unused);
+                    hasIssues = true
+                    formatDepcheckResult(pkg.packageJson.name, unused)
                 }
             })
-        );
+        )
 
         if (!hasIssues) {
-            console.log('\n✅ Dependency check completed, no issues found');
+            console.log('\n✅ Dependency check completed, no issues found')
         }
     } catch (error) {
-        console.error(
-            '❌ Dependency check failed:',
-            error instanceof Error ? error.message : error
-        );
+        console.error('❌ Dependency check failed:', error instanceof Error ? error.message : error)
     }
 }
 
@@ -177,11 +174,11 @@ function defineDepcheckCommand(cac: CAC) {
             const config: DepcheckConfig = {
                 ...(ignorePackages && { ignorePackages: ignorePackages.split(',') }),
                 ...(ignoreMatches && { ignoreMatches: ignoreMatches.split(',') }),
-                ...(ignorePatterns && { ignorePatterns: ignorePatterns.split(',') }),
-            };
+                ...(ignorePatterns && { ignorePatterns: ignorePatterns.split(',') })
+            }
 
-            await runDepcheck(config);
-        });
+            await runDepcheck(config)
+        })
 }
 
-export { defineDepcheckCommand };
+export { defineDepcheckCommand }

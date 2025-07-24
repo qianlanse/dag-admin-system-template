@@ -1,7 +1,7 @@
-import type { RouteRecordStringComponent } from '@dag/types';
+import type { RouteRecordStringComponent } from '@dag/types'
 
-import { requestClient } from '#/api/request';
+import { requestClient } from '#/api/request'
 
 export function getAllMenusApi() {
-    return requestClient.get<RouteRecordStringComponent[]>('/menu/all');
+    return requestClient.get<RouteRecordStringComponent[]>('/menu/all')
 }
