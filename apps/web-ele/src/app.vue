@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-    <div class="container z-popup">
+    <div class="z-popup container">
         <span>Vite Ele Template</span>
     </div>
 </template>
