@@ -1,12 +1,13 @@
 {
     "name": "dag-admin-system-template",
-    "version": "1.12.0",
+    "version": "1.12.1",
     "private": true,
     "license": "MIT",
     "type": "module",
     "scripts": {
         "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
         "build:naive": "pnpm run build --filter=@dag/web-naive",
+        "build:ele": "pnpm run build --filter=@dag/web-ele",
         "preinstall": "npx only-allow pnpm",
         "postinstall": "pnpm -r run stub --if-present",
         "commit": "czg",

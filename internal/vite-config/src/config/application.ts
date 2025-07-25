@@ -14,7 +14,7 @@ import { loadApplicationPlugins } from '../plugins'
 import { loadAndConvertEnv } from '../utils/env'
 import { getCommonConfig } from './common'
 
-// 处理全局Scss|Less变量
+// 处理全局样式变量
 function createCssOptions(injectGlobalScss = true): CSSOptions {
     const root = findMonorepoRoot()
 
@@ -26,7 +26,7 @@ function createCssOptions(injectGlobalScss = true): CSSOptions {
                           const relativePath = relative(root, filepath)
                           // apps下的包注入全局样式
                           if (relativePath.startsWith(`apps${path.sep}`)) {
-                              return `@import "@dag/styles/global" as *;\n${content}`
+                              return `@use "@dag/styles/global" as *;\n${content}`
                           }
                           return content
                       },
@@ -98,7 +98,7 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
             },
             css: createCssOptions(injectGlobalScss),
             esbuild: {
-                drop: isBuild ? ['console', 'debugger'] : [],
+                drop: isBuild ? ['debugger'] : [],
                 // 是否保留注释
                 legalComments: 'none'
             },

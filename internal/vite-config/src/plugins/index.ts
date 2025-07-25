@@ -61,7 +61,7 @@ async function loadCommonPlugins(options: CommonPluginOptions): Promise<Conditio
                     filename: './node_modules/.cache/visualizer/stats.html',
                     gzipSize: true,
                     open: true
-                })
+                }) as PluginOption
             ]
         }
     ]
@@ -152,6 +152,10 @@ async function loadApplicationPlugins(options: ApplicationPluginOptions): Promis
             }
         },
         {
+            condition: injectAppLoading,
+            plugins: async () => [await viteInjectAppLoadingPlugin(!!isBuild, env)]
+        },
+        {
             condition: license,
             plugins: async () => [await viteLicensePlugin()]
         },
@@ -191,10 +195,6 @@ async function loadApplicationPlugins(options: ApplicationPluginOptions): Promis
                 }
                 return compressPlugins
             }
-        },
-        {
-            condition: injectAppLoading,
-            plugins: async () => [await viteInjectAppLoadingPlugin(!!isBuild, env)]
         },
         {
             condition: !!html,

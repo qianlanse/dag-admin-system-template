@@ -25,7 +25,7 @@ function getConfigFiles() {
         mode = result[1] as string
     }
 
-    return ['.env', '.env.production', `.env.${mode}`, `.env.${mode}.local`]
+    return ['.env', '.env.local', `.env.${mode}`, `.env.${mode}.local`]
 }
 
 /**

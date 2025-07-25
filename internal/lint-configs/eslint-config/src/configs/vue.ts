@@ -152,8 +152,6 @@ export async function vue(): Promise<Linter.Config[]> {
                 'vue/require-explicit-emits': 'error',
                 // Require props 中的类型定义
                 'vue/require-prop-types': 'error',
-                // 防止将 <template> 中使用的 <script setup> 变量标记为未使用[已弃用]
-                'vue/script-setup-uses-vars': 'error',
                 // 要求在 singleline 元素的内容之前和之后使用换行符
                 'vue/singleline-html-element-content-newline': 'off',
                 // 要求在 <template> 中的中缀运算符周围留出间距

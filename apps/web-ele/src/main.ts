@@ -1,11 +1,11 @@
-import { createApp } from 'vue'
-
-import App from './app.vue'
-
-async function bootstrap() {
-    const app = createApp(App)
-
-    app.mount('#app')
+/**
+ * 应用初始化完成之后再进行页面加载渲染
+ */
+async function initApplication() {
+    // 启动应用并挂载
+    // 应用主要逻辑和视图
+    const { bootstrap } = await import('./bootstrap')
+    await bootstrap()
 }
 
-bootstrap()
+initApplication()

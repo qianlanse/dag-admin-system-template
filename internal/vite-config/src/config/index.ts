@@ -15,7 +15,7 @@ export function defineConfig(
 ) {
     let projectType = type
 
-    if (type === 'auto') {
+    if (projectType === 'auto') {
         const htmlPath = join(process.cwd(), 'index.html')
         projectType = existsSync(htmlPath) ? 'application' : 'library'
     }
