@@ -1,9 +1,14 @@
 <script setup lang="ts">
     interface Props {
-        companyName: string
+        /** 公司名称 */
+        companyName?: string
+        /** 公司链接地址 */
         companySiteLink?: string
-        date: string
+        /** 日期 */
+        date?: string
+        /** 备案IP值 */
         icp?: string
+        /** IP链接地址 */
         icpLink?: string
     }
 

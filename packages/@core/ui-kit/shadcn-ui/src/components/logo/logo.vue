@@ -4,6 +4,8 @@
     interface Props {
         /** 是否折叠文本 */
         collapsed?: boolean
+        /** Logo图片适应方式 */
+        fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
         /** 跳转地址 */
         href?: string
         /** 图片大小 */
@@ -25,7 +27,8 @@
         href: 'javascript:void 0',
         logoSize: 32,
         src: '',
-        theme: 'light'
+        theme: 'light',
+        fit: 'cover'
     })
 </script>
 
@@ -41,6 +44,7 @@
                 :alt="text"
                 :src="src"
                 :size="logoSize"
+                :fit="fit"
                 class="relative rounded-none bg-transparent"
             />
             <template v-if="!collapsed">

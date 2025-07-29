@@ -11,7 +11,10 @@
     import { DagAdminLayout } from '@dag-core/layout-ui'
     import { DagLogo } from '@dag-core/shadcn-ui'
 
-    import { Breadcrumb } from '../widgets'
+    import { Breadcrumb, Preferences } from '../widgets'
+    import { LayoutContent, LayoutContentSpinner } from './content'
+    import { Copyright } from './copyright'
+    import { LayoutFooter } from './footer'
     import { LayoutHeader } from './header'
     import { LayoutMenu, useMixedMenu } from './menu'
     import { LayoutTabbar } from './tabbar'
@@ -30,6 +33,7 @@
         isHeaderSidebarNav,
         isSideMixedNav,
         theme,
+        preferencesButtonPosition,
         layout
     } = usePreferences()
 
@@ -109,6 +113,11 @@
     function clearPreferencesAndLogout() {
         emits('clearPreferencesAndLogout')
     }
+
+    /** 点击Logo */
+    function handleClickLogo() {
+        emits('clickLogo')
+    }
 </script>
 
 <template>
@@ -147,11 +156,13 @@
         <template #logo>
             <DagLogo
                 v-if="preferences.logo.enable"
+                :fit="preferences.logo.fit"
                 :class="logoClass"
                 :collapsed="logoCollapsed"
                 :src="preferences.logo.source"
                 :text="preferences.app.name"
                 :theme="showHeaderNav ? headerTheme : theme"
+                @click="handleClickLogo"
             >
                 <template v-if="$slots['logo-text']" #text>
                     <slot name="logo-text"></slot>
@@ -201,6 +212,28 @@
             />
         </template>
 
+        <template #mixed-menu>
+            <span>mixed-menu</span>
+        </template>
+
+        <template #side-extra>
+            <span>side-extra</span>
+        </template>
+
+        <template #side-extra-title>
+            <DagLogo
+                v-if="preferences.logo.enable"
+                :fit="preferences.logo.fit"
+                :text="preferences.app.name"
+                :theme="theme"
+            >
+                <template v-if="$slots['logo-text']" #text>
+                    <slot name="logo-text"></slot>
+                </template>
+            </DagLogo>
+        </template>
+
+        <!-- 路由导航栏 -->
         <template #tabbar>
             <LayoutTabbar
                 v-if="preferences.tabbar.enable"
@@ -209,11 +242,31 @@
             />
         </template>
 
+        <!-- 主体内容 -->
+        <template #content>
+            <LayoutContent />
+        </template>
+
+        <!-- 主体内容加载动画 -->
+        <template v-if="preferences.transition.loading" #content-overlay>
+            <LayoutContentSpinner />
+        </template>
+
+        <template v-if="preferences.footer.enable" #footer>
+            <LayoutFooter>
+                <Copyright v-if="preferences.copyright.enable" v-bind="preferences.copyright" />
+            </LayoutFooter>
+        </template>
+
         <template #extra>
             <slot name="extra"></slot>
             <Transition v-if="preferences.widget.lockScreen" name="slide-up">
                 <slot v-if="accessStore.isLockScreen" name="lock-screen"></slot>
             </Transition>
+
+            <template v-if="preferencesButtonPosition.fixed">
+                <Preferences class="z-100 fixed bottom-20 right-0" />
+            </template>
         </template>
     </DagAdminLayout>
 </template>

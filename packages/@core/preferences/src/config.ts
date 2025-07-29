@@ -11,6 +11,8 @@ export const defaultPreferences: Preferences = {
         enablePreferences: true,
         enableRefreshToken: false,
         isMobile: false,
+        colorWeakMode: false,
+        colorGrayMode: false,
         layout: 'sidebar-nav',
         locale: 'zh-CN',
         loginExpiredMode: 'page',
@@ -45,6 +47,7 @@ export const defaultPreferences: Preferences = {
     },
     logo: {
         enable: true,
+        fit: 'contain',
         source: 'https://www.radix-vue.com/logo.svg'
     },
     navigation: {

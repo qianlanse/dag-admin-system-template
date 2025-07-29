@@ -6,4 +6,13 @@ function kebabToCamelCase(str: string): string {
         .join('')
 }
 
-export { kebabToCamelCase }
+/**
+ * 将字符串的首字母大写
+ * @param string
+ * @returns 字符串
+ */
+function capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+export { capitalizeFirstLetter, kebabToCamelCase }

@@ -44,6 +44,10 @@ interface AppPreferences {
     accessMode: AccessModeType
     /** 登录注册页面布局 */
     authPageLayout: AuthPageLayoutType
+    /** 是否开启灰色模式 */
+    colorGrayMode: boolean
+    /** 是否开启色弱模式 */
+    colorWeakMode: boolean
     /** 是否开启内容紧凑模式 */
     contentCompact: ContentCompactType
     /** 应用默认头像 */
@@ -71,9 +75,11 @@ interface AppPreferences {
 }
 
 interface LogoPreferences {
-    // 是否可见
+    /** logo是否可见 */
     enable: boolean
-    // logo地址
+    /** logo图片适应方式  */
+    fit: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
+    /** logo地址 */
     source: string
 }
 

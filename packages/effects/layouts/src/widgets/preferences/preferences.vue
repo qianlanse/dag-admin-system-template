@@ -1,19 +1,64 @@
 <script setup lang="ts">
-    import { Settings } from '@dag/icons'
-    import { $t } from '@dag/locales'
+    import { computed } from 'vue'
 
+    import { Settings } from '@dag/icons'
+    import { $t, loadLocaleMessages } from '@dag/locales'
+    import { preferences, updatePreferences } from '@dag/preferences'
+    import { capitalizeFirstLetter } from '@dag/utils'
+
+    import { useDagDrawer } from '@dag-core/popup-ui'
     import { DagButton } from '@dag-core/shadcn-ui'
 
-    /** 打开侧栏配置 */
-    function handleOpenDrawer() {
-        // eslint-disable-next-line no-console
-        console.log('open drawer preferences')
-    }
+    import PreferencesDrawer from './preferences-drawer.vue'
+
+    const [Drawer, drawerApi] = useDagDrawer({
+        connectedComponent: PreferencesDrawer
+    })
+
+    /**
+     * preferences 转成 vue props
+     * preferences.widget.fullscreen=>widgetFullscreen
+     */
+    const attrs = computed(() => {
+        const result: Record<string, any> = {}
+        for (const [key, value] of Object.entries(preferences)) {
+            for (const [subKey, subValue] of Object.entries(value)) {
+                result[`${key}${capitalizeFirstLetter(subKey)}`] = subValue
+            }
+        }
+        return result
+    })
+
+    /**
+     * preferences 转成 vue listener
+     * preferences.widget.fullscreen=>@update:widgetFullscreen
+     */
+    const listen = computed(() => {
+        const result: Record<string, any> = {}
+
+        for (const [key, value] of Object.entries(preferences)) {
+            if (typeof value === 'object') {
+                for (const subKey of Object.keys(value)) {
+                    result[`update:${key}${capitalizeFirstLetter(subKey)}`] = (val: any) => {
+                        updatePreferences({ [key]: { [subKey]: val } })
+                        if (key === 'app' && subKey === 'locale') {
+                            loadLocaleMessages(val)
+                        }
+                    }
+                }
+            } else {
+                result[key] = value
+            }
+        }
+
+        return result
+    })
 </script>
 
 <template>
     <div>
-        <div @click="handleOpenDrawer">
+        <Drawer v-bind="{ ...$attrs, ...attrs }" v-on="listen" />
+        <div @click="() => drawerApi.open()">
             <slot>
                 <DagButton
                     :title="$t('preferences.title')"

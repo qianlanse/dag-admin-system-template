@@ -34,6 +34,18 @@ class PreferenceManager {
         )
     }
 
+    /** 清除缓存 */
+    clearCache() {
+        ;[STORAGE_KEY, STORAGE_KEY_LOCALE, STORAGE_KEY_THEME].forEach((key) => {
+            this.cache?.removeItem(key)
+        })
+    }
+
+    /** 获取初始化值 */
+    public getInitialPreferences() {
+        return this.initialPreferences
+    }
+
     /**
      * 获取偏好设置state
      * @returns readonly state
@@ -69,6 +81,21 @@ class PreferenceManager {
     }
 
     /**
+     * 重置偏好设置
+     */
+    resetPreferences() {
+        // 将状态重置为初始偏好设置
+        Object.assign(this.state, this.initialPreferences)
+        // 保存重置后的偏好设置
+        this.savePreferences(this.state)
+        // 从储存中移除偏好设置项
+        ;[STORAGE_KEY, STORAGE_KEY_THEME, STORAGE_KEY_LOCALE].forEach((key) => {
+            this.cache?.removeItem(key)
+        })
+        this.updatePreferences(this.state)
+    }
+
+    /**
      * 更新偏好设置
      * @param updates 要更新的偏好设置
      */
@@ -98,8 +125,13 @@ class PreferenceManager {
      */
     private handleUpdates(updates: DeepPartial<Preferences>) {
         const themeUpdates = updates.theme || {}
+        const appUpdates = updates.app || {}
         if (themeUpdates && Object.keys(themeUpdates).length > 0) {
             updateCSSVariables(this.state)
+        }
+
+        if (Reflect.has(appUpdates, 'colorGrayMode') || Reflect.has(appUpdates, 'colorWeakMode')) {
+            this.updateColorMode(this.state)
         }
     }
 
@@ -116,6 +148,22 @@ class PreferenceManager {
      */
     private loadPreferences(): Preferences {
         return this.loadCachedPreferences() || { ...defaultPreferences }
+    }
+
+    /**
+     * 更新页面颜色模式(灰色、色弱)
+     * @param preference
+     */
+    private updateColorMode(preference: Preferences) {
+        if (preference.app) {
+            const { colorGrayMode, colorWeakMode } = preference.app
+            const dom = document.documentElement
+            const COLOR_WEAK = 'invert-mode'
+            const COLOR_GRAY = 'grayscale-mode'
+
+            colorWeakMode ? dom.classList.add(COLOR_WEAK) : dom.classList.remove(COLOR_WEAK)
+            colorGrayMode ? dom.classList.add(COLOR_GRAY) : dom.classList.remove(COLOR_GRAY)
+        }
     }
 }
 

@@ -1304,6 +1304,9 @@ importers:
       '@dag-core/shadcn-ui':
         specifier: workspace:*
         version: link:../../@core/ui-kit/shadcn-ui
+      '@dag-core/shared':
+        specifier: workspace:*
+        version: link:../../@core/base/shared
       '@dag-core/tabs-ui':
         specifier: workspace:*
         version: link:../../@core/ui-kit/tabs-ui

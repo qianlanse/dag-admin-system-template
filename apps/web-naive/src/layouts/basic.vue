@@ -98,7 +98,7 @@
 </script>
 
 <template>
-    <BasicLayout>
+    <BasicLayout @clear-preferences-and-logout="handleLogout">
         <!-- 用户简介&操作 -->
         <template #user-dropdown>
             <UserDropdown

@@ -1,10 +1,14 @@
 import { computed } from 'vue'
 
+import { diff } from '@dag-core/shared/utils'
+
 import { preferencesManager } from './preferences'
 import { isDarkTheme } from './update-css-variables'
 
 export function usePreferences() {
     const preferences = preferencesManager.getPreferences()
+    const initialPreferences = preferencesManager.getInitialPreferences()
+
     const appPreferences = computed(() => preferences.app)
     const shortcutKeysPreferences = computed(() => preferences.shortcutKeys)
 
@@ -123,6 +127,9 @@ export function usePreferences() {
         return headerIsHidden && sidebarIsHidden && !isFullContent.value
     })
 
+    /** 计算偏好设置的变化 */
+    const diffPreference = computed(() => diff(initialPreferences, preferences))
+
     return {
         authPanelCenter,
         authPanelLeft,
@@ -143,6 +150,7 @@ export function usePreferences() {
         layout,
         preferencesButtonPosition,
         sidebarCollapsed,
+        diffPreference,
         theme
     }
 }

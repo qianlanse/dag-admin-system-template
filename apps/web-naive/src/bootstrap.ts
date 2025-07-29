@@ -6,13 +6,14 @@ import '@dag/styles'
 
 import { useTitle } from '@vueuse/core'
 
+import { initComponentAdapter } from './adapter/component'
 import App from './app.vue'
 import { $t, setupI18n } from './locales'
 import { router } from './router'
 
 async function bootstrap(namespace: string) {
     // 初始化组件适配器
-    // initComponentAdapter()
+    await initComponentAdapter()
 
     const app = createApp(App)
 

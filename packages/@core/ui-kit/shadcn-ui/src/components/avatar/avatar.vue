@@ -14,6 +14,7 @@
         class?: ClassType
         dot?: boolean
         dotClass?: ClassType
+        fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
         size?: number
     }
 
@@ -25,7 +26,16 @@
         alt: 'avatar',
         as: 'button',
         dot: false,
-        dotClass: 'bg-green-500'
+        dotClass: 'bg-green-500',
+        fit: 'cover'
+    })
+
+    const imageStyle = computed<CSSProperties>(() => {
+        const { fit } = props
+        if (fit) {
+            return { objectFit: fit }
+        }
+        return {}
     })
 
     const text = computed(() => props.alt.slice(-2).toUpperCase())
@@ -43,8 +53,13 @@
 <template>
     <div :class="props.class" :style="rootStyle" class="relative flex flex-shrink-0 items-center">
         <Avatar :class="props.class" class="size-full">
-            <AvatarImage :alt="alt" :src="src" />
+            <AvatarImage :alt="alt" :src="src" :style="imageStyle" />
             <AvatarFallback>{{ text }}</AvatarFallback>
         </Avatar>
+        <span
+            v-if="dot"
+            :class="dotClass"
+            class="border-background absolute bottom-0 right-0 size-3 rounded-full border-2"
+        ></span>
     </div>
 </template>

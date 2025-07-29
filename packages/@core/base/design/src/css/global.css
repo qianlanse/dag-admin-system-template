@@ -28,7 +28,7 @@
     #app,
     body,
     html {
-        @apply size-full overscroll-none;
+        @apply size-full;
     }
 
     body {
@@ -43,7 +43,6 @@
         @apply no-underline;
     }
 
-    /* demo https://blog.csdn.net/xgangzai/article/details/134131242?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-4-134131242-blog-138215524.235^v43^pc_blog_bottom_relevance_base3&spm=1001.2101.3001.4242.3&utm_relevant_index=7 */
     ::view-transition-new(root),
     ::view-transition-old(root) {
         @apply animate-none mix-blend-normal;
@@ -54,11 +53,11 @@
     }
 
     ::view-transition-new(root) {
-        @apply z-[2024101115];
+        @apply z-[2147483646];
     }
 
     html.dark::view-transition-old(root) {
-        @apply z-[2024101115];
+        @apply z-[2147483646];
     }
 
     html.dark::view-transition-new(root) {
@@ -75,6 +74,7 @@
         @apply m-0 appearance-none;
     }
 
+    /* 只有非mac下才进行调整，mac下使用默认滚动条 */
     html:not([data-platform='macOs']) {
         ::-webkit-scrollbar {
             @apply h-[10px] w-[10px];
