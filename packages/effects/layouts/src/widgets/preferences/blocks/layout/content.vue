@@ -1,6 +1,9 @@
 <script setup lang="ts">
+    import type { Component } from 'vue'
+
+    import { computed } from 'vue'
+
     import { $t } from '@dag/locales'
-    import { computed, type Component } from 'vue'
 
     import { ContentCompact, ContentWide } from '../../icons'
 
