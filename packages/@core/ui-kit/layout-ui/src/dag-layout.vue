@@ -297,7 +297,7 @@
         }
 
         return {
-            marginLeft,
+            marginLeft: `${marginLeft}px`,
             width
         }
     })

@@ -16,7 +16,13 @@
     import { Copyright } from './copyright'
     import { LayoutFooter } from './footer'
     import { LayoutHeader } from './header'
-    import { LayoutMenu, useMixedMenu } from './menu'
+    import {
+        LayoutExtraMenu,
+        LayoutMenu,
+        LayoutMixedMenu,
+        useExtraMenu,
+        useMixedMenu
+    } from './menu'
     import { LayoutTabbar } from './tabbar'
 
     defineOptions({ name: 'BasicLayout' })
@@ -37,8 +43,27 @@
         layout
     } = usePreferences()
 
-    const { sidebarVisible, sidebarMenus, sidebarActive, handleMenuOpen, handleMenuSelect } =
-        useMixedMenu()
+    const {
+        sidebarVisible,
+        sidebarMenus,
+        sidebarActive,
+        mixHeaderMenus,
+        headerActive,
+        headerMenus,
+        handleMenuOpen,
+        handleMenuSelect
+    } = useMixedMenu()
+
+    const {
+        extraActiveMenu,
+        extraMenus,
+        sidebarExtraVisible,
+        handleDefaultSelect,
+        handleMenuMouseEnter,
+        handleMixedMenuSelect,
+        handleSideMouseLeave
+    } = useExtraMenu(mixHeaderMenus)
+
     const slots = useSlots()
     const accessStore = useAccessStore()
 
@@ -122,9 +147,18 @@
 
 <template>
     <DagAdminLayout
+        v-model:sidebar-extra-visible="sidebarExtraVisible"
         :content-compact="preferences.app.contentCompact"
+        :content-compact-width="preferences.app.contentCompactWidth"
+        :content-padding="preferences.app.contentPadding"
+        :content-padding-bottom="preferences.app.contentPaddingBottom"
+        :content-padding-left="preferences.app.contentPaddingLeft"
+        :content-padding-right="preferences.app.contentPaddingRight"
+        :content-padding-top="preferences.app.contentPaddingTop"
         :footer-enable="preferences.footer.enable"
         :footer-fixed="preferences.footer.fixed"
+        :footer-height="preferences.footer.height"
+        :header-height="preferences.header.height"
         :header-hidden="preferences.header.hidden"
         :header-mode="preferences.header.mode"
         :header-theme="headerTheme"
@@ -132,24 +166,35 @@
         :header-visible="preferences.header.enable"
         :is-mobile="preferences.app.isMobile"
         :layout="layout"
-        :sidebar-enable="sidebarVisible"
         :sidebar-collapse="preferences.sidebar.collapsed"
         :sidebar-collapse-show-title="preferences.sidebar.collapsedShowTitle"
+        :sidebar-enable="sidebarVisible"
         :sidebar-collapsed-button="preferences.sidebar.collapsedButton"
         :sidebar-fixed-button="preferences.sidebar.fixedButton"
         :sidebar-expand-on-hover="preferences.sidebar.expandOnHover"
-        :sidebar-extar-collapse="preferences.sidebar.extraCollapse"
+        :sidebar-extra-collapse="preferences.sidebar.extraCollapse"
+        :sidebar-extra-collapsed-width="preferences.sidebar.extraCollapsedWidth"
         :sidebar-hidden="preferences.sidebar.hidden"
+        :sidebar-mixed-width="preferences.sidebar.mixedWidth"
         :sidebar-theme="sidebarTheme"
         :sidebar-width="preferences.sidebar.width"
+        :side-collapse-width="preferences.sidebar.collapseWidth"
         :tabbar-enable="preferences.tabbar.enable"
         :tabbar-height="preferences.tabbar.height"
+        :z-index="preferences.app.zIndex"
+        @side-mouse-leave="handleSideMouseLeave"
         @toggle-sidebar="handleToggleSidebar"
         @update:sidebar-collapse="
             (value: boolean) => updatePreferences({ sidebar: { collapsed: value } })
         "
+        @update:sidebar-enable="
+            (value: boolean) => updatePreferences({ sidebar: { enable: value } })
+        "
         @update:sidebar-expand-on-hover="
             (value: boolean) => updatePreferences({ sidebar: { expandOnHover: value } })
+        "
+        @update:sidebar-extra-collapse="
+            (value: boolean) => updatePreferences({ sidebar: { extraCollapse: value } })
         "
     >
         <!-- Logo标题 -->
@@ -182,7 +227,15 @@
                     />
                 </template>
                 <template v-if="showHeaderNav" #menu>
-                    <span>menu</span>
+                    <LayoutMenu
+                        :default-active="headerActive"
+                        :menus="wrapperMenus(headerMenus)"
+                        :rounded="isMenuRounded"
+                        :theme="headerTheme"
+                        class="w-full"
+                        mode="horizontal"
+                        @select="handleMenuSelect"
+                    />
                 </template>
                 <template #user-dropdown>
                     <slot name="user-dropdown"></slot>
@@ -212,12 +265,28 @@
             />
         </template>
 
+        <!-- 混合侧栏主菜单 -->
         <template #mixed-menu>
-            <span>mixed-menu</span>
+            <LayoutMixedMenu
+                :active-path="extraActiveMenu"
+                :menus="wrapperMenus(mixHeaderMenus, false)"
+                :rounded="isMenuRounded"
+                :theme="sidebarTheme"
+                @default-select="handleDefaultSelect"
+                @enter="handleMenuMouseEnter"
+                @select="handleMixedMenuSelect"
+            />
         </template>
 
+        <!-- 混合侧栏子菜单 -->
         <template #side-extra>
-            <span>side-extra</span>
+            <LayoutExtraMenu
+                :accordion="preferences.navigation.accordion"
+                :collapse="preferences.sidebar.extraCollapse"
+                :menus="wrapperMenus(extraMenus)"
+                :rounded="isMenuRounded"
+                :theme="sidebarTheme"
+            />
         </template>
 
         <template #side-extra-title>
@@ -252,12 +321,14 @@
             <LayoutContentSpinner />
         </template>
 
+        <!-- 底部详情模块 -->
         <template v-if="preferences.footer.enable" #footer>
             <LayoutFooter>
                 <Copyright v-if="preferences.copyright.enable" v-bind="preferences.copyright" />
             </LayoutFooter>
         </template>
 
+        <!-- 扩展模块 -->
         <template #extra>
             <slot name="extra"></slot>
             <Transition v-if="preferences.widget.lockScreen" name="slide-up">

@@ -2,12 +2,12 @@ import type { DeepPartial } from '@dag-core/typings'
 
 import type { InitialOptions, Preferences } from './types'
 
-import { markRaw, reactive, readonly } from 'vue'
+import { markRaw, reactive, readonly, watch } from 'vue'
 
 import { StorageManager } from '@dag-core/shared/cache'
-import { merge } from '@dag-core/shared/utils'
+import { isMacOs, merge } from '@dag-core/shared/utils'
 
-import { useDebounceFn } from '@vueuse/core'
+import { breakpointsTailwind, useBreakpoints, useDebounceFn } from '@vueuse/core'
 
 import { defaultPreferences } from './config'
 import { updateCSSVariables } from './update-css-variables'
@@ -54,6 +54,12 @@ class PreferenceManager {
         return readonly(this.state)
     }
 
+    /** 监听系统类型 */
+    initPlatform() {
+        const dom = document.documentElement
+        dom.dataset.platform = isMacOs() ? 'macOs' : 'window'
+    }
+
     /**
      * 初始化覆盖偏好设置
      * namespace 命名空间
@@ -77,6 +83,13 @@ class PreferenceManager {
 
         // 更新偏好设置
         this.updatePreferences(mergedPreference)
+
+        // 监听状态和系统偏好设置的变化
+        this.setupWatcher()
+
+        // 监听系统类型
+        this.initPlatform()
+
         this.isInitialized = true
     }
 
@@ -93,6 +106,44 @@ class PreferenceManager {
             this.cache?.removeItem(key)
         })
         this.updatePreferences(this.state)
+    }
+
+    /** 监听状态和系统偏好设置的变化 */
+    setupWatcher() {
+        if (this.isInitialized) {
+            return
+        }
+
+        // 监听是否手机预览
+        const breakpoints = useBreakpoints(breakpointsTailwind)
+        const isMobile = breakpoints.smaller('md')
+
+        watch(
+            () => isMobile.value,
+            (val) => {
+                this.updatePreferences({
+                    app: { isMobile: val }
+                })
+            },
+            { immediate: true }
+        )
+
+        // 监听系统主题偏好设置变化
+        window
+            .matchMedia('(prefers-color-scheme: dark)')
+            .addEventListener('change', ({ matches: isDark }) => {
+                if (this.state.theme.mode === 'auto') {
+                    // 如果偏好设置中主题模式为auto，则跟随系统更新
+                    this.updatePreferences({
+                        theme: { mode: isDark ? 'dark' : 'light' }
+                    })
+
+                    // 恢复为auto模式
+                    this.updatePreferences({
+                        theme: { mode: 'auto' }
+                    })
+                }
+            })
     }
 
     /**

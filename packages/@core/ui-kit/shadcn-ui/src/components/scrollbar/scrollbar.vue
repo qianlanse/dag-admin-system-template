@@ -90,7 +90,7 @@
 <template>
     <ScrollArea
         :class="[cn(props.class), computedShadowClasses]"
-        :on-scrlll="handleScroll"
+        :on-scroll="handleScroll"
         class="dag-scrollbar relative"
     >
         <div

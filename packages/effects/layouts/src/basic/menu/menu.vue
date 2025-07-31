@@ -6,7 +6,7 @@
     import { Menu } from '@dag-core/menu-ui'
 
     interface Props extends MenuProps {
-        menus: MenuRecordRaw[]
+        menus?: MenuRecordRaw[]
     }
 
     const props = withDefaults(defineProps<Props>(), {

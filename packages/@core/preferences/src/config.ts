@@ -5,6 +5,12 @@ export const defaultPreferences: Preferences = {
         accessMode: 'frontend',
         authPageLayout: 'panel-right',
         contentCompact: 'wide',
+        contentCompactWidth: 1200,
+        contentPadding: 0,
+        contentPaddingBottom: 0,
+        contentPaddingLeft: 0,
+        contentPaddingRight: 0,
+        contentPaddingTop: 0,
         defaultAvatar: 'https://www.radix-vue.com/logo.svg',
         defaultHomePath: '/analytics',
         dynamicTitle: true,
@@ -17,7 +23,9 @@ export const defaultPreferences: Preferences = {
         locale: 'zh-CN',
         loginExpiredMode: 'page',
         name: 'Dag Admin',
-        preferencesButtonPosition: 'auto'
+        preferencesButtonPosition: 'auto',
+        watermark: false,
+        zIndex: 200
     },
     breadcrumb: {
         enable: true,
@@ -37,10 +45,12 @@ export const defaultPreferences: Preferences = {
     },
     footer: {
         enable: false,
-        fixed: false
+        fixed: false,
+        height: 32
     },
     header: {
         enable: true,
+        height: 50,
         hidden: false,
         menuAlign: 'start',
         mode: 'fixed'
@@ -67,11 +77,14 @@ export const defaultPreferences: Preferences = {
         collapsed: false,
         collapsedButton: true,
         collapsedShowTitle: false,
+        collapseWidth: 60,
         enable: true,
         expandOnHover: true,
         extraCollapse: false,
+        extraCollapsedWidth: 60,
         fixedButton: true,
         hidden: false,
+        mixedWidth: 80,
         width: 224
     },
     tabbar: {

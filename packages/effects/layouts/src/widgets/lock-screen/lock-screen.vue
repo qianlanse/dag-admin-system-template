@@ -29,6 +29,7 @@
     const merdiem = useDateFormat(now, 'A')
     const hour = useDateFormat(now, 'HH')
     const minute = useDateFormat(now, 'mm')
+    const second = useDateFormat(now, 'ss')
     const date = useDateFormat(now, 'YYYY-MM-DD dddd', { locales: locale.value })
 
     const showUnlockForm = ref(false)
@@ -104,6 +105,11 @@
                             class="bg-accent flex h-[140px] w-[140px] items-center justify-center rounded-xl text-[36px] sm:h-[160px] sm:w-[160px] sm:text-[42px] md:h-[200px] md:w-[200px] md:text-[72px]"
                         >
                             {{ minute }}
+                        </div>
+                        <div
+                            class="bg-accent flex h-[140px] w-[140px] items-center justify-center rounded-xl text-[36px] sm:h-[160px] sm:w-[160px] sm:text-[42px] md:h-[200px] md:w-[200px] md:text-[72px]"
+                        >
+                            {{ second }}
                         </div>
                     </div>
                 </div>

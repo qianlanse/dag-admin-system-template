@@ -373,6 +373,10 @@
 
     /** variables */
 
+    .is-menu-align {
+        justify-content: var(--menu-align, start);
+    }
+
     .#{$namespace}-menu__popup-container,
     .#{$namespace}-menu {
         --menu-title-width: 140px;
@@ -427,6 +431,47 @@
             --menu-item-collapse-margin-x: 6px;
             --menu-item-radius: 8px;
         }
+
+        &.is-horizontal:not(.is-rounded) {
+            --menu-item-height: 40px;
+            --menu-item-radius: 6px;
+        }
+
+        &.is-horizontal.is-rounded {
+            --menu-item-height: 40px;
+            --menu-item-radius: 6px;
+            --menu-item-padding-x: 12px;
+        }
+
+        &.is-horizontal {
+            --menu-item-padding-y: 0px;
+            --menu-item-padding-x: 10px;
+            --menu-item-margin-y: 0px;
+            --menu-item-margin-x: 1px;
+            --menu-background-color: transparent;
+
+            &.is-dark {
+                --menu-item-hover-color: hsl(var(--accent-foreground));
+                --menu-item-hover-background-color: hsl(var(--accent));
+                --menu-item-active-color: hsl(var(--accent-foreground));
+                --menu-item-active-background-color: hsl(var(--accent));
+                --menu-submenu-active-color: hsl(var(--foreground));
+                --menu-submenu-active-background-color: hsl(var(--accent));
+                --menu-submenu-hover-color: hsl(var(--accent-foreground));
+                --menu-submenu-hover-background-color: hsl(var(--accent));
+            }
+
+            &.is-light {
+                --menu-item-active-color: hsl(var(--primary));
+                --menu-item-active-background-color: hsl(var(--primary) / 15%);
+                --menu-item-hover-background-color: hsl(var(--accent));
+                --menu-item-hover-color: hsl(var(--primary));
+                --menu-submenu-active-color: hsl(var(--primary));
+                --menu-submenu-active-background-color: hsl(var(--primary) / 15%);
+                --menu-submenu-hover-color: hsl(var(--primary));
+                --menu-submenu-hover-background-color: hsl(var(--accent));
+            }
+        }
     }
 
     /** contents */
@@ -469,6 +514,51 @@
                 & > .#{$namespace}-menu-item {
                     padding-left: calc(var(--menu-item-indent) - 8px);
                 }
+            }
+        }
+
+        // 水平菜单
+        &.is-horizontal {
+            display: flex;
+            flex-wrap: nowrap;
+            max-width: 100%;
+            // height: var(--menu-horizontal-height);
+            border-right: none;
+
+            .#{$namespace}-menu-item {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                height: var(--menu-item-height);
+                padding-right: calc(var(--menu-item-padding-x) + 6px);
+                margin: 0;
+                margin-right: 2px;
+                border-radius: var(--menu-item-radius);
+            }
+
+            & > .#{$namespace}-sub-menu {
+                height: var(--menu-item-height);
+                margin-right: 2px;
+
+                &:focus,
+                &:hover {
+                    outline: none;
+                }
+
+                & .#{$namespace}-sub-menu-content {
+                    height: 100%;
+                    padding-right: 40px;
+                    border-radius: var(--menu-item-radius);
+                }
+            }
+
+            & .#{$namespace}-menu-item:not(.is-disabled):hover,
+            & .#{$namespace}-menu-item:not(.is-disabled):focus {
+                outline: none;
+            }
+
+            & > .#{$namespace}-menu-item.is-active {
+                color: var(--menu-item-active-color);
             }
         }
 

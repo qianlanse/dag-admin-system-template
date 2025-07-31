@@ -1,5 +1,10 @@
 <script setup lang="ts">
-    import type { BuiltinThemeType, ThemeModeType } from '@dag/types'
+    import type {
+        BuiltinThemeType,
+        ContentCompactType,
+        LayoutType,
+        ThemeModeType
+    } from '@dag/types'
 
     import type { SegmentedItem } from '@dag-core/shadcn-ui'
 
@@ -20,7 +25,7 @@
 
     import { useClipboard } from '@vueuse/core'
 
-    import { Block, BuiltinTheme, ColorMode, Radius, Theme } from '../blocks'
+    import { Block, BuiltinTheme, ColorMode, Content, Layout, Radius, Theme } from './blocks'
 
     const emit = defineEmits<{ clearPreferencesAndLogout: [] }>()
 
@@ -30,8 +35,9 @@
     const { copy } = useClipboard({ legacy: true })
     const [Drawer] = useDagDrawer()
 
-    const activeTab = ref('appearance')
+    const activeTab = ref('layout')
 
+    /** 外观 */
     const themeMode = defineModel<ThemeModeType>('themeMode')
     const themeSemiDarkSidebar = defineModel<boolean>('themeSemiDarkSidebar')
     const themeSemiDarkHeader = defineModel<boolean>('themeSemiDarkHeader')
@@ -40,6 +46,10 @@
     const themeRadius = defineModel<string>('themeRadius')
     const appColorWeakMode = defineModel<boolean>('appColorWeakMode')
     const appColorGrayMode = defineModel<boolean>('appColorGrayMode')
+
+    /** 布局 */
+    const appLayout = defineModel<LayoutType>('appLayout')
+    const appContentCompact = defineModel<ContentCompactType>('appContentCompact')
 
     const tabs = computed((): SegmentedItem[] => {
         return [
@@ -140,7 +150,12 @@
                         </Block>
                     </template>
                     <template #layout>
-                        <span>layout</span>
+                        <Block :title="$t('preferences.layout')">
+                            <Layout v-model="appLayout" />
+                        </Block>
+                        <Block :title="$t('preferences.content')">
+                            <Content v-model="appContentCompact" />
+                        </Block>
                     </template>
                     <template #shortcutKey>
                         <span>shortcutKey</span>

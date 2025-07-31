@@ -44,6 +44,30 @@ export function useMixedMenu() {
     /** 侧边菜单激活路径 */
     const sidebarActive = computed(() => (route?.meta?.activePath as string) ?? route.path)
 
+    const headerMenus = computed(() => {
+        if (!needSplit.value) {
+            return menus.value
+        }
+        return menus.value.map((item) => ({
+            ...item,
+            children: []
+        }))
+    })
+
+    const mixHeaderMenus = computed(() =>
+        isHeaderMixedNav.value ? sidebarMenus.value : headerMenus.value
+    )
+
+    /**
+     * 头部菜单激活路径
+     */
+    const headerActive = computed(() => {
+        if (!needSplit.value) {
+            return route.meta?.activePath ?? route.path
+        }
+        return rootMenuPath.value
+    })
+
     /** 侧边菜单展开事件 */
     function handleMenuOpen(key: string, parentsPath: string[]) {
         if (parentsPath.length <= 1 && preferences.sidebar.autoActivateChild) {
@@ -110,9 +134,12 @@ export function useMixedMenu() {
         sidebarMenus,
         sidebarActive,
         sidebarVisible,
+        headerActive,
+        headerMenus,
         handleMenuOpen,
         handleMenuSelect,
         mixedRootMenuPath,
-        mixExtraMenus
+        mixExtraMenus,
+        mixHeaderMenus
     }
 }

@@ -139,7 +139,6 @@
     /** 扩展栏样式 */
     const extraStyle = computed(() => {
         const { extraWidth, show, width, zIndex } = props
-
         return {
             left: `${width}px`,
             width: extraVisible.value && show ? `${extraWidth}px` : 0,
@@ -268,7 +267,6 @@
             v-if="showCollapseButton && !isSidebarMixed"
             v-model:collapsed="collapse"
         />
-
         <!-- 混合双列 -->
         <div
             v-if="isSidebarMixed"
