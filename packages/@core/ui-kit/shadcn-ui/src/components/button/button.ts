@@ -32,6 +32,8 @@ export type CustomRenderType = (() => Component | string) | string
 export type ValueType = boolean | number | string
 
 export interface DagButtonGroupProps extends Pick<DagButtonProps, 'disabled'> {
+    /** 单选模式下允许清除选中 */
+    allowClear?: boolean
     /** beforeChange事件 */
     beforeChange?: (
         value: ValueType,
@@ -41,10 +43,12 @@ export interface DagButtonGroupProps extends Pick<DagButtonProps, 'disabled'> {
     btnClass?: any
     /** 间隙 */
     gap?: number
+    /** 多模式下限制最多选择的数量，0表示不限制 */
+    maxCount?: number
     /** 是否多选 */
     multiple?: boolean
     /** 配置列表 */
-    options?: { label: CustomRenderType; value: ValueType }[]
+    options?: { [key: string]: any; label: CustomRenderType; value: ValueType }[]
     /** 是否显示Icon */
     showIcon?: boolean
     /** 大小 */

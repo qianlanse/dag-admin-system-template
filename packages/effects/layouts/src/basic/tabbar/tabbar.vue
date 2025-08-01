@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { computed } from 'vue'
+    import { useRoute } from 'vue-router'
 
     import { useContentMaximize, useTabs } from '@dag/hooks'
     import { preferences } from '@dag/preferences'
@@ -13,6 +14,7 @@
 
     defineProps<{ showIcon?: boolean; theme?: string }>()
 
+    const route = useRoute()
     const tabbarStore = useTabbarStore()
     const { unpinTab } = useTabs()
     const { currentActive, createContextMenus, currentTabs, handleClose, handleClick } = useTabbar()
@@ -28,6 +30,11 @@
             value: item.key
         }))
     })
+
+    // 刷新后如果不保持持久化则关闭其他tab
+    if (!preferences.tabbar.persist) {
+        tabbarStore.closeOtherTabs(route)
+    }
 </script>
 
 <template>

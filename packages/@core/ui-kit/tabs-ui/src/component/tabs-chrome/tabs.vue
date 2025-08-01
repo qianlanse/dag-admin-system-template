@@ -53,14 +53,7 @@
         })
     })
 
-    function handleClose(tab: TabConfig) {
-        emit('close', tab.key)
-    }
-
-    function handleUnpin(tab: TabConfig) {
-        emit('unpin', tab)
-    }
-
+    /** 点击鼠标中键关闭Tab */
     function handleMouseDownClose(evt: MouseEvent, tab: TabConfig) {
         if (
             evt.button === 1 &&
@@ -73,6 +66,16 @@
             evt.stopPropagation()
             emit('close', tab.key)
         }
+    }
+
+    /** 关闭Tab */
+    function handleClose(tab: TabConfig) {
+        emit('close', tab.key)
+    }
+
+    /** 固定Tab */
+    function handleUnpin(tab: TabConfig) {
+        emit('unpin', tab)
     }
 </script>
 

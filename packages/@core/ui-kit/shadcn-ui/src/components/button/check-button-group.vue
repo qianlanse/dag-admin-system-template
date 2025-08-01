@@ -22,8 +22,12 @@
         gap: 0,
         multiple: false,
         showIcon: true,
-        size: 'middle'
+        size: 'middle',
+        allowClear: false,
+        maxCount: 0
     })
+
+    const emit = defineEmits(['btnClick'])
 
     const modelValue = defineModel<Arrayable<ValueType> | undefined>()
 
@@ -82,13 +86,25 @@
             if (innerValue.value.includes(value)) {
                 innerValue.value = innerValue.value.filter((item) => item !== value)
             } else {
+                if (props.maxCount > 0) {
+                    innerValue.value = innerValue.value.slice(0, props.maxCount - 1)
+                }
                 innerValue.value.push(value)
             }
             modelValue.value = innerValue.value
         } else {
-            innerValue.value = [value]
-            modelValue.value = value
+            if (props.allowClear && innerValue.value.includes(value)) {
+                innerValue.value = []
+                modelValue.value = undefined
+                emit('btnClick', undefined)
+                return
+            } else {
+                innerValue.value = [value]
+                modelValue.value = value
+            }
         }
+
+        emit('btnClick', value)
     }
 </script>
 
@@ -108,11 +124,17 @@
             @click="onBtnClick(btn.value)"
         >
             <div class="icon-wrapper" v-if="props.showIcon">
-                <LoaderCircle class="animate-spin" v-if="loadingValues.includes(btn.value)" />
-                <CircleCheckBig v-else-if="innerValue.includes(btn.value)" />
-                <Circle v-else />
+                <slot
+                    name="icon"
+                    :loading="loadingValues.includes(btn.value)"
+                    :checked="innerValue.includes(btn.value)"
+                >
+                    <LoaderCircle class="animate-spin" v-if="loadingValues.includes(btn.value)" />
+                    <CircleCheckBig v-else-if="innerValue.includes(btn.value)" />
+                    <Circle v-else />
+                </slot>
             </div>
-            <slot name="option" :label="btn.label" :value="btn.value">
+            <slot name="option" :label="btn.label" :value="btn.value" :data="btn">
                 <DagRenderContent :content="btn.label" />
             </slot>
         </Button>
@@ -121,6 +143,9 @@
 
 <style lang="scss" scoped>
     .dag-check-button-group {
+        display: flex;
+        flex-wrap: wrap;
+
         &:deep(.size-large) button {
             .icon-wrapper {
                 margin-right: 0.3rem;
@@ -151,6 +176,17 @@
                     width: 0.65rem;
                     height: 0.65rem;
                 }
+            }
+        }
+
+        &.no-gap > :deep(button):nth-of-type(1) {
+            border-right-width: 0;
+        }
+
+        &.no-gap {
+            :deep(button + button) {
+                margin-right: -1px;
+                border-left-width: 1px;
             }
         }
     }

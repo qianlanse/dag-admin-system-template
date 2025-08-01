@@ -66,7 +66,6 @@
     /** refs */
     const contentRef = ref<HTMLDivElement>()
     const sidebarExpandOnHovering = ref(false)
-    const headerInHidden = ref(false)
     const headerIsHidden = ref(false)
 
     /** hooks */
@@ -258,7 +257,7 @@
             left: isMixedNav.value ? 0 : mainStyle.value.sidebarAndExtraWidth,
             position: fixed ? 'fixed' : 'static',
             top:
-                headerInHidden.value || isFullContent.value ? `-${headerWrapperHeight.value}px` : 0,
+                headerIsHidden.value || isFullContent.value ? `-${headerWrapperHeight.value}px` : 0,
             width: mainStyle.value.width,
             'z-index': headerZIndex.value
         }

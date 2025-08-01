@@ -50,6 +50,9 @@ export function usePreferences() {
     /** 是否侧边混合模式 */
     const isSideMixedNav = computed(() => appPreferences.value.layout === 'sidebar-mixed-nav')
 
+    /** 是否侧边导航模式 */
+    const isSideNav = computed(() => appPreferences.value.layout === 'sidebar-nav')
+
     /** 是否移动端 */
     const isMobile = computed(() => appPreferences.value.isMobile)
 
@@ -130,6 +133,17 @@ export function usePreferences() {
     /** 计算偏好设置的变化 */
     const diffPreference = computed(() => diff(initialPreferences, preferences))
 
+    /** 是否包含侧边导航模式 */
+    const isSideMode = computed(() => {
+        return (
+            isMixedNav.value ||
+            isSideMixedNav.value ||
+            isSideNav.value ||
+            isHeaderMixedNav.value ||
+            isHeaderSidebarNav.value
+        )
+    })
+
     return {
         authPanelCenter,
         authPanelLeft,
@@ -139,10 +153,12 @@ export function usePreferences() {
         globalLogoutShortcutKey,
         globalSearchShortcutKey,
         isDark,
+        isSideMode,
         isFullContent,
         isHeaderMixedNav,
         isHeaderNav,
         isHeaderSidebarNav,
+        isSideNav,
         isMixedNav,
         isMobile,
         isShowHeaderNav,

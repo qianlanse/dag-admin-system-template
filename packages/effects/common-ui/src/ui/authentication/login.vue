@@ -18,7 +18,7 @@
     import ThirdPartyLogin from './third-party-login.vue'
 
     interface Props extends AuthenticationProps {
-        formSchema: DagFormSchema[]
+        formSchema?: DagFormSchema[]
     }
 
     defineOptions({

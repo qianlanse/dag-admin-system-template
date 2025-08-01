@@ -86,7 +86,7 @@
 </script>
 
 <template>
-    <div class="flex w-full flex-wrap gap-5">
+    <div class="flex w-full flex-wrap gap-4">
         <template v-for="layout in PRESET" :key="layout.name">
             <div class="flex w-[100px] cursor-pointer flex-col" @click="modelValue = layout.type">
                 <div :class="activeClass(layout.type)" class="outline-box flex-center">
