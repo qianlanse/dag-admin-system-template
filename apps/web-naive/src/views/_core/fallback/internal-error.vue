@@ -1,9 +1,9 @@
 <script lang="ts" setup>
     import { Fallback } from '@dag/common-ui'
 
-    defineOptions({ name: 'Fallback403' })
+    defineOptions({ name: 'Fallback500' })
 </script>
 
 <template>
-    <Fallback status="403" />
+    <Fallback status="500" />
 </template>

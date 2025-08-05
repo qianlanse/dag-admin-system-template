@@ -2,7 +2,13 @@
     "name": "dag-admin-system-template",
     "version": "1.16.0",
     "private": true,
+    "homepage": "https://github.com/qianlanse/dag-admin-system-template",
     "license": "MIT",
+    "author": {
+        "name": "gj",
+        "email": "goujun@dageek.cn",
+        "url": "https://github.com/qianlanse"
+    },
     "type": "module",
     "scripts": {
         "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
@@ -60,7 +66,7 @@
         "node": ">=20.10.0",
         "pnpm": ">=9.12.0"
     },
-    "packageManager": "pnpm@10.13.1",
+    "packageManager": "pnpm@10.14.0",
     "pnpm": {
         "peerDependencyRules": {
             "allowedVersions": {

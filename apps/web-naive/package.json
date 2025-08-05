@@ -1,7 +1,13 @@
 {
     "name": "@dag/web-naive",
     "version": "1.16.0",
+    "homepage": "https://github.com/qianlanse/dag-admin-system-template",
     "license": "MIT",
+    "author": {
+        "name": "gj",
+        "email": "goujun@dageek.cn",
+        "url": "https://github.com/qianlanse"
+    },
     "type": "module",
     "scripts": {
         "dev": "pnpm vite --mode development",

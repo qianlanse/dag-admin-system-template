@@ -401,6 +401,12 @@ export const useTabbarStore = defineStore('core-tabbar', {
         },
         getMenuList(): string[] {
             return this.menuList
+        },
+        getCachedTabs(): string[] {
+            return [...this.cachedTabs]
+        },
+        getExcludeCachedTabs(): string[] {
+            return [...this.excludeCachedTabs]
         }
     },
     persist: [

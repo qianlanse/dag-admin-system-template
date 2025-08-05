@@ -144,6 +144,12 @@ export function usePreferences() {
         )
     })
 
+    /**
+     * 是否开启keep-alive
+     * 在tabs可见以及开启keep-alive的情况下才开启
+     */
+    const keepAlive = computed(() => preferences.tabbar.enable && preferences.tabbar.keepAlive)
+
     return {
         authPanelCenter,
         authPanelLeft,
@@ -167,6 +173,7 @@ export function usePreferences() {
         preferencesButtonPosition,
         sidebarCollapsed,
         diffPreference,
-        theme
+        theme,
+        keepAlive
     }
 }
