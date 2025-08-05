@@ -1,6 +1,6 @@
 {
     "name": "@dag/hooks",
-    "version": "1.15.0",
+    "version": "1.16.0",
     "license": "MIT",
     "type": "module",
     "sideEffects": [
@@ -19,6 +19,7 @@
         "@dag/utils": "workspace:^",
         "@vueuse/core": "catalog:",
         "vue": "catalog:",
-        "vue-router": "catalog:"
+        "vue-router": "catalog:",
+        "watermark-js-plus": "^1.6.3"
     }
 }

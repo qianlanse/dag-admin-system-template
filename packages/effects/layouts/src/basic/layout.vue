@@ -11,7 +11,7 @@
     import { DagAdminLayout } from '@dag-core/layout-ui'
     import { DagLogo } from '@dag-core/shadcn-ui'
 
-    import { Breadcrumb, Preferences } from '../widgets'
+    import { Breadcrumb, CheckUpdates, Preferences } from '../widgets'
     import { LayoutContent, LayoutContentSpinner } from './content'
     import { Copyright } from './copyright'
     import { LayoutFooter } from './footer'
@@ -331,10 +331,19 @@
         <!-- 扩展模块 -->
         <template #extra>
             <slot name="extra"></slot>
+
+            <!-- 检测版本更新 -->
+            <CheckUpdates
+                v-if="preferences.app.enableCheckUpdates"
+                :check-updates-interval="preferences.app.checkUpdatesInterval"
+            />
+
+            <!-- 锁屏 -->
             <Transition v-if="preferences.widget.lockScreen" name="slide-up">
                 <slot v-if="accessStore.isLockScreen" name="lock-screen"></slot>
             </Transition>
 
+            <!-- 偏好设置(Fixed模式) -->
             <template v-if="preferencesButtonPosition.fixed">
                 <Preferences class="z-100 fixed bottom-20 right-0" />
             </template>

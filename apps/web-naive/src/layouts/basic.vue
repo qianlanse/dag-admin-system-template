@@ -1,9 +1,10 @@
 <script setup lang="ts">
     import type { NotificationItem } from '@dag/layouts'
 
-    import { computed, ref } from 'vue'
+    import { computed, ref, watch } from 'vue'
 
     import { AuthenticationLoginExpiredModal } from '@dag/common-ui'
+    import { useWatermark } from '@dag/hooks'
     import { BookOpenText, CircleHelp, MdiGithub } from '@dag/icons'
     import { BasicLayout, LockScreen, Notification, UserDropdown } from '@dag/layouts'
     import { $t } from '@dag/locales'
@@ -48,6 +49,7 @@
     const userStore = useUserStore()
     const authStore = useAuthStore()
     const accessStore = useAccessStore()
+    const { updateWatermark, destroyWatermark } = useWatermark()
 
     const showDot = computed(() => notifications.value.some((item) => !item.isRead))
 
@@ -83,10 +85,26 @@
         }
     ])
 
+    watch(
+        () => preferences.app.watermark,
+        async (enable) => {
+            if (enable) {
+                await updateWatermark({
+                    content: `${userStore.userInfo?.username} - ${userStore.userInfo?.realName}`
+                })
+            } else {
+                destroyWatermark()
+            }
+        },
+        { immediate: true }
+    )
+
+    /** 清除全部通知 */
     function handleNoticeClear() {
         notifications.value = []
     }
 
+    /** 设置全部通知已读 */
     function handleMakeAll() {
         notifications.value.forEach((item) => (item.isRead = true))
     }

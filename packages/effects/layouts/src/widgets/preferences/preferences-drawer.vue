@@ -5,6 +5,7 @@
         LayoutHeaderMenuAlignType,
         LayoutHeaderModeType,
         LayoutType,
+        PreferencesButtonPositionType,
         ThemeModeType
     } from '@dag/types'
 
@@ -28,18 +29,24 @@
     import { useClipboard } from '@vueuse/core'
 
     import {
+        Animation,
         Block,
         Breadcrumb,
         BuiltinTheme,
         ColorMode,
         Content,
+        Copyright,
+        Footer,
+        General,
+        GlobalShortcutKeys,
         Header,
         Layout,
         Navigation,
         Radius,
         Sidebar,
         Tabbar,
-        Theme
+        Theme,
+        Widget
     } from './blocks'
 
     const emit = defineEmits<{ clearPreferencesAndLogout: [] }>()
@@ -62,7 +69,9 @@
 
     const activeTab = ref('layout')
 
-    /** 外观 */
+    /**
+     * 外观
+     */
     const themeMode = defineModel<ThemeModeType>('themeMode')
     const themeSemiDarkSidebar = defineModel<boolean>('themeSemiDarkSidebar')
     const themeSemiDarkHeader = defineModel<boolean>('themeSemiDarkHeader')
@@ -75,7 +84,9 @@
     const appColorWeakMode = defineModel<boolean>('appColorWeakMode')
     const appColorGrayMode = defineModel<boolean>('appColorGrayMode')
 
-    /** 布局 */
+    /**
+     * 布局
+     */
     const appLayout = defineModel<LayoutType>('appLayout')
     // 内容
     const appContentCompact = defineModel<ContentCompactType>('appContentCompact')
@@ -113,6 +124,51 @@
     const tabbarShowMore = defineModel<boolean>('tabbarShowMore')
     const tabbarShowMaximize = defineModel<boolean>('tabbarShowMaximize')
     const tabbarStyleType = defineModel<string>('tabbarStyleType')
+    // 小部件
+    const widgetGlobalSearch = defineModel<boolean>('widgetGlobalSearch')
+    const widgetThemeToggle = defineModel<boolean>('widgetThemeToggle')
+    const widgetLanguageToggle = defineModel<boolean>('widgetLanguageToggle')
+    const widgetFullscreen = defineModel<boolean>('widgetFullscreen')
+    const widgetNotification = defineModel<boolean>('widgetNotification')
+    const widgetLockScreen = defineModel<boolean>('widgetLockScreen')
+    const widgetSidebarToggle = defineModel<boolean>('widgetSidebarToggle')
+    const widgetRefresh = defineModel<boolean>('widgetRefresh')
+    const appPreferencesButtonPosition = defineModel<PreferencesButtonPositionType>(
+        'appPreferencesButtonPosition'
+    )
+    // 底栏
+    const footerEnable = defineModel<boolean>('footerEnable')
+    const footerFixed = defineModel<boolean>('footerFixed')
+    // 版权
+    const copyrightSettingShow = defineModel<boolean>('copyrightSettingShow')
+    const copyrightEnable = defineModel<boolean>('copyrightEnable')
+    const copyrightCompanyName = defineModel<string>('copyrightCompanyName')
+    const copyrightCompanySiteLink = defineModel<string>('copyrightCompanySiteLink')
+    const copyrightDate = defineModel<string>('copyrightDate')
+    const copyrightIcp = defineModel<string>('copyrightIcp')
+    const copyrightIcpLink = defineModel<string>('copyrightIcpLink')
+
+    /**
+     * 快捷键
+     */
+    // 全局
+    const shortcutKeysEnable = defineModel<boolean>('shortcutKeysEnable')
+    const shortcutKeysGlobalSearch = defineModel<boolean>('shortcutKeysGlobalSearch')
+    const shortcutKeysGlobalLogout = defineModel<boolean>('shortcutKeysGlobalLogout')
+    const shortcutKeysGlobalLockScreen = defineModel<boolean>('shortcutKeysGlobalLockScreen')
+
+    /**
+     * 通用
+     */
+    const appLocale = defineModel<string>('appLocale')
+    const appDynamicTitle = defineModel<boolean>('appDynamicTitle')
+    const appWatermark = defineModel<boolean>('appWatermark')
+    const appEnableCheckUpdates = defineModel<boolean>('appEnableCheckUpdates')
+    // 动画
+    const transitionProgress = defineModel<boolean>('transitionProgress')
+    const transitionLoading = defineModel<boolean>('transitionLoading')
+    const transitionEnable = defineModel<boolean>('transitionEnable')
+    const transitionName = defineModel<string>('transitionName')
 
     const tabs = computed((): SegmentedItem[] => {
         return [
@@ -286,12 +342,71 @@
                                 v-model:tabbar-style-type="tabbarStyleType"
                             />
                         </Block>
+                        <Block :title="$t('preferences.widget.title')">
+                            <Widget
+                                v-model:widget-global-search="widgetGlobalSearch"
+                                v-model:widget-theme-toggle="widgetThemeToggle"
+                                v-model:widget-language-toggle="widgetLanguageToggle"
+                                v-model:widget-fullscreen="widgetFullscreen"
+                                v-model:widget-notification="widgetNotification"
+                                v-model:widget-lock-screen="widgetLockScreen"
+                                v-model:widget-sidebar-toggle="widgetSidebarToggle"
+                                v-model:widget-refresh="widgetRefresh"
+                                v-model:app-preferences-button-position="
+                                    appPreferencesButtonPosition
+                                "
+                            />
+                        </Block>
+                        <Block :title="$t('preferences.footer.title')">
+                            <Footer
+                                v-model:footer-enable="footerEnable"
+                                v-model:footer-fixed="footerFixed"
+                            />
+                        </Block>
+                        <Block
+                            v-if="copyrightSettingShow"
+                            :title="$t('preferences.copyright.title')"
+                        >
+                            <Copyright
+                                v-model:copyright-enable="copyrightEnable"
+                                v-model:copyright-company-name="copyrightCompanyName"
+                                v-model:copyright-company-site-link="copyrightCompanySiteLink"
+                                v-model:copyright-date="copyrightDate"
+                                v-model:copyright-icp="copyrightIcp"
+                                v-model:copyright-icp-link="copyrightIcpLink"
+                                :disabled="!footerEnable"
+                            />
+                        </Block>
                     </template>
                     <template #shortcutKey>
-                        <span>shortcutKey</span>
+                        <Block :title="$t('preferences.shortcutKeys.global')">
+                            <GlobalShortcutKeys
+                                v-model:shortcut-keys-enable="shortcutKeysEnable"
+                                v-model:shortcut-keys-global-search="shortcutKeysGlobalSearch"
+                                v-model:shortcut-keys-global-logout="shortcutKeysGlobalLogout"
+                                v-model:shortcut-keys-global-lock-screen="
+                                    shortcutKeysGlobalLockScreen
+                                "
+                            />
+                        </Block>
                     </template>
                     <template #general>
-                        <span>general</span>
+                        <Block :title="$t('preferences.general')">
+                            <General
+                                v-model:app-locale="appLocale"
+                                v-model:app-dynamic-title="appDynamicTitle"
+                                v-model:app-watermark="appWatermark"
+                                v-model:app-enable-check-updates="appEnableCheckUpdates"
+                            />
+                        </Block>
+                        <Block :title="$t('preferences.animation.title')">
+                            <Animation
+                                v-model:transition-progress="transitionProgress"
+                                v-model:transition-loading="transitionLoading"
+                                v-model:transition-enable="transitionEnable"
+                                v-model:transition-name="transitionName"
+                            />
+                        </Block>
                     </template>
                 </DagSegmented>
             </div>

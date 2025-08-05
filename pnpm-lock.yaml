@@ -1283,6 +1283,9 @@ importers:
       vue-router:
         specifier: 'catalog:'
         version: 4.5.1(vue@3.5.18(typescript@5.8.3))
+      watermark-js-plus:
+        specifier: ^1.6.3
+        version: 1.6.3
 
   packages/effects/layouts:
     dependencies:
@@ -9565,6 +9568,9 @@ packages:
     resolution: {integrity: sha512-wlJQj7fIwKK2pOEoOq4Aro8JdPOGpX8aWQhV8YkTW9OgWD2uj2O8ANzvSsIGjx7LTOc7QbS7sXdxHi6XvRnHPA==}
     peerDependencies:
       vue: ^3.5.17
+
+  watermark-js-plus@1.6.3:
+    resolution: {integrity: sha512-iCLOGf70KacIwjGF9MDViYxQcRiVwOH7l42qDHLeE2HeUsQD1EQuUC9cKRG/4SErTUmdqV3yf5WnKk2dRARHPQ==}
 
   web-streams-polyfill@3.3.3:
     resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
@@ -18759,6 +18765,8 @@ snapshots:
       vdirs: 0.1.8(vue@3.5.18(typescript@5.8.3))
       vooks: 0.2.12(vue@3.5.18(typescript@5.8.3))
       vue: 3.5.18(typescript@5.8.3)
+
+  watermark-js-plus@1.6.3: {}
 
   web-streams-polyfill@3.3.3: {}
 

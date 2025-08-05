@@ -6,6 +6,7 @@ export const defaultPreferences: Preferences = {
         authPageLayout: 'panel-right',
         contentCompact: 'wide',
         contentCompactWidth: 1200,
+        checkUpdatesInterval: 1,
         contentPadding: 0,
         contentPaddingBottom: 0,
         contentPaddingLeft: 0,
@@ -25,6 +26,7 @@ export const defaultPreferences: Preferences = {
         name: 'Dag Admin',
         preferencesButtonPosition: 'auto',
         watermark: false,
+        enableCheckUpdates: true,
         zIndex: 200
     },
     breadcrumb: {
