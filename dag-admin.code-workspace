@@ -113,6 +113,10 @@
             "path": "packages/effects/layouts"
         },
         {
+            "name": "@dag/plugins",
+            "path": "packages/effects/plugins"
+        },
+        {
             "name": "@dag/request",
             "path": "packages/effects/request"
         },

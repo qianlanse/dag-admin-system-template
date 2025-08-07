@@ -1,0 +1,30 @@
+{
+    "name": "@dag/plugins",
+    "version": "1.17.0",
+    "homepage": "https://github.com/qianlanse/dag-admin-system-template",
+    "license": "MIT",
+    "type": "module",
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "exports": {
+        "./echarts": {
+            "types": "./src/echarts/index.ts",
+            "default": "./src/echarts/index.ts"
+        }
+    },
+    "dependencies": {
+        "@dag-core/form-ui": "workspace:*",
+        "@dag-core/shadcn-ui": "workspace:*",
+        "@dag-core/shared": "workspace:*",
+        "@dag/hooks": "workspace:*",
+        "@dag/icons": "workspace:*",
+        "@dag/locales": "workspace:*",
+        "@dag/preferences": "workspace:*",
+        "@dag/types": "workspace:*",
+        "@dag/utils": "workspace:*",
+        "@vueuse/core": "catalog:",
+        "echarts": "^5.6.0",
+        "vue": "catalog:"
+    }
+}

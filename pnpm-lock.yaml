@@ -563,6 +563,9 @@ importers:
 
   apps/web-naive:
     dependencies:
+      '@dag-core/shadcn-ui':
+        specifier: workspace:*
+        version: link:../../packages/@core/ui-kit/shadcn-ui
       '@dag/access':
         specifier: workspace:*
         version: link:../../packages/effects/access
@@ -584,6 +587,9 @@ importers:
       '@dag/locales':
         specifier: workspace:*
         version: link:../../packages/locales
+      '@dag/plugins':
+        specifier: workspace:*
+        version: link:../../packages/effects/plugins
       '@dag/preferences':
         specifier: workspace:*
         version: link:../../packages/preferences
@@ -1349,6 +1355,45 @@ importers:
       vue-router:
         specifier: 'catalog:'
         version: 4.5.1(vue@3.5.18(typescript@5.9.2))
+
+  packages/effects/plugins:
+    dependencies:
+      '@dag-core/form-ui':
+        specifier: workspace:*
+        version: link:../../@core/ui-kit/form-ui
+      '@dag-core/shadcn-ui':
+        specifier: workspace:*
+        version: link:../../@core/ui-kit/shadcn-ui
+      '@dag-core/shared':
+        specifier: workspace:*
+        version: link:../../@core/base/shared
+      '@dag/hooks':
+        specifier: workspace:*
+        version: link:../hooks
+      '@dag/icons':
+        specifier: workspace:*
+        version: link:../../icons
+      '@dag/locales':
+        specifier: workspace:*
+        version: link:../../locales
+      '@dag/preferences':
+        specifier: workspace:*
+        version: link:../../preferences
+      '@dag/types':
+        specifier: workspace:*
+        version: link:../../types
+      '@dag/utils':
+        specifier: workspace:*
+        version: link:../../utils
+      '@vueuse/core':
+        specifier: 'catalog:'
+        version: 13.6.0(vue@3.5.18(typescript@5.9.2))
+      echarts:
+        specifier: ^5.6.0
+        version: 5.6.0
+      vue:
+        specifier: ^3.5.18
+        version: 3.5.18(typescript@5.9.2)
 
   packages/effects/request:
     dependencies:
@@ -5450,6 +5495,9 @@ packages:
   ecdsa-sig-formatter@1.0.11:
     resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}
 
+  echarts@5.6.0:
+    resolution: {integrity: sha512-oTbVTsXfKuEhxftHqL5xprgLoc0k7uScAwtryCgWF6hPYFLRwOUHiFmHGCBKP5NPFNkDVopOieyUqYGH8Fa3kA==}
+
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
@@ -9280,6 +9328,9 @@ packages:
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
+  tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
@@ -9998,6 +10049,9 @@ packages:
 
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
+
+  zrender@5.6.1:
+    resolution: {integrity: sha512-OFXkDJKcrlx5su2XbzJvj/34Q3m6PvyCZkVPHGYpcCJ52ek4U/ymZyfuV1nKE23AyBJ51E/6Yr0mhZ7xGTO4ag==}
 
   zx@8.7.1:
     resolution: {integrity: sha512-28u1w2LlIfvyvJvYe6pmCipesk8oL5AFMVp+P/U445LcaPgzrU5lNDtAPd6nJvWmoCNyXZz37R/xKOGokccjsw==}
@@ -14484,6 +14538,11 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
+  echarts@5.6.0:
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.6.1
+
   ee-first@1.1.1: {}
 
   ejs@3.1.10:
@@ -18641,6 +18700,8 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
+  tslib@2.3.0: {}
+
   tslib@2.8.1: {}
 
   turbo-darwin-64@2.5.5:
@@ -19564,5 +19625,9 @@ snapshots:
       zod: 3.25.76
 
   zod@3.25.76: {}
+
+  zrender@5.6.1:
+    dependencies:
+      tslib: 2.3.0
 
   zx@8.7.1: {}

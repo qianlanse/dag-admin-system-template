@@ -1,6 +1,6 @@
 {
     "name": "@dag/web-naive",
-    "version": "1.16.0",
+    "version": "1.17.0",
     "homepage": "https://github.com/qianlanse/dag-admin-system-template",
     "license": "MIT",
     "author": {
@@ -20,6 +20,7 @@
         "#/*": "./src/*"
     },
     "dependencies": {
+        "@dag-core/shadcn-ui": "workspace:*",
         "@dag/access": "workspace:*",
         "@dag/common-ui": "workspace:*",
         "@dag/constants": "workspace:*",
@@ -27,6 +28,7 @@
         "@dag/icons": "workspace:^",
         "@dag/layouts": "workspace:*",
         "@dag/locales": "workspace:*",
+        "@dag/plugins": "workspace:*",
         "@dag/preferences": "workspace:*",
         "@dag/request": "workspace:*",
         "@dag/stores": "workspace:*",
