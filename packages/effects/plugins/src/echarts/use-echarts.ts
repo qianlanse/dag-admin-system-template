@@ -32,7 +32,7 @@ function useEcharts(chartRef: Ref<EchartsUIType>) {
     const { width, height } = useWindowSize()
     const resizeHandler: () => void = useDebounceFn(resize, 200)
 
-    /** 获取Echart样式配置 */
+    /** 获取Echarts样式配置 */
     const getOptions = computed((): EChartsOption => {
         if (!isDark.value) {
             return {}
@@ -43,7 +43,7 @@ function useEcharts(chartRef: Ref<EchartsUIType>) {
         }
     })
 
-    /** 初始化Echart */
+    /** 初始化Echarts */
     function initCharts(t?: EchartsThemeType) {
         const el = chartRef?.value?.$el
         if (!el) {
@@ -55,7 +55,7 @@ function useEcharts(chartRef: Ref<EchartsUIType>) {
         return chartInstance
     }
 
-    /** 渲染Echart */
+    /** 渲染Echarts */
     function renderEcharts(
         options: EChartsOption,
         clear = true

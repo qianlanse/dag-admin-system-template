@@ -26,9 +26,9 @@ export const MOCK_USERS: UserInfo[] = [
     {
         id: 2,
         password: '123456',
-        realName: 'Anyu',
+        realName: 'Jock',
         roles: ['user'],
-        username: 'anyu',
+        username: 'jock',
         homePath: '/analytics'
     }
 ]
@@ -47,7 +47,7 @@ export const MOCK_CODES = [
     {
         // user
         codes: ['AC_1000001', 'AC_1000002'],
-        username: 'anyu'
+        username: 'jock'
     }
 ]
 
@@ -145,7 +145,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
                             }
                         },
                         {
-                            name: 'AccessButonControlDemo',
+                            name: 'AccessButttonControlDemo',
                             path: '/demos/access/button-control',
                             component: '/demos/access/button-control',
                             meta: {
@@ -183,6 +183,6 @@ export const MOCK_MENUS = [
     },
     {
         menus: [...dashboardMenus, ...createDemosMenus('user')],
-        username: 'anyu'
+        username: 'jock'
     }
 ]

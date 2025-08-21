@@ -13,7 +13,7 @@ try {
 
     turboRun
         .command('[script]')
-        .usage('Run tuobo interactively.')
+        .usage('Run turbo interactively.')
         .action(async (command: string) => {
             run({ command })
         })

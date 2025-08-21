@@ -28,7 +28,7 @@ async function checkProps(api: ExtendedModalApi, attrs: Record<string, any>) {
     for (const attr of Object.keys(attrs)) {
         if (stateKeys.has(attr) && !['class'].includes(attr)) {
             console.warn(
-                `[Dag Modal]: When 'connectedComponent' exists, do not set props or slots '${attr}', which will increase complexity. If you need to modify the props of Modal, please use useVbenModal or api.`
+                `[Dag Modal]: When 'connectedComponent' exists, do not set props or slots '${attr}', which will increase complexity. If you need to modify the props of Modal, please use useDagModal or api.`
             )
         }
     }
@@ -69,8 +69,8 @@ export function useDagModal<TParentModalProps extends ModalProps = ModalProps>(
                     )
             },
             {
-                inheritAttrs: false,
-                name: 'DagParentModal'
+                name: 'DagParentModal',
+                inheritAttrs: false
             }
         )
 
@@ -109,8 +109,8 @@ export function useDagModal<TParentModalProps extends ModalProps = ModalProps>(
             return () => h(DagModal, { ...props, ...attrs, modalApi: extendedApi }, slots)
         },
         {
-            inheritAttrs: false,
-            name: 'DagModal'
+            name: 'DagModal',
+            inheritAttrs: false
         }
     )
 

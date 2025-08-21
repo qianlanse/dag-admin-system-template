@@ -17,7 +17,6 @@
         "@dag-core/popup-ui": "workspace:*",
         "@dag-core/shadcn-ui": "workspace:*",
         "@dag-core/shared": "workspace:*",
-        "@dag/hooks": "workspace:*",
         "@dag/icons": "workspace:*",
         "@dag/locales": "workspace:*",
         "@dag/types": "workspace:*",

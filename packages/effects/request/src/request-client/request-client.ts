@@ -15,7 +15,7 @@ import { FileUploader } from './modules/uploader'
 function getParamsSerializer(paramsSerializer: RequestClientOptions['paramsSerializer']) {
     if (isString(paramsSerializer)) {
         switch (paramsSerializer) {
-            case 'brachets': {
+            case 'brackets': {
                 return (params: any) => qs.stringify(params, { arrayFormat: 'brackets' })
             }
             case 'comma': {

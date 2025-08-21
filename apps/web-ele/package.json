@@ -12,13 +12,6 @@
     },
     "dependencies": {
         "@dag/styles": "workspace:*",
-        "element-plus": "catalog:",
-        "pinia": "catalog:",
-        "vue": "catalog:",
-        "vue-router": "catalog:"
-    },
-    "devDependencies": {
-        "@dag/types": "workspace:*",
-        "unplugin-element-plus": "catalog:"
+        "vue": "catalog:"
     }
 }

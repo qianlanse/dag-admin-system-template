@@ -172,7 +172,7 @@ export interface FormCommonConfig {
     disabledOnChangeListener?: boolean
     /** 是否禁用所有表单项的input事件监听 */
     disabledOnInputListener?: boolean
-    /** 所有表单项的空状态值，默认都是undefined,neive-ui的空状态值是null */
+    /** 所有表单项的空状态值，默认都是undefined,naive-ui的空状态值是null */
     emptyStateValue?: null | undefined
     /**
      * 所有表单项的控件样式

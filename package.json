@@ -61,7 +61,7 @@
         "unbuild": "catalog:",
         "vite": "catalog:",
         "vue": "catalog:",
-        "vue-tsc": "^3.0.6"
+        "vue-tsc": "catalog:"
     },
     "engines": {
         "node": ">=20.10.0",

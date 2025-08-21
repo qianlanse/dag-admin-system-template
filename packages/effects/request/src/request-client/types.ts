@@ -9,13 +9,13 @@ import type {
 type ExtendOptions<T = any> = {
     /**
      * 参数序列化方式
-     * - brachets: ids[]=1&ids[]=2&ids[]=3
+     * - brackets: ids[]=1&ids[]=2&ids[]=3
      * - comma: ids=1,2,3
      * - indices: ids[0]=1&ids[1]=2&ids[1]=3
      * - repeat: ids=1&ids=2&ids=3
      */
     paramsSerializer?:
-        | 'brachets'
+        | 'brackets'
         | 'comma'
         | 'indices'
         | 'repeat'
@@ -56,7 +56,10 @@ interface ResponseInterceptorConfig<T = any> {
     rejected?: (error: any) => any
 }
 
+type MakeErrorMessageFn = (message: string, error: any) => void
+
 export type {
+    MakeErrorMessageFn,
     RequestClientConfig,
     RequestClientOptions,
     RequestInterceptorConfig,

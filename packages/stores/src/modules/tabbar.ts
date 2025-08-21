@@ -238,9 +238,9 @@ export const useTabbarStore = defineStore('core-tabbar', {
             tab.meta.affixTab = true
             tab.meta.title = oldTab?.meta?.title as string
             this.tabs.splice(index, 1, tab)
-            const offixTabs = this.tabs.filter((tab) => isAffixTab(tab))
+            const affixTabs = this.tabs.filter((tab) => isAffixTab(tab))
             // 获得固定tabs的index
-            const newIndex = offixTabs.findIndex((item) => equalTab(item, tab))
+            const newIndex = affixTabs.findIndex((item) => equalTab(item, tab))
             // 交换位置重新排序
             await this.sortTabs(index, newIndex)
         },

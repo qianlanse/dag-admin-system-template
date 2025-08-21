@@ -31,7 +31,7 @@ async function checkProps(api: ExtendedDrawerApi, attrs: Record<string, any>) {
     for (const attr of Object.keys(attrs)) {
         if (stateKeys.has(attr) && !['class'].includes(attr)) {
             console.warn(
-                `[Dag Drawer]: When 'connectedComponent' exists, do not set props or slots '${attr}', which will increase complexity. If you need to modify the props of Drawer, please use useVbenDrawer or api.`
+                `[Dag Drawer]: When 'connectedComponent' exists, do not set props or slots '${attr}', which will increase complexity. If you need to modify the props of Drawer, please use useDagDrawer or api.`
             )
         }
     }

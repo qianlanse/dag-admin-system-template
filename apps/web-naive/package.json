@@ -20,12 +20,11 @@
         "#/*": "./src/*"
     },
     "dependencies": {
-        "@dag-core/shadcn-ui": "workspace:*",
         "@dag/access": "workspace:*",
         "@dag/common-ui": "workspace:*",
         "@dag/constants": "workspace:*",
         "@dag/hooks": "workspace:*",
-        "@dag/icons": "workspace:^",
+        "@dag/icons": "workspace:*",
         "@dag/layouts": "workspace:*",
         "@dag/locales": "workspace:*",
         "@dag/plugins": "workspace:*",

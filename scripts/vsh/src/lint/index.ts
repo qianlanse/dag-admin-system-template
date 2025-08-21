@@ -46,7 +46,7 @@ async function runLint({ format }: LintCommandOptions) {
  */
 function defineLintCommand(cac: CAC) {
     cac.command('lint')
-        .usage('Betch execute project lint check.')
+        .usage('Batch execute project lint check.')
         .option('--format', 'Format lint problem')
         .action(runLint)
 }

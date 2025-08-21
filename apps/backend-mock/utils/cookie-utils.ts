@@ -18,6 +18,6 @@ export function setRefreshTokenCookie(event: H3Event<EventHandlerRequest>, refre
 }
 
 export function getRefreshTokenFromCookie(event: H3Event<EventHandlerRequest>) {
-    const refreshToekn = getCookie(event, 'jwt')
-    return refreshToekn
+    const refreshToken = getCookie(event, 'jwt')
+    return refreshToken
 }
