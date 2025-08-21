@@ -68,6 +68,7 @@ export function useDagModal<TParentModalProps extends ModalProps = ModalProps>(
                         slots
                     )
             },
+            // eslint-disable-next-line vue/one-component-per-file
             {
                 name: 'DagParentModal',
                 inheritAttrs: false
@@ -108,6 +109,7 @@ export function useDagModal<TParentModalProps extends ModalProps = ModalProps>(
         (props: ModalProps, { attrs, slots }) => {
             return () => h(DagModal, { ...props, ...attrs, modalApi: extendedApi }, slots)
         },
+        // eslint-disable-next-line vue/one-component-per-file
         {
             name: 'DagModal',
             inheritAttrs: false
