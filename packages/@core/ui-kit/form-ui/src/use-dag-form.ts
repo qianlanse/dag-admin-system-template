@@ -26,8 +26,8 @@ export function useDagForm<T extends BaseFormComponentType = BaseFormComponentTy
             return () => h(DagUseForm, { ...props, ...attrs, formApi: extendedApi }, slots)
         },
         {
-            inheritAttrs: false,
-            name: 'DagUseForm'
+            name: 'DagUseForm',
+            inheritAttrs: false
         }
     )
 

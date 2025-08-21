@@ -1,6 +1,6 @@
 {
     "name": "@dag-core/shared",
-    "version": "1.17.0",
+    "version": "1.18.0",
     "license": "MIT",
     "type": "module",
     "scripts": {
@@ -76,14 +76,21 @@
         "@tanstack/vue-store": "catalog:",
         "@vue/shared": "catalog:",
         "clsx": "catalog:",
+        "dayjs": "catalog:",
         "defu": "catalog:",
         "lodash.clonedeep": "catalog:",
+        "lodash.get": "^4.4.2",
+        "lodash.isequal": "^4.5.0",
+        "lodash.set": "^4.3.2",
         "nprogress": "catalog:",
         "tailwind-merge": "catalog:",
         "theme-colors": "catalog:"
     },
     "devDependencies": {
         "@types/lodash.clonedeep": "catalog:",
+        "@types/lodash.get": "^4.4.9",
+        "@types/lodash.isequal": "^4.5.8",
+        "@types/lodash.set": "^4.3.9",
         "@types/nprogress": "catalog:"
     }
 }

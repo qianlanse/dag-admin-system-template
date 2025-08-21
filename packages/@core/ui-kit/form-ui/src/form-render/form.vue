@@ -7,7 +7,7 @@
     import { computed } from 'vue'
 
     import { Form } from '@dag-core/shadcn-ui'
-    import { cn, isString, mergeWithArrayOverride } from '@dag-core/shared/utils'
+    import { cn, isFunction, isString, mergeWithArrayOverride } from '@dag-core/shared/utils'
 
     import { provideFormRenderProps } from './context'
     import { useExpandable } from './expandable'
@@ -30,6 +30,20 @@
     provideFormRenderProps(props)
 
     const { isCalculated, keepFormItemIndex, wrapperRef } = useExpandable(props)
+
+    const wrapperClass = computed(() => {
+        const cls = ['flex']
+
+        if (props.layout === 'vertical') {
+            cls.push(props.compact ? 'gap-x-2' : 'gap-x-4', 'flex-col grid')
+        } else if (props.layout === 'inline') {
+            cls.push('flex-wrap gap-2')
+        } else {
+            cls.push('gap-2 flex-col grid')
+        }
+
+        return cn(...cls, props.wrapperClass)
+    })
 
     const shapes = computed(() => {
         const resultShapes: FormShape[] = []
@@ -94,10 +108,21 @@
             } = mergeWithArrayOverride(props.commonConfig, props.globalCommonConfig)
             return (props.schema || []).map((schema, index) => {
                 const keepIndex = keepFormItemIndex.value
+                // 折叠状态 & 显示折叠按钮 & 当前索引大于保留索引
                 const hidden =
                     props.showCollapseButton && !!formCollapsed.value && keepIndex
                         ? keepIndex <= index
                         : false
+                // 处理函数形式的formItemClass
+                let resolvedSchemaFormItemClass = schema.formItemClass
+                if (isFunction(schema.formItemClass)) {
+                    try {
+                        resolvedSchemaFormItemClass = schema.formItemClass()
+                    } catch (error) {
+                        console.error('Error calling formItemClass function:', error)
+                        resolvedSchemaFormItemClass = ''
+                    }
+                }
 
                 return {
                     colon,
@@ -122,7 +147,7 @@
                         'flex-shrink-0',
                         { hidden },
                         formItemClass,
-                        schema.formItemClass
+                        resolvedSchemaFormItemClass
                     ),
                     labelClass: cn(labelClass, schema.labelClass)
                 }
@@ -133,7 +158,7 @@
 
 <template>
     <component :is="formComponent" v-bind="formComponentProps">
-        <div ref="wrapperRef" :class="wrapperClass" class="grid">
+        <div ref="wrapperRef" :class="wrapperClass">
             <template v-for="cSchema in computedSchema" :key="cSchema.fieldName">
                 <FormField v-bind="cSchema" :class="cSchema.formItemClass" :rules="cSchema.rules">
                     <template #default="slotProps">

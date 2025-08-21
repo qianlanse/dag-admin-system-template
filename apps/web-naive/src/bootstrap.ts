@@ -3,10 +3,12 @@ import { createApp, watchEffect } from 'vue'
 import { preferences } from '@dag/preferences'
 import { initStores } from '@dag/stores'
 import '@dag/styles'
+import '@dag/styles/naive'
 
 import { useTitle } from '@vueuse/core'
 
 import { initComponentAdapter } from './adapter/component'
+import { initSetupDagForm } from './adapter/form'
 import App from './app.vue'
 import { $t, setupI18n } from './locales'
 import { router } from './router'
@@ -14,6 +16,9 @@ import { router } from './router'
 async function bootstrap(namespace: string) {
     // 初始化组件适配器
     await initComponentAdapter()
+
+    // 初始化表单组件
+    await initSetupDagForm()
 
     const app = createApp(App)
 

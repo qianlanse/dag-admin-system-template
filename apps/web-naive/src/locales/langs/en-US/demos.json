@@ -4,6 +4,11 @@
     "table": "Table",
     "form": "Form",
     "dag": {
-        "about": "About"
+        "title": "Project",
+        "about": "About",
+        "document": "Document",
+        "antdv": "Ant Design Vue Version",
+        "naive-ui": "Naive UI Version",
+        "element-plus": "Element Plus Version"
     }
 }

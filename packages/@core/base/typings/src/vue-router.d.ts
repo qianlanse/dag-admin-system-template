@@ -35,6 +35,11 @@ interface RouteMeta {
      */
     badgeVariants?: 'default' | 'destructive' | 'primary' | 'success' | 'warning' | string
     /**
+     * 路由的完整路径作为key
+     * @default true
+     */
+    fullPathKey?: boolean
+    /**
      * 当前路由的子级在菜单中不展示
      */
     hideChildrenInMenu?: boolean

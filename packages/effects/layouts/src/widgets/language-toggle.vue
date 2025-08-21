@@ -12,7 +12,8 @@
         name: 'LanguageToggle'
     })
 
-    function handleUpdate(value: string) {
+    function handleUpdate(value: string | undefined) {
+        if (!value) return
         const locale = value as SupportedLanguagesType
         updatePreferences({
             app: {

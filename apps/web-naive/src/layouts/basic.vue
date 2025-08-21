@@ -111,7 +111,7 @@
 
     /** 退出登录 */
     async function handleLogout() {
-        await authStore.logout()
+        await authStore.logout(false)
     }
 </script>
 

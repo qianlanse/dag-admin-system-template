@@ -1,6 +1,6 @@
 {
     "name": "dag-admin-system-template",
-    "version": "1.17.0",
+    "version": "1.18.0",
     "private": true,
     "homepage": "https://github.com/qianlanse/dag-admin-system-template",
     "license": "MIT",
@@ -60,7 +60,8 @@
         "typescript": "catalog:",
         "unbuild": "catalog:",
         "vite": "catalog:",
-        "vue": "catalog:"
+        "vue": "catalog:",
+        "vue-tsc": "^3.0.6"
     },
     "engines": {
         "node": ">=20.10.0",

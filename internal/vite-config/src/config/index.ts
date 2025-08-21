@@ -28,7 +28,7 @@ export function defineConfig(
             return defineLibraryConfig(userConfigPromise)
         }
         default: {
-            throw new Error(`Un supported project type: ${projectType}`)
+            throw new Error(`Unsupported project type: ${projectType}`)
         }
     }
 }

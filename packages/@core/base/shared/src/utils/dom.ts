@@ -78,3 +78,12 @@ export function needsScrollbar() {
 
     return doc.scrollHeight > window.innerHeight
 }
+
+/** 触发视窗改变事件 */
+export function triggerWindowResize(): void {
+    // 创建一个新的resize事件
+    const resizeEvent = new Event('resize')
+
+    // 触发window的resize事件
+    window.dispatchEvent(resizeEvent)
+}

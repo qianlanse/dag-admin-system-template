@@ -35,7 +35,8 @@
         }
     ])
 
-    function handleUpdate(value: string) {
+    function handleUpdate(value: string | undefined) {
+        if (!value) return
         updatePreferences({
             app: {
                 authPageLayout: value as AuthPageLayoutType

@@ -12,11 +12,17 @@ type Breakpoints = '2xl:' | '3xl:' | '' | 'lg:' | 'md:' | 'sm:' | 'xl:'
 type GridCols = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13
 
 /** 表单布局样式 */
-export type FormLayout = 'horizontal' | 'vertical'
+export type FormLayout = 'horizontal' | 'inline' | 'vertical'
 
 export type WrapperClassType =
     | `${Breakpoints}grid-cols-${GridCols}`
     | (Record<never, never> & string)
+
+export type ArrayToStringFields = Array<
+    | [string[], string?] // 嵌套数组格式，可选分隔符
+    | string // 单个字段，使用默认分隔符
+    | string[] // 简单数组格式，最后一个元素可以是分隔符
+>
 
 /** 基础组件类型 */
 export type BaseFormComponentType =
@@ -266,8 +272,20 @@ export interface DagFormProps<T extends BaseFormComponentType = BaseFormComponen
     extends Omit<FormRenderProps<T>, 'componentBindEventMap' | 'componentMap' | 'form'> {
     /** 操作按钮是否反转（提交按钮前置） */
     actionButtonsReverse?: boolean
+    /**
+     * 操作按钮的样式
+     * newLine: 在新行显示；rowEnd: 在行内显示，靠右对齐(默认)；inline: 使用grid模式样式
+     */
+    actionLayout?: 'inline' | 'newLine' | 'rowEnd'
+    /**
+     * 操作按钮组显示位置，默认靠右显示
+     * @default 'left'
+     */
+    actionPosition?: 'center' | 'left' | 'right'
     /** 表单操作区域class */
     actionWrapperClass?: ClassType
+    /** 表单字段数组映射字符串配置 默认使用"," */
+    arrayToStringFields?: ArrayToStringFields
     /** 表单字段映射 */
     fieldMappingTime?: FieldMappingTime
     /** 表单重置回调 */
@@ -275,7 +293,7 @@ export interface DagFormProps<T extends BaseFormComponentType = BaseFormComponen
     /** 表单提交回调 */
     handleSubmit?: HandleSubmitFn
     /** 表单值变化回调 */
-    handleValuesChange?: (values: Record<string, any>) => void
+    handleValuesChange?: (values: Record<string, any>, fieldsChanged: string[]) => void
     /** 重置按钮参数 */
     resetButtonOptions?: ActionButtonOptions
     /**
@@ -301,4 +319,18 @@ export type ExtendedFormApi = FormApi & {
     useStore: <T = NoInfer<DagFormProps>>(
         selector?: (state: NoInfer<DagFormProps>) => T
     ) => Readonly<Ref<T>>
+}
+
+export interface DagFormAdapterOptions<T extends BaseFormComponentType = BaseFormComponentType> {
+    config?: {
+        baseModelPropName?: string
+        disabledOnChangeListener?: boolean
+        disabledOnInputListener?: boolean
+        emptyStateValue?: null | undefined
+        modelPropNameMap?: Partial<Record<T, string>>
+    }
+    defineRules?: {
+        required?: (value: any, params: any, ctx: Record<string, any>) => boolean | string
+        selectRequired?: (value: any, params: any, ctx: Record<string, any>) => boolean | string
+    }
 }

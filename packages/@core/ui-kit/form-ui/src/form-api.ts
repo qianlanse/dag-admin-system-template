@@ -11,10 +11,15 @@ import { isRef, toRaw } from 'vue'
 import { Store } from '@dag-core/shared/store'
 import {
     bindMethods,
+    createMerge,
+    isDate,
+    isDayjsObject,
     isFunction,
     mergeWithArrayOverride,
     StateHandler
 } from '@dag-core/shared/utils'
+
+import { isObject } from '@vueuse/core'
 
 function getDefaultState(): DagFormProps {
     return {
@@ -202,6 +207,41 @@ export class FormApi {
         }
     }
 
+    /**
+     * 设置表单值
+     * @param fields 表单对象值
+     * @param filterFields 过滤不在schema种定义的字段，默认为true
+     * @param shouldValidate
+     */
+    async setValues(
+        fields: Record<string, any>,
+        filterFields: boolean = true,
+        shouldValidate: boolean = false
+    ) {
+        const form = await this.getForm()
+        if (!filterFields) {
+            form.setValues(fields, shouldValidate)
+            return
+        }
+
+        const fieldMergeFn = createMerge((obj, key, value) => {
+            if (key in obj) {
+                obj[key] =
+                    !Array.isArray(obj[key]) &&
+                    isObject(obj[key]) &&
+                    !isDayjsObject(obj[key]) &&
+                    !isDate(obj[key])
+                        ? fieldMergeFn(obj[key], value)
+                        : value
+            }
+            return true
+        })
+
+        const filteredFields = fieldMergeFn(fields, form.values)
+        this.handleStringToArrayFields(filteredFields)
+        form.setValues(filteredFields, shouldValidate)
+    }
+
     /** 提交表单 */
     async submitForm(evt?: Event) {
         evt?.preventDefault()
@@ -261,6 +301,60 @@ export class FormApi {
         const values = { ...originValues }
 
         return values
+    }
+
+    /** xxxx */
+    private handleStringToArrayFields(originValues: Record<string, any>) {
+        const arrayToStringFields = this.state?.arrayToStringFields
+        if (!arrayToStringFields || !Array.isArray(arrayToStringFields)) {
+            return
+        }
+
+        const processFields = (fields: string[], separator: string = ',') => {
+            this.processFields(fields, separator, originValues, (value, sep) =>
+                Array.isArray(value) ? value.join(sep) : value
+            )
+        }
+
+        // 处理普通数组
+        if (arrayToStringFields.every((item) => typeof item === 'string')) {
+            const lastItem = arrayToStringFields[arrayToStringFields.length - 1] || ''
+            const fields =
+                lastItem.length === 1 ? arrayToStringFields.slice(0, -1) : arrayToStringFields
+            const separator = lastItem.length === 1 ? lastItem : ','
+            processFields(fields, separator)
+            return
+        }
+
+        // 处理嵌套数组
+        arrayToStringFields.forEach((fieldConfig) => {
+            if (Array.isArray(fieldConfig)) {
+                const [fields, separator = ','] = fieldConfig
+                if (!Array.isArray(fields)) {
+                    console.warn(
+                        `Invalid field configuration: fields should be an array of strings, got ${typeof fields}`
+                    )
+                    return
+                }
+                processFields(fields, separator)
+            }
+        })
+    }
+
+    /** xxxx */
+    private processFields(
+        fields: string[],
+        separator: string,
+        originValues: Record<string, any>,
+        transformFn: (value: any, separator: string) => any
+    ) {
+        fields.forEach((field) => {
+            const value = originValues[field]
+            if (value === undefined || value === null) {
+                return
+            }
+            originValues[field] = transformFn(value, separator)
+        })
     }
 
     /** 重置状态值 */

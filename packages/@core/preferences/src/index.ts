@@ -1,5 +1,7 @@
 /**
- * 查看bind,call,apply区别
+ * 查看bind,call,apply区别(定义this指向)
+ * bind 返回是函数(所有参数放到一个数组)
+ * call, apply的参数依次逗号隔开放后面
  * @see https://www.runoob.com/w3cnote/js-call-apply-bind.html
  */
 
