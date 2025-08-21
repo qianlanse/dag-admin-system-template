@@ -31,7 +31,7 @@
         "dev:ele": "pnpm -F @dag/web-ele run dev",
         "dev:naive": "pnpm -F @dag/web-naive run dev",
         "changeset": "pnpm exec changeset",
-        "update:deps": "npx taze -r -w",
+        "update:deps": "pnpm dlx taze -r -w",
         "preview": "turbo-run preview",
         "version": "pnpm exec changeset version && pnpm install --no-frozen-lockfile",
         "catalog": "pnpx codemod pnpm/catalog"
